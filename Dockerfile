@@ -17,7 +17,7 @@ RUN apt-get update \
         nodejs \
     && gem install bundler \
     && bundle install \
-    && apt-get remove -y build-essential git \
+    && apt-get remove -y build-essential \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
 
