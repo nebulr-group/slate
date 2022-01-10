@@ -1,5 +1,5 @@
 ---
-title: API Reference Test
+title: nBlocks API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - typescript
