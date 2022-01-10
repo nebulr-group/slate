@@ -6,10 +6,6 @@ Before you can send an email, you must create and verify identity that you're go
 
 To verify an email address check the inbox of the email address used to create your identity and look for an email from no-reply-aws@amazon.com. Open the email and click the link to complete the verification process for the email address. After it's complete, the Identity status updates to Verified. The link in the verification email expires after 24 hours.
 
-```typescript
-const response = await client.communication.awsSesIdentity({action: 'CREATE', EmailIdentity: 'identity@example.com'});
-```
-
 ```shell
 curl --request POST 'https://account-api.nebulr-core.com/communication/email/awsSesIdentity' \
 --header 'x-api-key: API_KEY' \
@@ -38,10 +34,6 @@ curl --request POST 'https://account-api.nebulr-core.com/communication/email/aws
 
 ## Get an email address identity data
 Provides information about a specific identity, including the identity's verification status
-
-```typescript
-const response = await client.communication.awsSesIdentity({action: 'GET', EmailIdentity: 'identity@example.com'});
-```
 
 ```shell
 curl --request POST 'https://account-api.nebulr-core.com/communication/email/awsSesIdentity' \
@@ -84,10 +76,6 @@ curl --request POST 'https://account-api.nebulr-core.com/communication/email/aws
 ## Delete an email address identity data
 Deletes an email identity.
 
-```typescript
-const response = await client.communication.awsSesIdentity({action: 'DELETE', EmailIdentity: 'identity@example.com'});
-```
-
 ```shell
 curl --request POST 'https://account-api.nebulr-core.com/communication/email/awsSesIdentity' \
 --header 'x-api-key: API_KEY' \
@@ -115,10 +103,6 @@ curl --request POST 'https://account-api.nebulr-core.com/communication/email/aws
 ## Get an email address verified status
 Deletes an email identity.
 
-```typescript
-const response = await client.communication.awsSesIdentity({action: 'VERIFIED_STATUS', EmailIdentity: 'identity@example.com'});
-```
-
 ```shell
 curl --request POST 'https://account-api.nebulr-core.com/communication/email/awsSesIdentity' \
 --header 'x-api-key: API_KEY' \
@@ -138,10 +122,6 @@ curl --request POST 'https://account-api.nebulr-core.com/communication/email/aws
 
 
 ## Send Email
-
-```typescript
-const response = await client.communication.email({action: 'VERIFIED_STATUS', EmailIdentity: 'identity@example.com'});
-```
 
 ```shell
 curl --request POST 'https://account-api.nebulr-core.com/communication/email/awsSesIdentity' \
