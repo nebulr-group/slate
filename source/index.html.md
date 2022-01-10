@@ -12,6 +12,7 @@ toc_footers:
 includes:
     - app
     - auth
+    - email
     - errors
 
 search: true

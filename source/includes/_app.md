@@ -128,7 +128,9 @@ curl --request GET 'https://account-api.nebulr-core.com/app' \
     "logo": "https://www.example.com/logo.png",
     "websiteUrl": "https://www.example.com",
     "privacyPolicyUrl": "https://www.example.com/privacy-policy",
-    "termsOfServiceUrl": "https://www.example.com/terms-of-service"
+    "termsOfServiceUrl": "https://www.example.com/terms-of-service",
+    "emailSenderName": "My App Sender",
+    "emailSenderEmail": "sender@example.com"
 }
 ```
 
@@ -265,7 +267,9 @@ curl --request PUT 'https://account-api.nebulr-core.com/app' \
     "logo": "https://www.example.com/logo.png",
     "websiteUrl": "https://www.example.com",
     "privacyPolicyUrl": "https://www.example.com/privacy-policy",
-    "termsOfServiceUrl": "https://www.example.com/terms-of-service"
+    "termsOfServiceUrl": "https://www.example.com/terms-of-service",
+    "emailSenderName": "My App Sender",
+    "emailSenderEmail": "sender@example.com"
 }
 ```
 
@@ -286,6 +290,8 @@ logo | false | URL to your logo
 websiteUrl | false | URL to your website or landing page. E.g. Branded emails will link to this URL, checkout process will redirect to `/payment-success` and `/payment-cancel`
 privacyPolicyUrl | false | URL to a page on your website containing a Privacy policy for your app users. E.g. checkout process will link to this url.
 termsOfServiceUrl | false | URL to a page on your website containing a Terms of service for your app users. E.g. checkout process will link to this url
+emailSenderName | false | Emails sent from your website will have this sender name
+emailSenderEmail | false | Emails sent from your website will have this sender email
 
 ## Update credentials
 
