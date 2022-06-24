@@ -1,9 +1,9 @@
 ---
 title: nBlocks API Reference
 
-language_tabs: # must be one of https://git.io/vQNgJ
-  - typescript
+language_tabs: # must be one of https://github.com/rouge-ruby/rouge/wiki/List-of-supported-languages-and-lexers
   - shell
+  - typescript
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
