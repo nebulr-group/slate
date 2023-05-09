@@ -1,3 +1,18 @@
+# Running in development
+`./slate.sh serve`
+
+# Publishing
+## Make sure everything is pushed
+- `git commit -m ""`
+- `git push origin main`
+
+## Create static version in new branch gh-pages
+- `./deploy`
+- `git checkout gh-pages`
+- `git push origin gh-pages -f`
+
+
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/slatedocs/img/main/logo-slate.png" alt="Slate: API Documentation Generator" width="226">
   <br>
