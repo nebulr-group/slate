@@ -1,0 +1,280 @@
+# Tenants
+A tenant represents a customers workspace in your app. These are isolated data silos of team members, settings, and application data.
+
+## List all tenants
+
+> Request example
+
+```http
+GET /tenant HTTP/1.1
+User-Agent: MyClient/1.0.0
+x-api-token: <%= config[:api_key] %>
+Host: <%= config[:account_api_host] %>
+```
+
+```typescript
+const response = await client.tenants.list();
+```
+
+```shell
+curl --request GET '<%= config[:account_api_url] %>/tenant' \
+--header 'x-api-key: <%= config[:api_key] %>'
+```
+
+> Response example:
+
+```json
+[
+    {
+        "id": "606b00a61679e20008a5654d",
+        "plan": "TEAM",
+        "mfa": false,
+        "locale": "en",
+        "name": "John Inc",
+        "logo": "",
+        "metadata": {},
+        "createdAt": "2021-04-05T12:20:54.890Z",
+        "paymentsEnabled": false,
+        "paymentsRequired": true,
+        "onboarded": true
+    },
+    {
+        "id": "605dd819e8fd3e00086cc552",
+        "plan": "ESSENTIAL",
+        "mfa": false,
+        "locale": "en",
+        "name": "Dave Ltd",
+        "logo": "",
+        "metadata": {},
+        "createdAt": "2021-03-26T12:48:25.187Z",
+        "paymentsEnabled": false,
+        "paymentsRequired": true,
+        "onboarded": true
+    }
+]
+```
+
+Lists all tenants in your app. Each tenant will have their own sets of users.
+
+### HTTP Request
+
+`GET <%= config[:account_api_url] %>/tenant`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### Response
+A list of [Tenant models](#tenant-model)
+
+## Get tenant by id
+
+> Request example
+
+```http
+GET /tenant/byId/606b00a61679e20008a5654d HTTP/1.1
+User-Agent: MyClient/1.0.0
+x-api-token: <%= config[:api_key] %>
+Host: <%= config[:account_api_host] %>
+```
+
+```typescript
+const response = await client.tenant('606b00a61679e20008a5654d').get();
+```
+
+```shell
+curl --request GET '<%= config[:account_api_url] %>/tenant/byId/606b00a61679e20008a5654d' \
+--header 'x-api-key: <%= config[:api_key] %>'
+```
+
+> Response example:
+
+```json
+{
+    "id": "606b00a61679e20008a5654d",
+    "plan": "TEAM",
+    "mfa": false,
+    "locale": "en",
+    "name": "John Inc",
+    "logo": "",
+    "metadata": {},
+    "createdAt": "2021-04-05T12:20:54.890Z",
+    "paymentsEnabled": false,
+    "paymentsRequired": true,
+    "onboarded": true
+}
+```
+
+Get a single tenant in your app
+
+### HTTP Request
+
+`GET <%= config[:account_api_url] %>/tenant/byId/:TENANT_ID`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### URL Parameters
+| Parameter | Description          |
+| --------- | -------------------- |
+| TENANT_ID | The ID of the tenant |
+
+### Response
+[Tenant model](#tenant-model)
+
+## Create new tenant
+
+> Request example
+
+```http
+POST /tenant HTTP/1.1
+User-Agent: MyClient/1.0.0
+x-api-token: <%= config[:api_key] %>
+Host: <%= config[:account_api_host] %>
+Content-Type: application/json
+Content-Length: XX
+
+{"name": "New Company Ltd","plan": "TEAM", "owner": {"email": "john@example.com", "firstName": "John", "lastName": "Doe"},"metadata": {"VIP": "true"}}
+```
+
+```typescript
+const response = await client.tenants.create(
+    {
+        name: "New Company Ltd",
+        plan: "TEAM",
+        owner: {
+            email: "john@example.com", 
+            firstName: "John", 
+            lastName: "Doe"
+            },
+        metadata: {
+            VIP: "true"
+        }
+    });
+```
+
+```shell
+curl --request POST '<%= config[:account_api_url] %>/tenant' \
+--header 'x-api-key: <%= config[:api_key] %>' \
+--data-raw '{
+    "name": "New Company Ltd","plan": "TEAM", "owner": {"email": "john@example.com", "firstName": "John", "lastName": "Doe"},"metadata": {"VIP": "true"}
+    }'
+```
+
+> Response example:
+
+```json
+{
+    "id": "606b00a61679e20008a5654d",
+    "plan": "TEAM",
+    "mfa": false,
+    "locale": "en",
+    "name": "John Inc",
+    "logo": "",
+    "metadata": {},
+    "createdAt": "2021-04-05T12:20:54.890Z",
+    "paymentsEnabled": false,
+    "paymentsRequired": true,
+    "onboarded": true
+}
+```
+
+Creates a new tenant with an initial user that is regarded as the tenant owner.
+
+### HTTP Request
+
+`POST <%= config[:account_api_url] %>/tenant`
+
+### Body Parameters
+
+| Parameter | Type                  | Required | Description                                                                                                                                                                            |
+| --------- | --------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| owner     | TenantOwner           | Required | A user will need to be assigned as an owner to this tenant. Either reused if the user already exist or a new user will be created. The user will be onboarded automatically. See below |
+| name      | string                | Optional | Name of the tenant. Can also be set by tenant owner during onboarding                                                                                                                  |
+| plan      | string                | Optional | The plan must be present in the configured App business model                                                                                                                          |
+| logo      | string                | Optional | A URI to a logo. Can also be set by tenant owner during onboarding                                                                                                                     |
+| metadata  | Record<string,string> | Optional | Store metadata for your own business logic that will be returned in every Tenant response. This data will never be outputted to the end user                                           |
+
+**TenantOwner**
+
+| Parameter         | Type    | Required | Description                                                                                                                                                                 |
+| ----------------- | ------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| email             | string  | Required | A user will need to be assigned as an owner to this tenant. Either reused if the user already exist or a new user will be created. The user will be onboarded automatically |
+| firstName         | string  | Optional | The first name. Can also be set by tenant owner during onboarding                                                                                                           |
+| lastName          | string  | Optional | The last name. Can also be set by tenant owner during onboarding                                                                                                            |
+| muteNotifications | boolean | Optional | Set this variable to true if you don't wish to send out any invitation/notifications to the new user                                                                        |
+
+### Response
+[Tenant model](#tenant-model)
+
+## Update tenant
+
+> Request example
+
+```http
+PUT /tenant/606b00a61679e20008a5654d HTTP/1.1
+User-Agent: MyClient/1.0.0
+x-api-token: <%= config[:api_key] %>
+Host: <%= config[:account_api_host] %>
+Content-Type: application/json
+Content-Length: XX
+
+{"logo": "http://path/to/logo.png","locale": "en"}
+```
+
+```typescript
+const response = await client.tenant('606b00a61679e20008a5654d').update(
+    {
+        logo: "http://path/to/logo.png",
+        locale: "en"
+    });
+```
+
+```shell
+curl --request PUT '<%= config[:account_api_url] %>/tenant/606b00a61679e20008a5654d' \
+--header 'x-api-key: <%= config[:api_key] %>' \
+--data-raw '{
+    "logo": "http://path/to/logo.png","locale": "en"
+    }'
+```
+
+> Response example:
+
+```json
+{
+    "id": "606b00a61679e20008a5654d",
+    "plan": "TEAM",
+    "mfa": false,
+    "locale": "en",
+    "name": "John Inc",
+    "logo": "",
+    "metadata": {},
+    "createdAt": "2021-04-05T12:20:54.890Z",
+    "paymentsEnabled": false,
+    "paymentsRequired": true,
+    "onboarded": true
+}
+```
+
+Update an existing tenant.
+
+### HTTP Request
+
+`PUT <%= config[:account_api_url] %>/tenant/606b00a61679e20008a5654d`
+
+### Body Parameters
+
+| Parameter | Type                  | Required | Description                                                                                                                                  |
+| --------- | --------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| name      | string                | Optional | Name of the tenant.                                                                       |
+| locale    | string                | Optional | The default locale / lang code for all users in this tenant (`ISO_639-1` format). This property will set the i18n for all platform emails    |
+| plan      | string                | Optional | The plan must be present in the configured App business model                                                                                |
+| logo      | string                | Optional | A URI to a logo.                                                                                                                             |
+| mfa       | boolean               | Optional | Require users to login with MFA/2FA                                                                                                          |
+| metadata  | Record<string,string> | Optional | Store metadata for your own business logic that will be returned in every Tenant response. This data will never be outputted to the end user |
+
+### Response
+[Tenant model](#tenant-model)

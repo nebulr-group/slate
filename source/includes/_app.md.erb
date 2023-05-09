@@ -1,0 +1,387 @@
+# App Profile
+As the developer, the App profile is your entrypoint to Nblocks. This is your unique set of settings to tailor the Nblocks experience. You can have several different Profiles, e.g. one for production and one for testing. This helps organize and separate configurations from different stages in your development process.
+
+## Get app profile
+
+> Request example
+
+```http
+GET /app HTTP/1.1
+User-Agent: MyClient/1.0.0
+x-api-token: <%= config[:api_key] %>
+Host: <%= config[:account_api_host] %>
+```
+
+```typescript
+const response = await client.config.getAppProfile();
+```
+
+```shell
+curl --request GET '<%= config[:account_api_url] %>/app' \
+--header 'x-api-key: <%= config[:api_key] %>'
+```
+
+> Response example:
+
+```json
+{
+    "id": "624c14cc0c01e70033356282",
+    "name": "My app",
+    "domain": "MY_APP",
+    "apiUrl": "",
+    "uiUrl": "http://localhost:8100",
+    "stripeEnabled": true,
+    "azureMarketplaceEnabled": false,
+    "onboardingFlow": "B2B", d
+    "cloudViews": true,
+    "redirectUris": ["http://localhost:8080/auth/oauth-callback"],
+    "defaultCallbackUri": "http://localhost:8080/auth/oauth-callback",
+    "defaultRole": "OWNER",
+    "roles": {
+        "OWNER": [
+            "TENANT_READ",
+            "TENANT_WRITE",
+            "CASE_READ",
+            "CASE_WRITE",
+            "TAG_READ",
+            "TAG_WRITE",
+            "USER_READ",
+            "USER_WRITE",
+            "GROUP_WRITE",
+            "GROUP_READ",
+            "ASSIGNEES_WRITE",
+            "SETTINGS_READ",
+            "SETTINGS_WRITE"
+        ],
+        "ADMIN": [
+            "TENANT_READ",
+            "CASE_READ",
+            "CASE_WRITE",
+            "TAG_READ",
+            "TAG_WRITE",
+            "USER_READ",
+            "USER_WRITE",
+            "GROUP_WRITE",
+            "GROUP_READ",
+            "ASSIGNEES_WRITE",
+            "SETTINGS_READ",
+            "SETTINGS_WRITE"
+        ],
+        "MANAGER": [
+            "TENANT_READ",
+            "CASE_READ",
+            "CASE_WRITE",
+            "TAG_READ",
+            "USER_READ",
+            "GROUP_READ",
+            "SETTINGS_READ"
+        ],
+        "VIEWER": [
+            "TENANT_READ",
+            "CASE_READ",
+            "TAG_READ",
+            "USER_READ",
+            "GROUP_READ",
+            "SETTINGS_READ"
+        ]
+    },
+    "businessModel": {
+        "taxes": [
+            {
+            "region": "SE",
+            "name": "VAT",
+            "percentage": 25
+            }
+        ],
+        "plans": [
+            {
+            "name": "ESSENTIAL",
+            "prices": [
+                {
+                "region": "SE",
+                "amount": 500,
+                "currency": "SEK",
+                "recurrenceInterval": "month"
+                },
+                {
+                "region": "DE",
+                "amount": 50,
+                "currency": "EUR",
+                "recurrenceInterval": "month"
+                }
+            ]
+            },
+            {
+            "name": "TEAM",
+            "trialDays": 14,
+            "prices": [
+                {
+                "region": "SE",
+                "amount": 1000,
+                "currency": "SEK",
+                "recurrenceInterval": "month"
+                },
+                {
+                "region": "DE",
+                "amount": 100,
+                "currency": "EUR",
+                "recurrenceInterval": "month"
+                }
+            ]
+            }
+        ]
+    },
+    "logo": "https://public.nblocks.dev/assets/logos/nblocks-logo-purple.png",
+    "websiteUrl": "http://localhost",
+    "privacyPolicyUrl": "",
+    "termsOfServiceUrl": ""
+}
+```
+
+Gets the complete `App` model of your app.
+The app is your top most entity and holds all configurations for how your App interacts with the platform in any sub call. 
+Use this response data to alter your model and push back.
+
+### HTTP Request
+
+`GET <%= config[:account_api_url] %>/app`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### Response
+Your [App profile model](#app-profile-model)
+
+
+## Update app profile
+
+> Request example
+
+```http
+PUT /app HTTP/1.1
+User-Agent: MyClient/1.0.0
+x-api-token: <%= config[:api_key] %>
+Host: <%= config[:account_api_host] %>
+Content-Type: application/json
+Content-Length: XX
+
+{"logo": "https://www.example.com/another_logo.png"}
+```
+
+```typescript
+const response = await client.config.updateAppProfile({logo: "https://www.example.com/another_logo.png"});
+```
+
+```shell
+curl --request PUT '<%= config[:account_api_url] %>/app' \
+--header 'x-api-key: <%= config[:api_key] %>' \
+--data-raw '{
+    "logo": "https://www.example.com/another_logo.png"
+}'
+```
+
+> Response example:
+
+```json
+{
+    "id": "624c14cc0c01e70033356282",
+    "name": "My app",
+    "domain": "MY_APP",
+    "apiUrl": "",
+    "uiUrl": "http://localhost:8100",
+    "stripeEnabled": true,
+    "azureMarketplaceEnabled": false,
+    "onboardingFlow": "B2B",
+    "cloudViews": true,
+    "redirectUris": ["http://localhost:8080/auth/oauth-callback"],
+    "defaultCallbackUri": "http://localhost:8080/auth/oauth-callback",
+    "defaultRole": "OWNER",
+    "roles": {
+        "OWNER": [
+            "TENANT_READ",
+            "TENANT_WRITE",
+            "CASE_READ",
+            "CASE_WRITE",
+            "TAG_READ",
+            "TAG_WRITE",
+            "USER_READ",
+            "USER_WRITE",
+            "GROUP_WRITE",
+            "GROUP_READ",
+            "ASSIGNEES_WRITE",
+            "SETTINGS_READ",
+            "SETTINGS_WRITE"
+        ],
+        "ADMIN": [
+            "TENANT_READ",
+            "CASE_READ",
+            "CASE_WRITE",
+            "TAG_READ",
+            "TAG_WRITE",
+            "USER_READ",
+            "USER_WRITE",
+            "GROUP_WRITE",
+            "GROUP_READ",
+            "ASSIGNEES_WRITE",
+            "SETTINGS_READ",
+            "SETTINGS_WRITE"
+        ],
+        "MANAGER": [
+            "TENANT_READ",
+            "CASE_READ",
+            "CASE_WRITE",
+            "TAG_READ",
+            "USER_READ",
+            "GROUP_READ",
+            "SETTINGS_READ"
+        ],
+        "VIEWER": [
+            "TENANT_READ",
+            "CASE_READ",
+            "TAG_READ",
+            "USER_READ",
+            "GROUP_READ",
+            "SETTINGS_READ"
+        ]
+    },
+    "businessModel": {
+        "taxes": [
+            {
+            "region": "SE",
+            "name": "VAT",
+            "percentage": 25
+            }
+        ],
+        "plans": [
+            {
+            "name": "ESSENTIAL",
+            "prices": [
+                {
+                "region": "SE",
+                "amount": 500,
+                "currency": "SEK",
+                "recurrenceInterval": "month"
+                },
+                {
+                "region": "DE",
+                "amount": 50,
+                "currency": "EUR",
+                "recurrenceInterval": "month"
+                }
+            ]
+            },
+            {
+            "name": "TEAM",
+            "trialDays": 14,
+            "prices": [
+                {
+                "region": "SE",
+                "amount": 1000,
+                "currency": "SEK",
+                "recurrenceInterval": "month"
+                },
+                {
+                "region": "DE",
+                "amount": 100,
+                "currency": "EUR",
+                "recurrenceInterval": "month"
+                }
+            ]
+            }
+        ]
+    },
+    "logo": "https://public.nblocks.dev/assets/logos/nblocks-logo-purple.png",
+    "websiteUrl": "http://localhost",
+    "privacyPolicyUrl": "",
+    "termsOfServiceUrl": ""
+}
+```
+
+You can update the app with the same JSON you got from `Get app model` or just provide the field you want to update
+
+### HTTP Request
+
+`PUT <%= config[:account_api_url] %>/app`
+
+### Body Parameters
+
+| Parameter          | Type                     | Required | Description                                                                                                                                                |
+| ------------------ | ------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name               | string                   | Optional | Name of the app                                                                                                                                            | d
+| apiUrl             | string                   | Optional | URL to your api (to receive webhooks etc). **Must be HTTPS**                                                                                               |
+| defaultRole        | string                   | Optional | Default user role                                                                                                                                          |
+| uiUrl              | string                   | Optional | URL to your frontend app (for onboarding redirects etc). **Must be HTTPS**                                                                                 |
+| roles              | Record<string, string[]> | Optional | All user roles and their granted privileges                                                                                                                |
+| businessModel      | BusinessModel            | Optional | The business model defines what plans are available to subscribe to and what taxes applies.                                                                |
+| logo               | string                   | Optional | URL to your logo                                                                                                                                           |
+| websiteUrl         | string                   | Optional | URL to your website or landing page. E.g. Branded emails will link to this URL, checkout process will redirect to `/payment-success` and `/payment-cancel` |
+| privacyPolicyUrl   | string                   | Optional | URL to a page on your website containing a Privacy policy for your app users. E.g. checkout process will link to this url.                                 |
+| termsOfServiceUrl  | string                   | Optional | URL to a page on your website containing a Terms of service for your app users. E.g. checkout process will link to this url.                               |
+| emailSenderName    | string                   | Optional | Emails sent from Nblocks will have this sender name                                                                                                        |
+| emailSenderEmail   | string                   | Optional | Emails sent from Nblocks will have this sender email. You'll have to verify this email before                                                              |
+| onboardingFlow     | OnboardingFlow           | Optional | Configure how users will be onboarded                                                                                                                      |
+| cloudViews         | boolean                  | Optional | Toggle this to true if you want to use a UI provided by NBlocks instead of your own                                                                        |
+| redirectUris       | string[]                 | Optional | Allowed redirect uris                                                                                                                                      |
+| defaultCallbackUri | string                   | Optional | Default handover/callback uri used by Nblocks                                                                                                              |
+
+## Update credentials
+
+> Request example
+
+```http
+PUT /app/credentials HTTP/1.1
+User-Agent: MyClient/1.0.0
+x-api-token: <%= config[:api_key] %>
+Host: <%= config[:account_api_host] %>
+Content-Type: application/json
+Content-Length: XX
+
+{"googleClientId": "XXXXXXX","googleClientSecret": "XXXXXXX"}
+```
+
+```typescript
+const response = await client.config.updateCredentials({
+    googleClientId: "XXXXXXX",
+    googleClientSecret: "XXXXXXX"
+});
+```
+
+```shell
+curl --request PUT '<%= config[:account_api_url] %>/app/credentials' \
+--header 'x-api-key: <%= config[:api_key] %>' \
+--data-raw '{
+    "googleClientId": "XXXXXXX",
+    "googleClientSecret": "XXXXXXX"
+}'
+```
+
+Store sensitive credentials for your app so NBlocks can authorize with 3d party services on your behalf.
+
+These credentials are never outputted back again
+
+E.g. Stripe integration, social login providers like Google, Facebook, Github etc.
+
+### HTTP Request
+
+`PUT <%= config[:account_api_url] %>/app/credentials`
+
+### Body Parameters
+
+| Parameter                             | Type   | Required | Description                                 |
+| ------------------------------------- | ------ | -------- | ------------------------------------------- |
+| stripeSecretKey                       | string | Optional | Stripe integration, secret key              |
+| stripePublicKey                       | string | Optional | Stripe integration, public key              |
+| microsoftAzureMarketplaceClientId     | string | Optional | Microsoft Azure Marketplace integration App |
+| microsoftAzureMarketplaceClientSecret | string | Optional | Microsoft Azure Marketplace integration App |
+| microsoftAzureMarketplaceTenantId     | string | Optional | Microsoft Azure Marketplace integration App |
+| googleClientId                        | string | Optional | Google social login                         |
+| googleClientSecret                    | string | Optional | Google social login                         |
+| githubClientId                        | string | Optional | Gitlab social login                         |
+| githubClientSecret                    | string | Optional | Gitlab social login                         |
+| facebookAppId                         | string | Optional | Facebook social login                       |
+| facebookAppSecret                     | string | Optional | Facebook social login                       |
+| microsoftAzureADClientId              | string | Optional | MS Azure AD SSO                             |
+| microsoftAzureADClientSecret          | string | Optional | MS Azure AD SSO                             |
+| microsoftAzureADTenantId              | string | Optional | MS Azure AD SSO                             |

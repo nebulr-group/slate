@@ -1,6 +1,22 @@
 # Unique header generation
 require './lib/unique_head.rb'
 
+# Global Variables
+set :api_key, 'YOUR_APP_API_KEY'
+set :app_id, 'YOUR_APP_ID'
+set :account_api_url, 'https://account-api.nebulr-core.com'
+set :account_api_host, 'account-api.nebulr-core.com'
+set :communication_api_url, 'https://communication-api.nebulr-core.com'
+set :file_api_url, 'https://file-api.nebulr-core.com'
+set :auth_url, 'https://auth.nblocks.cloud'
+config[:api_key]
+config[:app_id]
+config[:account_api_url]
+config[:account_api_host]
+config[:communication_api_url]
+config[:file_api_url]
+config[:auth_url]
+
 # Markdown
 set :markdown_engine, :redcarpet
 set :markdown,

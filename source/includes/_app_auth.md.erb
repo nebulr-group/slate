@@ -1,0 +1,39 @@
+# Authentication
+
+## How it works
+
+> Request example with api key
+
+```http
+GET /endpoint HTTP/1.1
+User-Agent: MyClient/1.0.0
+x-api-token: <%= config[:api_key] %>
+Host: someapi.com %>
+```
+
+```typescript
+const client = new NblocksClient(<%= config[:api_key] %>);
+await new client.some.cool.function();
+```
+
+```shell
+curl --request GET 'https://someapi.com/endpoint' \
+--header 'x-api-key: <%= config[:api_key] %>'
+```
+
+All calls to Nblocks apis requires you to authorize yourself as a valid app, either with your unique App ID or more commonly your secret API key. You should have received these keys upon registration.
+The apis expect you to authorize each call by including your api key in the HTTP headers.
+
+`x-api-key: <%= config[:api_key] %>`
+
+This should not be confused with your users authenticating. When they login into your app they authenticate with their own credentails using a Oauth 2.0 [flow](#user-auth).
+
+## Registrating for a new app profile
+
+`npx @nebulr-group/nblocks-cli create-app`
+
+The NPX tool will create a new folder and place a `.env` file containing your Nblocks API key and download a copy of your app profile into a file `app-configuration.json`. Use this API key from the env file and the App ID from your app profile to start calling our APIs.
+
+<aside class="success">
+In all future request examples, we assume you have access to your App API key and your App ID.
+</aside>

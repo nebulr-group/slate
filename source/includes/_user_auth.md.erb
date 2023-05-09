@@ -1,0 +1,234 @@
+# User auth
+
+User authentication is done using Nblocks Auth Service that supports Oauth 2.0 / OpenID Connect and tokens are issued as JWTs.
+
+**At a glance, the authentication process looks like this:**
+
+1. You initiate the login process by redirecting the user to the `/authorize` endpoint (or the simpler shorthand `/login` endpoint).
+2. User is pulled through an authentication process provided by Nblocks with cloud views.
+3. Once the user is authenticated and has selected the tenant to access the user is redirect back to your app with a code.
+4. You make a call to the `/token` endpoint with this code to exchange it for access tokens and user profile information (openid).
+5. You can verify that the tokens are valid and safe to trust by using the public keys available from the `/.well-known` endpoint.
+6. You will be able to refresh the tokens using the `/token` endpoint to obtain up to date access and profile information.
+
+## Authorize
+
+Start the Oauth 2.0 user login flow by redirecting the user to the `/authorize` endpoint. The user will be able to choose login method and after authentication process get back to your app with an auth code that you can exchange for access and openid tokens.
+
+### HTTP Request
+
+`GET <%= config[:auth_url] %>/authorize`
+
+### Query Parameters
+
+| Parameter        | Type    | Required | Description                                                                                                                          |
+| ---------------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| client_id        | string  | Required | Your app id                                                                                                                          |
+| response_type    | string  | Required | What kind of tokens will be generated. We support `code`                                                                             |
+| redirect_uri     | string  | Required | A target URI where the authenticated user will be redirected to together with tokens. Must be a valid URI in your App `redirectUris` |
+| scope            | string  | Required | Any or all of the following: `openid`, `profile`, `email`, `address`, `phone`, `onboarding`, `tenant`                                |
+| state            | string  | Optional | This can be used to resume a state in your app. The state will be available in the response code                                     |
+| force_federation | boolean | Optional | If you want to force a certain federated login flow instead of letting the user choose during login. We support `ms-azure-ad`        |
+
+<aside class="notice">
+You should redirect the user agent to this endpoint to initate the login flow. This is not an API <-> API call.
+</aside>
+
+## Get tokens
+
+> Request example exchanging code for tokens
+
+```http
+POST /token HTTP/1.1
+User-Agent: MyClient/1.0.0
+Host: <%= config[:auth_host] %>
+Content-Type: application/json
+Content-Length: XX
+
+{"client_id": "<%= config[:app_id] %>", "grant_type": "authorization_code", "code": "XXXX", "redirect_uri": "http://localhost:8080/auth/oauth-callback"}
+```
+
+```typescript
+const response = await client.auth.getTokens({code: "XXXX"});
+```
+
+```shell
+curl --request PUT '<%= config[:auth_url] %>/token' \
+--data-raw '{
+    {client_id: "<%= config[:app_id] %>", grant_type: "authorization_code", code: "XXXX", "redirect_uri": "http://localhost:8080/auth/oauth-callback"}
+}'
+```
+
+> Request example exchanging refresh token for tokens
+
+```http
+POST /token HTTP/1.1
+User-Agent: MyClient/1.0.0
+Host: <%= config[:auth_host] %>
+Content-Type: application/json
+Content-Length: XX
+
+{"client_id": "<%= config[:app_id] %>", "grant_type": "refresh_token", "refresh_token": "XXXX"}
+```
+
+```typescript
+const response = await client.auth.refreshTokens({refreshToken: "XXXX"});
+```
+
+```shell
+curl --request POST '<%= config[:auth_url] %>/token' \
+--data-raw '{
+    {client_id: "<%= config[:app_id] %>", grant_type: "refresh_token", refresh_token: "XXXX"}
+}'
+```
+
+> Response example:
+
+```json
+{
+    "access_token": "XXXX",
+    "refresh_token": "XXXX",
+    "token_type": "Bearer",
+    "expires_in": "XXXX",
+    "id_token": "XXXX"
+}
+```
+
+Get new tokens using an authorization code from a user just completed authentication or by using the refresh token that was issued to a logged in user before. This endpoints serves both cases. 
+
+### HTTP Request
+
+`POST <%= config[:auth_url] %>/token`
+
+### Body Parameters
+
+| Parameter     | Type   | Required                          | Description                                                                                                                          |
+| ------------- | ------ | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| client_id     | string | Required                          | Your app id                                                                                                                          |
+| grant_type    | string | Required                          | `authorization_code` or `refresh_token`                                                                                              |
+| code          | string | Required for `authorization_code` | The code you recieved from the authenticated user.                                                                                   |
+| redirect_uri  | string | Required for `authorization_code` | A target URI where the authenticated user will be redirected to together with tokens. Must be a valid URI in your App `redirectUris` |
+| refresh_token | string | Required for `refresh_token`      | The refresh token that was issued when getting the tokens before                                                                     |
+
+### Response
+[Tokens response](#tokens-response)
+
+<aside class="notice">
+These tokens are <a href="https://jwt.io">JWTs</a>, provided in a compact form, all according to the <a href="https://www.oauth.com">OAuth 2.0 / OpenID standard</a>. 
+That means there are plenty of libraries for many software stacks to decode them into readable JSON. Here's a extensive list of tools for most software stacks https://jwt.io/libraries.
+</aside>
+
+## Short hand authorize
+
+Shorthand endpoints exists so you can use them with less parameters using sensible defaults. Use the simpler short hand endpoint `/url/login` to initiate the login flow. The Nblocks will collect your default config and issue the Oauth 2.0 flow.
+
+### HTTP Request
+
+`GET <%= config[:auth_url] %>/url/login/:<%= config[:app_id] %>`
+
+### URL Parameters
+| Parameter              | Description        |
+| ---------------------- | ------------------ |
+| <%= config[:app_id] %> | The ID of your app |
+
+### Query Parameters
+
+| Parameter       | Type    | Required | Description                                                                                                                               |
+| --------------- | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| redirectUri     | string  | Optional | A target URI where the authenticated user will be redirected to together with tokens. The default value is your App `defaultCallbackUri`. |
+| state           | string  | Optional | This can be used to resume a state in your app. The state will be available in the response code                                          |
+| forceFederation | boolean | Optional | If you want to force a certain federated login flow instead of letting the user choose during login. We support `ms-azure-ad`             |
+
+<aside class="notice">
+You should redirect the user agent to this endpoint to initate the login flow. This is not an API <-> API call.
+</aside>
+
+## Shorthand get tokens
+
+> Request example exchanging code for tokens
+
+```http
+POST /token/authorization_code/<%= config[:app_id] %> HTTP/1.1
+User-Agent: MyClient/1.0.0
+Host: <%= config[:auth_host] %>
+Content-Type: application/json
+Content-Length: XX
+
+{"code": "XXXX"}
+```
+
+```typescript
+const response = await client.auth.getTokens({code: "XXXX"});
+```
+
+```shell
+curl --request PUT '<%= config[:auth_url] %>/token/authorization_code/<%= config[:app_id] %>' \
+--data-raw '{
+    {"code": "XXXX"}
+}'
+```
+
+> Request example exchanging refresh token for tokens
+
+```http
+POST /token/refresh_token/<%= config[:app_id] %> HTTP/1.1
+User-Agent: MyClient/1.0.0
+Host: <%= config[:auth_host] %>
+Content-Type: application/json
+Content-Length: XX
+
+{"refresh_token": "XXXX"}
+```
+
+```typescript
+const response = await client.auth.refreshTokens({refreshToken: "XXXX"});
+```
+
+```shell
+curl --request POST '<%= config[:auth_url] %>/token/refresh_token/<%= config[:app_id] %>' \
+--data-raw '{
+    {"refresh_token": "XXXX"}
+}'
+```
+
+> Response example:
+
+```json
+{
+    "access_token": "XXXX",
+    "refresh_token": "XXXX",
+    "token_type": "Bearer",
+    "expires_in": "XXXX",
+    "id_token": "XXXX"
+}
+```
+
+Shorthand endpoints exists so you can use them with less parameters using sensible defaults. Get new tokens using an authorization code from a user just completed authentication or by using the refresh token that was issued to a logged in user before. This endpoints serves both cases. 
+
+### HTTP Request
+
+`POST <%= config[:auth_url] %>/token/:grantType/:<%= config[:app_id] %>`
+
+### URL Parameters
+| Parameter | Description        |
+| --------- | ------------------ |
+| grantType    | `authorization_code` or `refresh_token` |
+| <%= config[:app_id] %>    | The ID of your app |
+
+### Body Parameters
+
+| Parameter     | Type   | Required                          | Description                                                                                                                          |
+| ------------- | ------ | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| client_id     | string | Required                          | Your app id                                                                                                                          |
+| grant_type    | string | Required                          | `authorization_code` or `refresh_token`                                                                                              |
+| code          | string | Required for `authorization_code` | The code you recieved from the authenticated user.                                                                                   |
+| redirect_uri  | string | Required for `authorization_code` | A target URI where the authenticated user will be redirected to together with tokens. Must be a valid URI in your App `redirectUris` |
+| refresh_token | string | Required for `refresh_token`      | The refresh token that was issued when getting the tokens before                                                                     |
+
+### Response
+[Tokens response](#tokens-response)
+
+<aside class="notice">
+These tokens are <a href="https://jwt.io">JWTs</a>, provided in a compact form, all according to the <a href="https://www.oauth.com">OAuth 2.0 / OpenID standard</a>. 
+That means there are plenty of libraries for many software stacks to decode them into readable JSON. Here's a extensive list of tools for most software stacks https://jwt.io/libraries.
+</aside>
