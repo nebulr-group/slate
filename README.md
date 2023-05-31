@@ -10,6 +10,7 @@
 - `git branch -D gh-pages`
 - `./deploy`
 - `git push origin gh-pages -f`
+- `git reset --hard main`
 
 
 
