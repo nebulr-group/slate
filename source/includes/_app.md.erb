@@ -151,7 +151,7 @@ Use this response data to alter your model and push back.
 | --------- | ------ | -------- | ---------------- |
 | x-api-key | string | Required | Your app api key |
 
-### Response
+<%= partial "/includes/response_success.md" %>
 Your [App profile model](#app-profile-model)
 
 
@@ -314,7 +314,7 @@ You can update the app with the same JSON you got from `Get app model` or just p
 | defaultRole        | string                   | Optional | Default user role                                                                                                                                          |
 | uiUrl              | string                   | Optional | URL to your frontend app (for onboarding redirects etc). **Must be HTTPS**                                                                                 |
 | roles              | Record<string, string[]> | Optional | All user roles and their granted privileges                                                                                                                |
-| businessModel      | BusinessModel            | Optional | The business model defines what plans are available to subscribe to and what taxes applies.                                                                |
+| businessModel      | [BusinessModel](#business-model)             | Optional | The business model defines what plans are available to subscribe to and what taxes applies.                                                                |
 | logo               | string                   | Optional | URL to your logo                                                                                                                                           |
 | websiteUrl         | string                   | Optional | URL to your website or landing page. E.g. Branded emails will link to this URL, checkout process will redirect to `/payment-success` and `/payment-cancel` |
 | privacyPolicyUrl   | string                   | Optional | URL to a page on your website containing a Privacy policy for your app users. E.g. checkout process will link to this url.                                 |
@@ -325,6 +325,9 @@ You can update the app with the same JSON you got from `Get app model` or just p
 | cloudViews         | boolean                  | Optional | Toggle this to true if you want to use a UI provided by NBlocks instead of your own                                                                        |
 | redirectUris       | string[]                 | Optional | Allowed redirect uris                                                                                                                                      |
 | defaultCallbackUri | string                   | Optional | Default handover/callback uri used by Nblocks                                                                                                              |
+
+<%= partial "/includes/response_success.md" %>
+Your [App profile model](#app-profile-model)
 
 ## Update credentials
 
@@ -385,3 +388,5 @@ E.g. Stripe integration, social login providers like Google, Facebook, Github et
 | microsoftAzureADClientId              | string | Optional | MS Azure AD SSO                             |
 | microsoftAzureADClientSecret          | string | Optional | MS Azure AD SSO                             |
 | microsoftAzureADTenantId              | string | Optional | MS Azure AD SSO                             |
+
+<%= partial "/includes/response_success.md" %>

@@ -127,7 +127,7 @@
 | defaultRole             | string                   | Default user role                                                                                                                                          |
 | uiUrl                   | string                   | URL to your frontend app (for onboarding redirects etc). **Must be HTTPS**                                                                                 |
 | roles                   | Record<string, string[]> | All user roles and their granted privileges                                                                                                                |
-| businessModel           | BusinessModel            | The business model defines what plans are available to subscribe to and what taxes applies.                                                                |
+| businessModel           | [BusinessModel](#business-model)            | The business model defines what plans are available to subscribe to and what taxes applies.                                                                |
 | logo                    | string                   | URL to your logo                                                                                                                                           |
 | websiteUrl              | string                   | URL to your website or landing page. E.g. Branded emails will link to this URL, checkout process will redirect to `/payment-success` and `/payment-cancel` |
 | privacyPolicyUrl        | string                   | URL to a page on your website containing a Privacy policy for your app users. E.g. checkout process will link to this url.                                 |
@@ -140,6 +140,65 @@
 | cloudViews              | boolean                  | Toggle this to true if you want to use a UI provided by NBlocks instead of your own                                                                        |
 | redirectUris            | string[]                 | Allowed redirect uris                                                                                                                                      |
 | defaultCallbackUri      | string                   | Default handover/callback uri used by Nblocks                                                                                                              |
+
+## Business model
+
+> Model example:
+
+```json
+{
+        "taxes": [
+            {
+            "region": "SE",
+            "name": "VAT",
+            "percentage": 25
+            }
+        ],
+        "plans": [
+            {
+            "name": "ESSENTIAL",
+            "prices": [
+                {
+                "region": "SE",
+                "amount": 500,
+                "currency": "SEK",
+                "recurrenceInterval": "month"
+                },
+                {
+                "region": "DE",
+                "amount": 50,
+                "currency": "EUR",
+                "recurrenceInterval": "month"
+                }
+            ]
+            },
+            {
+            "name": "TEAM",
+            "trialDays": 14,
+            "prices": [
+                {
+                "region": "SE",
+                "amount": 1000,
+                "currency": "SEK",
+                "recurrenceInterval": "month"
+                },
+                {
+                "region": "DE",
+                "amount": 100,
+                "currency": "EUR",
+                "recurrenceInterval": "month"
+                }
+            ]
+            }
+        ]
+}
+```
+
+| Parameter | Type   | Description                                           |
+| --------- | ------ | ----------------------------------------------------- |
+| taxes     | Tax[]  | A list of Taxes for different countries               |
+| plans     | Plan[] | A list of Plans which your customers can subscribe to |
+
 
 ## Tenant model
 
@@ -174,13 +233,14 @@
 | createdAt        | string                 | Timestamp when created (Read only)                                                                                                             |
 
 ## Tokens response
-| Parameter     | Type   | Description                                                              |
-| ------------- | ------ | ------------------------------------------------------------------------ |
-| access_token  | string | The access token containing authentication and access control data only) |
-| refresh_token | string | The token use for refreshing the access token before it expires app      |
-| token_type    | string | Token type                                                               |
-| expires_in    | number | Seconds before the access_token expires                                  |
-| id_token      | string | The OpenId Connect user profile id                                       |
+| Parameter     | Type   | Description                                                                                         |
+| ------------- | ------ | --------------------------------------------------------------------------------------------------- |
+| token_type    | string | Token type                                                                                          |
+| expires_in    | number | Seconds before the access_token expires                                                             |
+| access_token  | string | (JWT) The access token containing authentication and access control data only)                      |
+| refresh_token | string | (JWT) The token use for refreshing the access token before it expires app                           |
+| id_token      | string | (JWT) The OpenId Connect user profile id                                                            |
+| user_profile  | object | A decoded id_token JWT as JSON. Available in [Shorthand get tokens](#shorthand-get-tokens) endpoint |
 
 
 ## Access token model
@@ -231,7 +291,7 @@ Decoded JWT payload.
 
 | Parameter          | Type    | Description                               |
 | ------------------ | ------- | ----------------------------------------- |
-| sub                | string  | Tenant user id                            |
+| sub                | string  | User id                            |
 | name               | string  | Users full name                           |
 | family_name        | string  | Users last name                           |
 | given_name         | string  | Users first name                          |

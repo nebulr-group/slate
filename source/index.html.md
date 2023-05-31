@@ -12,13 +12,13 @@ toc_footers:
 includes:
     - app_auth.md.erb
     - app.md.erb
-    - tenants.md.erb
-    - users.md.erb
     - user_auth.md.erb
+    - users.md.erb
+    - tenants.md.erb
     # - auth.md
     - models.md
     - errors.md
-    - changelog.md
+    - changelog.md.erb
 
 search: true
 

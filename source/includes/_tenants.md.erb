@@ -65,7 +65,7 @@ Lists all tenants in your app. Each tenant will have their own sets of users.
 | --------- | ------ | -------- | ---------------- |
 | x-api-key | string | Required | Your app api key |
 
-### Response
+<%= partial "/includes/response_success.md" %>
 A list of [Tenant models](#tenant-model)
 
 ## Get tenant by id
@@ -122,7 +122,7 @@ Get a single tenant in your app
 | --------- | -------------------- |
 | TENANT_ID | The ID of the tenant |
 
-### Response
+<%= partial "/includes/response_success.md" %>
 [Tenant model](#tenant-model)
 
 ## Create new tenant
@@ -207,7 +207,7 @@ Creates a new tenant with an initial user that is regarded as the tenant owner.
 | lastName          | string  | Optional | The last name. Can also be set by tenant owner during onboarding                                                                                                            |
 | muteNotifications | boolean | Optional | Set this variable to true if you don't wish to send out any invitation/notifications to the new user                                                                        |
 
-### Response
+<%= partial "/includes/response_success_created.md" %>
 [Tenant model](#tenant-model)
 
 ## Update tenant
@@ -276,5 +276,5 @@ Update an existing tenant.
 | mfa       | boolean               | Optional | Require users to login with MFA/2FA                                                                                                          |
 | metadata  | Record<string,string> | Optional | Store metadata for your own business logic that will be returned in every Tenant response. This data will never be outputted to the end user |
 
-### Response
+<%= partial "/includes/response_success.md" %>
 [Tenant model](#tenant-model)
