@@ -148,7 +148,7 @@ You should redirect the user agent to this endpoint to initate the login flow. T
 > Request example exchanging code for tokens
 
 ```http
-POST /token/authorization_code/<%= config[:app_id] %> HTTP/1.1
+POST /token/code/<%= config[:app_id] %> HTTP/1.1
 User-Agent: MyClient/1.0.0
 Host: <%= config[:auth_host] %>
 Content-Type: application/json
@@ -162,7 +162,7 @@ const response = await client.auth.getTokens({code: "XXXX"});
 ```
 
 ```shell
-curl --request PUT '<%= config[:auth_url] %>/token/authorization_code/<%= config[:app_id] %>' \
+curl --request PUT '<%= config[:auth_url] %>/token/code/<%= config[:app_id] %>' \
 --data-raw '{
     {"code": "XXXX"}
 }'
@@ -171,13 +171,13 @@ curl --request PUT '<%= config[:auth_url] %>/token/authorization_code/<%= config
 > Request example exchanging refresh token for tokens
 
 ```http
-POST /token/refresh_token/<%= config[:app_id] %> HTTP/1.1
+POST /token/refresh/<%= config[:app_id] %> HTTP/1.1
 User-Agent: MyClient/1.0.0
 Host: <%= config[:auth_host] %>
 Content-Type: application/json
 Content-Length: XX
 
-{"refresh_token": "XXXX"}
+{"refreshToken": "XXXX"}
 ```
 
 ```typescript
@@ -185,9 +185,9 @@ const response = await client.auth.refreshTokens({refreshToken: "XXXX"});
 ```
 
 ```shell
-curl --request POST '<%= config[:auth_url] %>/token/refresh_token/<%= config[:app_id] %>' \
+curl --request POST '<%= config[:auth_url] %>/token/refresh/<%= config[:app_id] %>' \
 --data-raw '{
-    {"refresh_token": "XXXX"}
+    {"refreshToken": "XXXX"}
 }'
 ```
 
@@ -227,16 +227,17 @@ Shorthand endpoints exists so you can use them with less parameters using sensib
 ### URL Parameters
 | Parameter | Description        |
 | --------- | ------------------ |
-| grantType    | `authorization_code` or `refresh_token` |
+| grantType    | `code` or `refresh` |
 | <%= config[:app_id] %>    | The ID of your app |
 
 ### Body Parameters
 
 | Parameter     | Type   | Required                          | Description                                                                                                                          |
 | ------------- | ------ | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| code          | string | Required for `authorization_code` | The code you recieved from the authenticated user.                                                                                   |
-| redirectUri  | string | Required for `authorization_code` | A target URI where the authenticated user will be redirected to together with tokens. Must be a valid URI in your App `redirectUris` |
-| refreshToken | string | Required for `refresh_token`      | The refresh token that was issued when getting the tokens before                                                                     |
+| code          | string | Required for code grant | The code you recieved from the authenticated user.                                                                                   |
+| refreshToken | string | Required for refresh grant      | The refresh token that was issued when getting the tokens before                                                                     |
+| redirectUri  | string | Optional for code grant | A target URI where the authenticated user will be redirected to together with tokens. The default value is your App `defaultCallbackUri`. |
+
 
 <%= partial "/includes/response_success.md" %>
 [Tokens response](#tokens-response)
