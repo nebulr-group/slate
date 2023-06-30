@@ -12,15 +12,23 @@ set :app_id, 'YOUR_APP_ID'
 set :account_api_url, 'https://account-api-stage.nebulr-core.com'
 set :account_api_host, 'account-api-stage.nebulr-core.com'
 set :communication_api_url, 'https://communication-api-stage.nebulr-core.com'
+set :communication_api_host, 'communication-api-stage.nebulr-core.com'
 set :file_api_url, 'https://file-api-stage.nebulr-core.com'
+set :file_api_host, 'file-api-stage.nebulr-core.com'
 set :auth_url, 'https://auth-stage.nblocks.cloud'
+set :auth_host, 'auth-stage.nblocks.cloud'
+set :backendless_api_url, 'https://backendless-stage.nblocks.cloud'
+set :backendless_api_host, 'backendless-stage.nblocks.cloud'
 config[:api_key]
 config[:app_id]
 config[:account_api_url]
 config[:account_api_host]
 config[:communication_api_url]
+config[:communication_api_host]
 config[:file_api_url]
+config[:file_api_host]
 config[:auth_url]
+config[:auth_host]
 
 # Markdown
 set :markdown_engine, :redcarpet

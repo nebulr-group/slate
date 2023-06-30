@@ -53,7 +53,7 @@ const response = await client.auth.getTokens({code: "XXXX"});
 ```
 
 ```shell
-curl --request PUT '<%= config[:auth_url] %>/token' \
+curl --request POST '<%= config[:auth_url] %>/token' \
 --data-raw '{
     {client_id: "<%= config[:app_id] %>", grant_type: "authorization_code", code: "XXXX", "redirect_uri": "http://localhost:8080/auth/oauth-callback"}
 }'
@@ -162,7 +162,7 @@ const response = await client.auth.getTokens({code: "XXXX"});
 ```
 
 ```shell
-curl --request PUT '<%= config[:auth_url] %>/token/code/<%= config[:app_id] %>' \
+curl --request POST '<%= config[:auth_url] %>/token/code/<%= config[:app_id] %>' \
 --data-raw '{
     {"code": "XXXX"}
 }'
@@ -246,3 +246,58 @@ Shorthand endpoints exists so you can use them with less parameters using sensib
 These tokens are <a href="https://jwt.io">JWTs</a>, provided in a compact form, all according to the <a href="https://www.oauth.com">OAuth 2.0 / OpenID standard</a>. 
 That means there are plenty of libraries for many software stacks to decode them into readable JSON. Here's a extensive list of tools for most software stacks https://jwt.io/libraries.
 </aside>
+
+## Handover code
+
+> Request example getting handover code
+
+```http
+POST /handover/code/<%= config[:app_id] %> HTTP/1.1
+User-Agent: MyClient/1.0.0
+Host: <%= config[:auth_host] %>
+Content-Type: application/json
+Content-Length: XX
+
+{"accessToken": "XXXX"}
+```
+
+```typescript
+TBD
+```
+
+```shell
+curl --request POST '<%= config[:auth_url] %>/handover/code/<%= config[:app_id] %>' \
+--data-raw '{
+    {"accessToken": "XXXX"}
+}'
+```
+
+> Response example:
+
+```json
+{
+    "code": "XXXX"
+}
+```
+This endpoint returns a handover code which is used when redirecting to or displaying Nblocks hosted views and user interactions. 
+The code is shortlived and should be consumed with a follow up call to which interaction you want to display for the user.
+
+### HTTP Request
+
+`POST <%= config[:auth_url] %>/handover/code/:<%= config[:app_id] %>`
+
+### URL Parameters
+| Parameter | Description        |
+| --------- | ------------------ |
+| <%= config[:app_id] %>    | The ID of your app |
+
+### Body Parameters
+
+| Parameter     | Type   | Required                          | Description                                                                                                                          |
+| ------------- | ------ | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| accessToken          | string | Yes | A valid user access token                                                                                   |
+
+<%= partial "/includes/response_success.md" %>
+| Parameter     | Type   | Description                                                                                         |
+| ------------- | ------ | --------------------------------------------------------------------------------------------------- |
+| code    | string | A shortlived unique token                                                                                          |
