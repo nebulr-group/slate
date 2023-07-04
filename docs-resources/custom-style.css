@@ -1,0 +1,36 @@
+:root {
+    /* Theme variables. Use https://mdigi.tools/color-shades */
+
+    /* Primary */
+    --color-primary-50: 250 245 255;
+    --color-primary-100: 243 232 255;
+    --color-primary-200: 233 213 255;
+    --color-primary-300: 243 232 255;
+    --color-primary-400: 192 132 252;
+    --color-primary-500: 168 85 247;
+    --color-primary-600: 147 51 234;
+    --color-primary-700: 126 34 206;
+    --color-primary-800: 107 33 168;
+    --color-primary-900: 88 28 135;
+
+    /* Secondary */
+    --color-tertiary-50: 249 250 251;
+    --color-tertiary-100: 243 244 246;
+    --color-tertiary-200: 229 231 235;
+    --color-tertiary-300: 209 213 219;
+    --color-tertiary-400: 156 163 175;
+    --color-tertiary-500: 107 114 128;
+    --color-tertiary-600: 75 85 99;
+    --color-tertiary-700: 55 65 81;
+    --color-tertiary-800: 31 41 55;
+    --color-tertiary-900: 17 24 39;
+
+    --font-body: Inter, sans-serif !important;
+    --font-paragraph: Inter, sans-serif !important;
+    --font-heading: Inter, sans-serif !important;
+}
+
+/** Element CSS example */
+button {
+    height: 100px;
+}
