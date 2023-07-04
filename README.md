@@ -7,6 +7,7 @@
 - `git push origin main`
 
 ## Create static version in new branch gh-pages
+- `git checkout main`
 - `git branch -D gh-pages`
 - `./deploy`
 - `git push origin gh-pages -f`

@@ -55,7 +55,7 @@ const response = await client.auth.getTokens({code: "XXXX"});
 ```shell
 curl --request POST '<%= config[:auth_url] %>/token' \
 --data-raw '{
-    {client_id: "<%= config[:app_id] %>", grant_type: "authorization_code", code: "XXXX", "redirect_uri": "http://localhost:8080/auth/oauth-callback"}
+    client_id: "<%= config[:app_id] %>", grant_type: "authorization_code", code: "XXXX", "redirect_uri": "http://localhost:8080/auth/oauth-callback"
 }'
 ```
 
@@ -78,7 +78,7 @@ const response = await client.auth.refreshTokens({refreshToken: "XXXX"});
 ```shell
 curl --request POST '<%= config[:auth_url] %>/token' \
 --data-raw '{
-    {client_id: "<%= config[:app_id] %>", grant_type: "refresh_token", refresh_token: "XXXX"}
+    client_id: "<%= config[:app_id] %>", grant_type: "refresh_token", refresh_token: "XXXX"
 }'
 ```
 
@@ -164,7 +164,7 @@ const response = await client.auth.getTokens({code: "XXXX"});
 ```shell
 curl --request POST '<%= config[:auth_url] %>/token/code/<%= config[:app_id] %>' \
 --data-raw '{
-    {"code": "XXXX"}
+    "code": "XXXX"
 }'
 ```
 
@@ -187,7 +187,7 @@ const response = await client.auth.refreshTokens({refreshToken: "XXXX"});
 ```shell
 curl --request POST '<%= config[:auth_url] %>/token/refresh/<%= config[:app_id] %>' \
 --data-raw '{
-    {"refreshToken": "XXXX"}
+    "refreshToken": "XXXX"
 }'
 ```
 
@@ -268,7 +268,7 @@ TBD
 ```shell
 curl --request POST '<%= config[:auth_url] %>/handover/code/<%= config[:app_id] %>' \
 --data-raw '{
-    {"accessToken": "XXXX"}
+    "accessToken": "XXXX"
 }'
 ```
 

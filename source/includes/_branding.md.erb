@@ -1,0 +1,354 @@
+# Branding
+You can change the looks of Nblocks by changing your app's branding.
+
+Nblocks supports these different kinds of branding.
+
+- Custom email templates for emails sent to your users via Nblock
+- Custom CSS for the Nblocks hosted views that you embedd in your application
+- Custom translations for the Nblocks hosted views that you embedd in your application
+
+## Set custom email template
+
+> Request example
+
+```http
+PUT /template/SIGNUP HTTP/1.1
+User-Agent: MyClient/1.0.0
+x-api-token: <%= config[:api_key] %>
+Host: <%= config[:communication_api_host] %>
+
+{"type": "SIGNUP", "testRecipient": "john@doe.com", "content": "<h1>Signup</h1><a href=\"{{ctaUrl}}\">Click here</a>"}
+```
+
+```typescript
+TBD
+```
+
+```shell
+curl --request PUT '<%= config[:communication_api_url] %>/template/SIGNUP' \
+--header 'x-api-key: <%= config[:api_key] %>'
+--data-raw '{
+    "type": "SIGNUP", 
+    "testRecipient": "john@doe.com", 
+    "content": "<h1>Signup</h1><a href=\"{{ctaUrl}}\">Click here</a>"
+}'
+```
+
+Overriding one of the pre defined templates can be done easily. When you override a template, Nblocks will use this content for all languages.
+
+| Templates       | Description                                                                        |
+| --------------- | ---------------------------------------------------------------------------------- |
+| RESET-PASSWORD  | Sent to the user when the user requests to set a new password                      |
+| SIGNUP          | Sent when a user sign up for a new tenant                                          |
+| INVITE_NEW      | Sent when a new user is invited to a tenant                                        |
+| INVITE_EXISTING | Sent when an existing user of other tenants are invited to a tenant                |
+| PAYMENT_FAILURE | Sent to the tenant owner if in case of any subscription payment failures           |
+| BASE            | This template is used when you send transactional emails yourself through the api. |
+
+The HTML content supports variables that are injected when rendering the template. Except for the `ctaUrl` variable, which contains a unique link if the mail asks the user to perform an action, these are not required and can be considered just as helpers.
+Variables in themplates, use `<h1>{{variable}}</h1>` to inject it in the content html.
+
+| Variable           | Example                                              | Description                                                                       |
+| ------------------ | ---------------------------------------------------- | --------------------------------------------------------------------------------- |
+| appName            | `My app`                                             | Your app name                                                                     |
+| appLogo            | `https://url-to-logo.png`                            | Your app logo url                                                                 |
+| appUrl             | `https://url-to-app.com`                             | A url to your app frontend                                                        |
+| emailTitle         | `Reset your password`                                | The title of the email. Comes from Nblocks standard texts                         |
+| emailBody          | `To reset your password, please click the button...` | The content of the email. Comes from Nblocks standard texts                       |
+| ctaTitle           | `Reset password`                                     | The Call-to-action button title. Comes from Nblocks standard texts                |
+| ctaUrl             | `https://unique-link...`                             | The Call-to-action button link. A unique link relevant to this email              |
+| fallBackButtonText | `Button not working? Click the li...`                | A title to a fallback link displayed under the CTA button for older email clients |
+| currentYear        | `2023`                                               | Current year                                                                      |
+
+### HTTP Request
+
+`PUT <%= config[:communication_api_url] %>/template/:templateName`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### URL Parameters
+| Parameter    | Description                                      |
+| ------------ | ------------------------------------------------ |
+| templateName | Any of the available template names listed above |
+
+### Body Parameters
+
+| Parameter     | Type   | Required | Description                                                           |
+| ------------- | ------ | -------- | --------------------------------------------------------------------- |
+| type          | string | Yes      | Any of the available template names listed above                      |
+| testRecipient | string | No       | If provided, Nblocks will send a test email with the updated template |
+| content       | string | Yes      | The template content in HTML                                          |
+
+
+<%= partial "/includes/response_success.md" %>
+
+## Get custom email template
+
+> Request example
+
+```http
+GET /template/SIGNUP HTTP/1.1
+User-Agent: MyClient/1.0.0
+x-api-token: <%= config[:api_key] %>
+Host: <%= config[:communication_api_host] %>
+```
+
+```typescript
+TBD
+```
+
+```shell
+curl --request GET '<%= config[:communication_api_url] %>/template/SIGNUP' \
+--header 'x-api-key: <%= config[:api_key] %>'
+```
+
+> Response example:
+
+```json
+{
+    "type": "SIGNUP",
+    "content": "<h1>Signup</h1><a href=\"{{ctaUrl}}\">Click here</a>"
+}
+```
+
+Get a custom email template
+
+### HTTP Request
+
+`GET <%= config[:communication_api_url] %>/template/:templateName`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### URL Parameters
+| Parameter    | Description                                      |
+| ------------ | ------------------------------------------------ |
+| templateName | Any of the available template names listed in [set custom email template](#set-custom-email-template) |
+
+<%= partial "/includes/response_success.md" %>
+| Parameter | Type   | Description                  |
+| --------- | ------ | ---------------------------- |
+| type      | string | The template name            |
+| content   | string | The template content in HTML |
+
+## Delete custom email template
+
+> Request example
+
+```http
+DELETE /template/SIGNUP HTTP/1.1
+User-Agent: MyClient/1.0.0
+x-api-token: <%= config[:api_key] %>
+Host: <%= config[:communication_api_host] %>
+```
+
+```typescript
+TBD
+```
+
+```shell
+curl --request DELETE '<%= config[:communication_api_url] %>/template/SIGNUP' \
+--header 'x-api-key: <%= config[:api_key] %>'
+```
+
+Deleting a custom template will restore Nblocks default template.
+
+### HTTP Request
+
+`DELETE <%= config[:communication_api_url] %>/template/:templateName`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### URL Parameters
+| Parameter    | Description                                      |
+| ------------ | ------------------------------------------------ |
+| templateName | Any of the available template names listed in [set custom email template](#set-custom-email-template) |
+
+<%= partial "/includes/response_success.md" %>
+
+## Set custom CSS
+
+> Request example
+
+```http
+POST /brand/css HTTP/1.1
+User-Agent: MyClient/1.0.0
+x-api-token: <%= config[:api_key] %>
+Host: <%= config[:backendless_api_host] %>
+
+{"content": "html,body { background-color: red !important; }"}
+```
+
+```typescript
+TBD
+```
+
+```shell
+curl --request POST '<%= config[:backendless_api_url] %>/brand/css' \
+--header 'x-api-key: <%= config[:api_key] %>'
+--data-raw '{
+    "content": "html,body { background-color: red !important; }"
+}'
+```
+
+The CSS is used by Nblocks Cloud views, like Nblocks Login and User Management portal.
+
+### HTTP Request
+
+`POST <%= config[:backendless_api_url] %>/brand/css`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### Body Parameters
+
+| Parameter | Type   | Required | Description     |
+| --------- | ------ | -------- | --------------- |
+| content   | string | Yes      | The CSS content |
+
+
+<%= partial "/includes/response_success.md" %>
+
+## Get your custom CSS
+
+> Request example
+
+```http
+GET /brand/css HTTP/1.1
+User-Agent: MyClient/1.0.0
+x-api-token: <%= config[:api_key] %>
+Host: <%= config[:backendless_api_host] %>
+```
+
+```typescript
+TBD
+```
+
+```shell
+curl --request GET '<%= config[:backendless_api_url] %>/brand/css' \
+--header 'x-api-key: <%= config[:api_key] %>'
+```
+
+> Response example:
+
+```json
+{
+    "content": "html,body { background-color: red !important; }"
+}
+```
+
+The CSS is used by Nblocks Cloud views, like Nblocks Login and User Management portal.
+
+### HTTP Request
+
+`GET <%= config[:backendless_api_url] %>/brand/css`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+<%= partial "/includes/response_success.md" %>
+| Parameter | Type   | Description     |
+| --------- | ------ | --------------- |
+| content   | string | The CSS content |
+
+
+## Set custom Translations
+
+> Request example
+
+```http
+POST /brand/translations HTTP/1.1
+User-Agent: MyClient/1.0.0
+x-api-token: <%= config[:api_key] %>
+Host: <%= config[:backendless_api_host] %>
+
+{
+    "Login": "Log in",
+    "Email address": "Email"
+}
+```
+
+```typescript
+TBD
+```
+
+```shell
+curl --request POST '<%= config[:backendless_api_url] %>/brand/translations' \
+--header 'x-api-key: <%= config[:api_key] %>'
+--data-raw '{
+    "Login": "Log in",
+    "Email address": "Email"
+}'
+```
+
+The translations are used by Nblocks Cloud views, like Nblocks Login and User Management portal. Use [this template](https://github.com/nebulr-group/nblocks-react/blob/main/src/translations/en.json) to understand what translations can be changed.
+
+### HTTP Request
+
+`POST <%= config[:backendless_api_url] %>/brand/translations`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### Body Parameters
+Your translations content as JSON. [See example](https://github.com/nebulr-group/nblocks-react/blob/main/src/translations/en.json)
+
+
+<%= partial "/includes/response_success.md" %>
+
+## Get your custom Translations
+
+> Request example
+
+```http
+GET /brand/translations HTTP/1.1
+User-Agent: MyClient/1.0.0
+x-api-token: <%= config[:api_key] %>
+Host: <%= config[:backendless_api_host] %>
+```
+
+```typescript
+TBD
+```
+
+```shell
+curl --request GET '<%= config[:backendless_api_url] %>/brand/translations' \
+--header 'x-api-key: <%= config[:api_key] %>'
+```
+
+> Response example:
+
+```json
+{
+    "Login": "Log in",
+    "Email address": "Email"
+}
+```
+
+The translations are used by Nblocks Cloud views, like Nblocks Login and User Management portal.
+
+### HTTP Request
+
+`GET <%= config[:backendless_api_url] %>/brand/translations`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+<%= partial "/includes/response_success.md" %>
+Your translations content as JSON

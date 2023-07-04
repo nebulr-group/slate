@@ -11,7 +11,8 @@ toc_footers:
 
 includes:
     - app_auth.md.erb
-    - app.md.erb
+    - app_profile.md.erb
+    - branding.md.erb
     - user_auth.md.erb
     - users.md.erb
     - tenants.md.erb
