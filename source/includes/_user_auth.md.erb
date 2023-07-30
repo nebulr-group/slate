@@ -38,16 +38,6 @@ You should redirect the user agent to this endpoint to initate the login flow. T
 
 > Request example exchanging code for tokens
 
-```http
-POST /token HTTP/1.1
-User-Agent: MyClient/1.0.0
-Host: <%= config[:auth_host] %>
-Content-Type: application/json
-Content-Length: XX
-
-{"client_id": "<%= config[:app_id] %>", "grant_type": "authorization_code", "code": "XXXX", "redirect_uri": "http://localhost:8080/auth/oauth-callback"}
-```
-
 ```typescript
 const response = await client.auth.getTokens({code: "XXXX"});
 ```
@@ -60,16 +50,6 @@ curl --request POST '<%= config[:auth_url] %>/token' \
 ```
 
 > Request example exchanging refresh token for tokens
-
-```http
-POST /token HTTP/1.1
-User-Agent: MyClient/1.0.0
-Host: <%= config[:auth_host] %>
-Content-Type: application/json
-Content-Length: XX
-
-{"client_id": "<%= config[:app_id] %>", "grant_type": "refresh_token", "refresh_token": "XXXX"}
-```
 
 ```typescript
 const response = await client.auth.refreshTokens({refreshToken: "XXXX"});
@@ -147,16 +127,6 @@ You should redirect the user agent to this endpoint to initate the login flow. T
 
 > Request example exchanging code for tokens
 
-```http
-POST /token/code/<%= config[:app_id] %> HTTP/1.1
-User-Agent: MyClient/1.0.0
-Host: <%= config[:auth_host] %>
-Content-Type: application/json
-Content-Length: XX
-
-{"code": "XXXX"}
-```
-
 ```typescript
 const response = await client.auth.getTokens({code: "XXXX"});
 ```
@@ -169,16 +139,6 @@ curl --request POST '<%= config[:auth_url] %>/token/code/<%= config[:app_id] %>'
 ```
 
 > Request example exchanging refresh token for tokens
-
-```http
-POST /token/refresh/<%= config[:app_id] %> HTTP/1.1
-User-Agent: MyClient/1.0.0
-Host: <%= config[:auth_host] %>
-Content-Type: application/json
-Content-Length: XX
-
-{"refreshToken": "XXXX"}
-```
 
 ```typescript
 const response = await client.auth.refreshTokens({refreshToken: "XXXX"});
@@ -250,16 +210,6 @@ That means there are plenty of libraries for many software stacks to decode them
 ## Handover code
 
 > Request example getting handover code
-
-```http
-POST /handover/code/<%= config[:app_id] %> HTTP/1.1
-User-Agent: MyClient/1.0.0
-Host: <%= config[:auth_host] %>
-Content-Type: application/json
-Content-Length: XX
-
-{"accessToken": "XXXX"}
-```
 
 ```typescript
 TBD

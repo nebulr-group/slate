@@ -2,7 +2,6 @@
 title: nBlocks API Reference
 
 language_tabs: # must be one of https://github.com/rouge-ruby/rouge/wiki/List-of-supported-languages-and-lexers
-  - http: HTTP
   - shell: cURL
   - typescript: Typescript
 
@@ -18,7 +17,7 @@ includes:
     - tenants.md.erb
     - feature_flags.md.erb
     # - auth.md
-    - models.md
+    - models.md.erb
     - errors.md
     - changelog.md.erb
 

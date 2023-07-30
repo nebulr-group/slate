@@ -4,13 +4,6 @@
 
 > Request example with api key
 
-```http
-GET /endpoint HTTP/1.1
-User-Agent: MyClient/1.0.0
-x-api-token: <%= config[:api_key] %>
-Host: someapi.com %>
-```
-
 ```typescript
 const client = new NblocksClient(<%= config[:api_key] %>);
 await new client.some.cool.function();

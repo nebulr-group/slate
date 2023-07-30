@@ -312,14 +312,14 @@ Decoded JWT payload.
 ```json
 {
     "user": {
-        "key": "useThisAsYouWant",
+        "key": "foobar",
         "id": "63d2ab029e23db0afb07a5a7",
         "role": "ADMIN",
         "name": "John Doe";
     }
 
     "org": {
-        "key": "useThisAsYouWant",
+        "key": "helloworld",
         "id": "63d2ab029e23db0afb07a5a7",
         "plan": "PREMIUM",
         "name": "My Workspace"
@@ -360,6 +360,33 @@ Decoded JWT payload.
 | Parameter          | Type    | Description                               |
 | ------------------ | ------- | ----------------------------------------- |
 | key                | string  | The value to be matched (==)                           |
+
+## Feature flags segment
+
+> Model example:
+
+```json
+{
+    "id": "64c6400fdaf20f0008e71b25",
+    "key": "admins",
+    "description": "This segment targets admins",
+    "target": {
+        "user": {
+            "role": {
+                "operator": "eq",
+                "value": "ADMIN"
+            }
+        }
+    }
+}
+```
+
+| Parameter        | Type                   | Description                                                                                                                                    |
+| ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| id               | string                 | Unique ID (Read only)                                                                                                                          |
+| key             | string                 | Segment key. Use this to reference the segment in a flag                                    |
+| description           | string                 | Description text      |
+| target             | [Target](#feature-flags-segment-target)                 |  The target which will be used to match                                                                                                                              |
 
 ## Feature flags segment target
 
@@ -410,5 +437,46 @@ Decoded JWT payload.
 
 | Parameter          | Type    | Description                               |
 | ------------------ | ------- | ----------------------------------------- |
-| operator                | string  | Either `eq`, `beginsWith`, `endsWith` or `contains`                           |
+| operator                | Operator  | The matching operator                           |
 | value                | string  | The value to be matched using the operator                           |
+
+**Operator**
+
+<%= partial "/includes/feature_flags_operators.md" %>
+
+## Feature flags flag
+
+> Model example:
+
+```json
+{
+    "id": "64c64cfb47418500082f60b5",
+    "key": "iphone-feature",
+    "description": "A feature for iPhones",
+    "defaultValue": false,
+    "segments": [
+        {
+            "id": "64c63e7adaf20f0008e71b20",
+            "key": "iphones",
+            "description": "This segment targets iPhones",
+            "target": {
+                "device": {
+                    "key": "iphone"
+                }
+            }
+        }
+    ],
+    "targetValue": true,
+    "enabled": true
+}
+```
+
+| Parameter        | Type                   | Description                                                                                                                                    |
+| ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| id               | string                 | Unique ID (Read only)                                                                                                                          |
+| key             | string                 | Flag key. Use this to reference the flag when evaluating                                    |
+| description           | string                 | Description text      |
+| defaultValue           | boolean                 | The value to return if no segment was found or matched     |
+| segments             | List of [Segment](#feature-flags-segment)                 |  The segments and matchers that are linked to this flag                                                                                                                              |
+| targetValue           | boolean                 | The value to return of a segment was matched      |
+| enabled             | boolean                 |  Active state. Only enabled flags are available for evaluation. Otherwise evaluation falls back to false.                                                                                                                              |

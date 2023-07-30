@@ -5,13 +5,6 @@ A tenant represents a customers workspace in your app. These are isolated data s
 
 > Request example
 
-```http
-GET /tenant HTTP/1.1
-User-Agent: MyClient/1.0.0
-x-api-token: <%= config[:api_key] %>
-Host: <%= config[:account_api_host] %>
-```
-
 ```typescript
 const response = await client.tenants.list();
 ```
@@ -72,13 +65,6 @@ A list of [Tenant models](#tenant-model)
 
 > Request example
 
-```http
-GET /tenant/byId/606b00a61679e20008a5654d HTTP/1.1
-User-Agent: MyClient/1.0.0
-x-api-token: <%= config[:api_key] %>
-Host: <%= config[:account_api_host] %>
-```
-
 ```typescript
 const response = await client.tenant('606b00a61679e20008a5654d').get();
 ```
@@ -128,17 +114,6 @@ Get a single tenant in your app
 ## Create new tenant
 
 > Request example
-
-```http
-POST /tenant HTTP/1.1
-User-Agent: MyClient/1.0.0
-x-api-token: <%= config[:api_key] %>
-Host: <%= config[:account_api_host] %>
-Content-Type: application/json
-Content-Length: XX
-
-{"name": "New Company Ltd","plan": "TEAM", "owner": {"email": "john@example.com", "firstName": "John", "lastName": "Doe"},"metadata": {"VIP": "true"}}
-```
 
 ```typescript
 const response = await client.tenants.create(
@@ -214,17 +189,6 @@ Creates a new tenant with an initial user that is regarded as the tenant owner.
 
 > Request example
 
-```http
-PUT /tenant/606b00a61679e20008a5654d HTTP/1.1
-User-Agent: MyClient/1.0.0
-x-api-token: <%= config[:api_key] %>
-Host: <%= config[:account_api_host] %>
-Content-Type: application/json
-Content-Length: XX
-
-{"logo": "http://path/to/logo.png","locale": "en"}
-```
-
 ```typescript
 const response = await client.tenant('606b00a61679e20008a5654d').update(
     {
@@ -263,7 +227,7 @@ Update an existing tenant.
 
 ### HTTP Request
 
-`PUT <%= config[:account_api_url] %>/tenant/606b00a61679e20008a5654d`
+`PUT <%= config[:account_api_url] %>/tenant/TENANT_ID`
 
 ### Body Parameters
 

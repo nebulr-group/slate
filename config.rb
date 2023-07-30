@@ -11,6 +11,8 @@ set :app_id, 'YOUR_APP_ID'
 # set :auth_url, 'https://auth.nblocks.cloud'
 set :account_api_url, 'https://account-api-stage.nebulr-core.com'
 set :account_api_host, 'account-api-stage.nebulr-core.com'
+set :admin_api_url, 'https://admin-api-stage.nblocks.cloud'
+set :admin_api_host, 'admin-api-stage.nblocks.cloud'
 set :communication_api_url, 'https://communication-api-stage.nebulr-core.com'
 set :communication_api_host, 'communication-api-stage.nebulr-core.com'
 set :file_api_url, 'https://file-api-stage.nebulr-core.com'
@@ -23,6 +25,8 @@ config[:api_key]
 config[:app_id]
 config[:account_api_url]
 config[:account_api_host]
+config[:admin_api_url]
+config[:admin_api_host]
 config[:communication_api_url]
 config[:communication_api_host]
 config[:file_api_url]

@@ -5,13 +5,6 @@ As the developer, the App profile is your entrypoint to Nblocks. This is your un
 
 > Request example
 
-```http
-GET /app HTTP/1.1
-User-Agent: MyClient/1.0.0
-x-api-token: <%= config[:api_key] %>
-Host: <%= config[:account_api_host] %>
-```
-
 ```typescript
 const response = await client.config.getAppProfile();
 ```
@@ -158,17 +151,6 @@ Your [App profile model](#app-profile-model)
 ## Update app profile
 
 > Request example
-
-```http
-PUT /app HTTP/1.1
-User-Agent: MyClient/1.0.0
-x-api-token: <%= config[:api_key] %>
-Host: <%= config[:account_api_host] %>
-Content-Type: application/json
-Content-Length: XX
-
-{"logo": "https://www.example.com/another_logo.png"}
-```
 
 ```typescript
 const response = await client.config.updateAppProfile({logo: "https://www.example.com/another_logo.png"});
@@ -332,17 +314,6 @@ Your [App profile model](#app-profile-model)
 ## Update credentials
 
 > Request example
-
-```http
-PUT /app/credentials HTTP/1.1
-User-Agent: MyClient/1.0.0
-x-api-token: <%= config[:api_key] %>
-Host: <%= config[:account_api_host] %>
-Content-Type: application/json
-Content-Length: XX
-
-{"googleClientId": "XXXXXXX","googleClientSecret": "XXXXXXX"}
-```
 
 ```typescript
 const response = await client.config.updateCredentials({

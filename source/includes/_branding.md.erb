@@ -11,15 +11,6 @@ Nblocks supports these different kinds of branding.
 
 > Request example
 
-```http
-PUT /template/SIGNUP HTTP/1.1
-User-Agent: MyClient/1.0.0
-x-api-token: <%= config[:api_key] %>
-Host: <%= config[:communication_api_host] %>
-
-{"type": "SIGNUP", "testRecipient": "john@doe.com", "content": "<h1>Signup</h1><a href=\"{{ctaUrl}}\">Click here</a>"}
-```
-
 ```typescript
 TBD
 ```
@@ -89,13 +80,6 @@ Variables in themplates, use `<h1>{{variable}}</h1>` to inject it in the content
 
 > Request example
 
-```http
-GET /template/SIGNUP HTTP/1.1
-User-Agent: MyClient/1.0.0
-x-api-token: <%= config[:api_key] %>
-Host: <%= config[:communication_api_host] %>
-```
-
 ```typescript
 TBD
 ```
@@ -140,13 +124,6 @@ Get a custom email template
 
 > Request example
 
-```http
-DELETE /template/SIGNUP HTTP/1.1
-User-Agent: MyClient/1.0.0
-x-api-token: <%= config[:api_key] %>
-Host: <%= config[:communication_api_host] %>
-```
-
 ```typescript
 TBD
 ```
@@ -177,15 +154,6 @@ Deleting a custom template will restore Nblocks default template.
 ## Set custom CSS
 
 > Request example
-
-```http
-POST /brand/css HTTP/1.1
-User-Agent: MyClient/1.0.0
-x-api-token: <%= config[:api_key] %>
-Host: <%= config[:backendless_api_host] %>
-
-{"content": "html,body { background-color: red !important; }"}
-```
 
 ```typescript
 TBD
@@ -223,13 +191,6 @@ Use the [example css](https://github.com/nebulr-group/nblocks-api-docs/blob/main
 ## Get your custom CSS
 
 > Request example
-
-```http
-GET /brand/css HTTP/1.1
-User-Agent: MyClient/1.0.0
-x-api-token: <%= config[:api_key] %>
-Host: <%= config[:backendless_api_host] %>
-```
 
 ```typescript
 TBD
@@ -269,18 +230,6 @@ The CSS is used by Nblocks Cloud views, like Nblocks Login and User Management p
 
 > Request example
 
-```http
-POST /brand/translations HTTP/1.1
-User-Agent: MyClient/1.0.0
-x-api-token: <%= config[:api_key] %>
-Host: <%= config[:backendless_api_host] %>
-
-{
-    "Login": "Log in",
-    "Email address": "Email"
-}
-```
-
 ```typescript
 TBD
 ```
@@ -314,13 +263,6 @@ Your translations content as JSON. [See example](https://github.com/nebulr-group
 ## Get your custom Translations
 
 > Request example
-
-```http
-GET /brand/translations HTTP/1.1
-User-Agent: MyClient/1.0.0
-x-api-token: <%= config[:api_key] %>
-Host: <%= config[:backendless_api_host] %>
-```
 
 ```typescript
 TBD
