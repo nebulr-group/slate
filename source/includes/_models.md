@@ -304,3 +304,111 @@ Decoded JWT payload.
 | tenant_name        | string  | Tenant name                               |
 | tenant_locale      | string  | The preferred locale of the whole tenant  |
 | tenant_logo        | string  | Tenant logo URI                           |
+
+## Feature flags evaluation context
+
+> Model example:
+
+```json
+{
+    "user": {
+        "key": "useThisAsYouWant",
+        "id": "63d2ab029e23db0afb07a5a7",
+        "role": "ADMIN",
+        "name": "John Doe";
+    }
+
+    "org": {
+        "key": "useThisAsYouWant",
+        "id": "63d2ab029e23db0afb07a5a7",
+        "plan": "PREMIUM",
+        "name": "My Workspace"
+    }
+
+    "device": {
+        "key": "iphone"
+    }
+}
+```
+
+| Parameter          | Type    | Description                               |
+| ------------------ | ------- | ----------------------------------------- |
+| user                | UserContext  | User context                            |
+| org               | OrgContext  | Org context                           |
+| device        | KeyContext  | Device context                           |
+
+**UserContext**
+
+| Parameter          | Type    | Description                               |
+| ------------------ | ------- | ----------------------------------------- |
+| key                | string  | Custom value                            |
+| id                | string  | User id                            |
+| role               | string  | User role                           |
+| name        | string  | User name                           |
+
+**OrgContext**
+
+| Parameter          | Type    | Description                               |
+| ------------------ | ------- | ----------------------------------------- |
+| key                | string  | Custom value                            |
+| id                | string  | Tenant id                            |
+| plan               | string  | Tenant plan                           |
+| name        | string  | Tenant name                           |
+
+**KeyContext**
+
+| Parameter          | Type    | Description                               |
+| ------------------ | ------- | ----------------------------------------- |
+| key                | string  | The value to be matched (==)                           |
+
+## Feature flags segment target
+
+> Model example:
+
+```json
+{
+    "device": {
+        "key": {
+            "operator": "contains",
+            "value": "iphone"
+        }
+    }
+}
+```
+
+| Parameter          | Type    | Description                               |
+| ------------------ | ------- | ----------------------------------------- |
+| user                | UserTarget  | User id                            |
+| org               | OrgTarget  | Users full name                           |
+| device        | KeyTarget  | Users last name                           |
+
+**UserTarget**
+
+| Parameter          | Type    | Description                               |
+| ------------------ | ------- | ----------------------------------------- |
+| key                | TargetValue  | Custom value                            |
+| id                | string  | User id                            |
+| role               | TargetValue  | User role                           |
+| name        | TargetValue  | User name                           |
+
+**OrgTarget**
+
+| Parameter          | Type    | Description                               |
+| ------------------ | ------- | ----------------------------------------- |
+| key                | TargetValue  | Custom value                            |
+| id                | string  | Tenant id                            |
+| plan               | TargetValue  | Tenant plan                           |
+| name        | TargetValue  | Tenant name                           |
+
+**KeyTarget**
+
+| Parameter          | Type    | Description                               |
+| ------------------ | ------- | ----------------------------------------- |
+| key                | TargetValue  | The value to be matched                          |
+
+**TargetValue**
+
+| Parameter          | Type    | Description                               |
+| ------------------ | ------- | ----------------------------------------- |
+| operator                | string  | Either `eq`, `beginsWith`, `endsWith` or `contains`                           |
+| value                | string  | The value to be matched using the operator                           |

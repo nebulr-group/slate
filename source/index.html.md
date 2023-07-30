@@ -16,6 +16,7 @@ includes:
     - user_auth.md.erb
     - users.md.erb
     - tenants.md.erb
+    - feature_flags.md.erb
     # - auth.md
     - models.md
     - errors.md

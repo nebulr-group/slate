@@ -1,0 +1,36 @@
+# Feature flags
+Feature flags allows you to conditionally give access to or show / hide features or content to your users.
+
+To use feature flags you must first create **Flags** and link them with **Segments**. 
+Then you can start making **Evaluation** calls where you provide the current **[Context](#feature-flags-evaluation-context)** and the API will take care of matching the context with the segments and returns if the flag is enabled or not.
+
+Some use cases for feature flags are:
+
+- Restrict access to premium content that just users with a certain plan can access
+- Try beta features on a selection of customers
+- Show a message to all users during a scheduled release.
+
+
+## Evaluate a flag
+<%= partial "/includes/feature_flags_context.md" %>
+
+## Evaluate flags in bulk
+<%= partial "/includes/feature_flags_context.md" %>
+
+## List segments
+
+## Create a segment
+<%= partial "/includes/feature_flags_operators.md" %>
+
+## Update a segment
+<%= partial "/includes/feature_flags_operators.md" %>
+
+## Delete a segment
+
+## List flags
+
+## Create a flag
+
+## Update a flag
+
+## Delete a flag
