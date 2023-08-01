@@ -3,7 +3,7 @@
 
 # Publishing
 ## Make sure everything is pushed
-- `git commit -m ""`
+- `git commit -m "Changes"`
 - `git push origin main`
 
 ## Create static version in new branch gh-pages

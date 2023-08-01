@@ -190,27 +190,31 @@ curl --request GET '<%= config[:admin_api_url] %>/flags/segment' \
         "id": "64c63e7adaf20f0008e71b20",
         "key": "iphones",
         "description": "This segment targets iPhones",
-        "target": {
-            "device": {
-                "key": {
-                    "operator": "contains",
-                    "value": "iphone"
+        "targets": [
+            {
+                "device": {
+                    "key": {
+                        "operator": "contains",
+                        "value": "iphone"
+                    }
                 }
             }
-        }
+        ]
     },
     {
         "id": "64c6400fdaf20f0008e71b25",
         "key": "admins",
         "description": "This segment targets admins",
-        "target": {
-            "user": {
-                "role": {
-                    "operator": "eq",
-                    "value": "ADMIN"
+        "targets": [
+            {
+                "user": {
+                    "role": {
+                        "operator": "eq",
+                        "value": "ADMIN"
+                    }
                 }
             }
-        }
+        ]
     }
 ]
 ```
@@ -243,14 +247,16 @@ curl --request POST '<%= config[:admin_api_url] %>/flags/segment' \
 --data-raw '{
     "key": "admins",
     "description": "This segment targets admins",
-    "target": {
-        "user": {
-            "role": {
-                "operator": "eq",
-                "value": "ADMIN"
+    "targets": [
+        {
+            "user": {
+                "role": {
+                    "operator": "eq",
+                    "value": "ADMIN"
+                }
             }
         }
-    }
+    ]
 }'
 ```
 
@@ -261,14 +267,16 @@ curl --request POST '<%= config[:admin_api_url] %>/flags/segment' \
     "id": "64c6400fdaf20f0008e71b25",
     "key": "admins",
     "description": "This segment targets admins",
-    "target": {
-        "user": {
-            "role": {
-                "operator": "eq",
-                "value": "ADMIN"
+    "targets": [
+        {
+            "user": {
+                "role": {
+                    "operator": "eq",
+                    "value": "ADMIN"
+                }
             }
         }
-    }
+    ]
 }
 ```
 
@@ -288,7 +296,7 @@ Create a segment
 | ------------- | ------ | -------- | --------------------------------------------------------------------- |
 | key          | string | Yes      | A unique key for this segment                      |
 | description | string | No       | Optional description |
-| target       | [Target](#feature-flags-segment-target) | No      | The target to match                                          |
+| targets       | [Target](#feature-flags-segment-target)[] | No      | The targets to match                                          |
 
 <%= partial "/includes/response_success.md" %>
 [Segment](#feature-flags-segment)
@@ -316,14 +324,16 @@ curl --request PUT '<%= config[:admin_api_url] %>/flags/segment/64c6400fdaf20f00
     "id": "64c6400fdaf20f0008e71b25",
     "key": "admins",
     "description": "Updated description",
-    "target": {
-        "user": {
-            "role": {
-                "operator": "eq",
-                "value": "ADMIN"
+    "targets": [
+        {
+            "user": {
+                "role": {
+                    "operator": "eq",
+                    "value": "ADMIN"
+                }
             }
         }
-    }
+    ]
 }
 ```
 
@@ -348,7 +358,7 @@ Update an existing segment
 | ------------- | ------ | -------- | --------------------------------------------------------------------- |
 | key          | string | No      | A unique key for this segment                      |
 | description | string | No       | Optional description |
-| target       | [Target](#feature-flags-segment-target) | No      | The target to match                                          |
+| targets       | [Target](#feature-flags-segment-target)[] | No      | The targets to match                                          |
 
 <%= partial "/includes/response_success.md" %>
 [Segment](#feature-flags-segment)
@@ -411,11 +421,13 @@ curl --request GET '<%= config[:admin_api_url] %>/flags/flags' \
                 "id": "64c63e7adaf20f0008e71b20",
                 "key": "iphones",
                 "description": "This segment targets iPhones",
-                "target": {
-                    "device": {
-                        "key": "iphone"
+                "targets": [
+                    {
+                        "device": {
+                            "key": "iphone"
+                        }
                     }
-                }
+                ]
             }
         ],
         "targetValue": true,
@@ -474,11 +486,13 @@ curl --request POST '<%= config[:admin_api_url] %>/flags/flag' \
             "id": "64c63e7adaf20f0008e71b20",
             "key": "iphones",
             "description": "This segment targets iPhones",
-            "target": {
-                "device": {
-                    "key": "iphone"
+            "targets": [
+                {
+                    "device": {
+                        "key": "iphone"
+                    }
                 }
-            }
+            ]
         }
     ],
     "targetValue": true,
@@ -539,11 +553,13 @@ curl --request PUT '<%= config[:admin_api_url] %>/flags/flag/64c6400fdaf20f0008e
             "id": "64c63e7adaf20f0008e71b20",
             "key": "iphones",
             "description": "This segment targets iPhones",
-            "target": {
-                "device": {
-                    "key": "iphone"
+            "targets": [
+                {
+                    "device": {
+                        "key": "iphone"
+                    }
                 }
-            }
+            ]
         }
     ],
     "targetValue": true,

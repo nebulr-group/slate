@@ -370,14 +370,16 @@ Decoded JWT payload.
     "id": "64c6400fdaf20f0008e71b25",
     "key": "admins",
     "description": "This segment targets admins",
-    "target": {
-        "user": {
-            "role": {
-                "operator": "eq",
-                "value": "ADMIN"
+    "targets": [
+        {
+            "user": {
+                "role": {
+                    "operator": "eq",
+                    "value": "ADMIN"
+                }
             }
         }
-    }
+    ]
 }
 ```
 
@@ -386,7 +388,7 @@ Decoded JWT payload.
 | id               | string                 | Unique ID (Read only)                                                                                                                          |
 | key             | string                 | Segment key. Use this to reference the segment in a flag                                    |
 | description           | string                 | Description text      |
-| target             | [Target](#feature-flags-segment-target)                 |  The target which will be used to match                                                                                                                              |
+| targets             | [Target](#feature-flags-segment-target)[]                 |  The target which will be used to match                                                                                                                              |
 
 ## Feature flags segment target
 
@@ -459,11 +461,13 @@ Decoded JWT payload.
             "id": "64c63e7adaf20f0008e71b20",
             "key": "iphones",
             "description": "This segment targets iPhones",
-            "target": {
-                "device": {
-                    "key": "iphone"
+            "targets": [
+                {
+                    "device": {
+                        "key": "iphone"
+                    }
                 }
-            }
+            ]
         }
     ],
     "targetValue": true,
