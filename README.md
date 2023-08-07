@@ -9,7 +9,7 @@
 ## Create static version in new branch gh-pages
 - `git checkout main`
 - `git branch -D gh-pages`
-- `./deploy`
+- `./deploy.sh`
 - `git push origin gh-pages -f`
 - `git reset --hard main`
 - `git checkout main`
