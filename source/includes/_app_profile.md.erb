@@ -16,120 +16,7 @@ curl --request GET '<%= config[:account_api_url] %>/app' \
 
 > Response example:
 
-```json
-{
-    "id": "624c14cc0c01e70033356282",
-    "name": "My app",
-    "domain": "MY_APP",
-    "apiUrl": "",
-    "uiUrl": "http://localhost:8100",
-    "stripeEnabled": true,
-    "azureMarketplaceEnabled": false,
-    "onboardingFlow": "B2B", d
-    "cloudViews": true,
-    "redirectUris": ["http://localhost:8080/auth/oauth-callback"],
-    "defaultCallbackUri": "http://localhost:8080/auth/oauth-callback",
-    "defaultRole": "OWNER",
-    "roles": {
-        "OWNER": [
-            "TENANT_READ",
-            "TENANT_WRITE",
-            "CASE_READ",
-            "CASE_WRITE",
-            "TAG_READ",
-            "TAG_WRITE",
-            "USER_READ",
-            "USER_WRITE",
-            "GROUP_WRITE",
-            "GROUP_READ",
-            "ASSIGNEES_WRITE",
-            "SETTINGS_READ",
-            "SETTINGS_WRITE"
-        ],
-        "ADMIN": [
-            "TENANT_READ",
-            "CASE_READ",
-            "CASE_WRITE",
-            "TAG_READ",
-            "TAG_WRITE",
-            "USER_READ",
-            "USER_WRITE",
-            "GROUP_WRITE",
-            "GROUP_READ",
-            "ASSIGNEES_WRITE",
-            "SETTINGS_READ",
-            "SETTINGS_WRITE"
-        ],
-        "MANAGER": [
-            "TENANT_READ",
-            "CASE_READ",
-            "CASE_WRITE",
-            "TAG_READ",
-            "USER_READ",
-            "GROUP_READ",
-            "SETTINGS_READ"
-        ],
-        "VIEWER": [
-            "TENANT_READ",
-            "CASE_READ",
-            "TAG_READ",
-            "USER_READ",
-            "GROUP_READ",
-            "SETTINGS_READ"
-        ]
-    },
-    "businessModel": {
-        "taxes": [
-            {
-            "region": "SE",
-            "name": "VAT",
-            "percentage": 25
-            }
-        ],
-        "plans": [
-            {
-            "name": "ESSENTIAL",
-            "prices": [
-                {
-                "region": "SE",
-                "amount": 500,
-                "currency": "SEK",
-                "recurrenceInterval": "month"
-                },
-                {
-                "region": "DE",
-                "amount": 50,
-                "currency": "EUR",
-                "recurrenceInterval": "month"
-                }
-            ]
-            },
-            {
-            "name": "TEAM",
-            "trialDays": 14,
-            "prices": [
-                {
-                "region": "SE",
-                "amount": 1000,
-                "currency": "SEK",
-                "recurrenceInterval": "month"
-                },
-                {
-                "region": "DE",
-                "amount": 100,
-                "currency": "EUR",
-                "recurrenceInterval": "month"
-                }
-            ]
-            }
-        ]
-    },
-    "logo": "https://public.nblocks.dev/assets/logos/nblocks-logo-purple.png",
-    "websiteUrl": "http://localhost",
-    "privacyPolicyUrl": "",
-    "termsOfServiceUrl": ""
-}
-```
+<%= partial "/includes/app_profile_json.md.erb" %>
 
 Gets the complete `App` model of your app.
 The app is your top most entity and holds all configurations for how your App interacts with the platform in any sub call. 
@@ -166,120 +53,7 @@ curl --request PUT '<%= config[:account_api_url] %>/app' \
 
 > Response example:
 
-```json
-{
-    "id": "624c14cc0c01e70033356282",
-    "name": "My app",
-    "domain": "MY_APP",
-    "apiUrl": "",
-    "uiUrl": "http://localhost:8100",
-    "stripeEnabled": true,
-    "azureMarketplaceEnabled": false,
-    "onboardingFlow": "B2B",
-    "cloudViews": true,
-    "redirectUris": ["http://localhost:8080/auth/oauth-callback"],
-    "defaultCallbackUri": "http://localhost:8080/auth/oauth-callback",
-    "defaultRole": "OWNER",
-    "roles": {
-        "OWNER": [
-            "TENANT_READ",
-            "TENANT_WRITE",
-            "CASE_READ",
-            "CASE_WRITE",
-            "TAG_READ",
-            "TAG_WRITE",
-            "USER_READ",
-            "USER_WRITE",
-            "GROUP_WRITE",
-            "GROUP_READ",
-            "ASSIGNEES_WRITE",
-            "SETTINGS_READ",
-            "SETTINGS_WRITE"
-        ],
-        "ADMIN": [
-            "TENANT_READ",
-            "CASE_READ",
-            "CASE_WRITE",
-            "TAG_READ",
-            "TAG_WRITE",
-            "USER_READ",
-            "USER_WRITE",
-            "GROUP_WRITE",
-            "GROUP_READ",
-            "ASSIGNEES_WRITE",
-            "SETTINGS_READ",
-            "SETTINGS_WRITE"
-        ],
-        "MANAGER": [
-            "TENANT_READ",
-            "CASE_READ",
-            "CASE_WRITE",
-            "TAG_READ",
-            "USER_READ",
-            "GROUP_READ",
-            "SETTINGS_READ"
-        ],
-        "VIEWER": [
-            "TENANT_READ",
-            "CASE_READ",
-            "TAG_READ",
-            "USER_READ",
-            "GROUP_READ",
-            "SETTINGS_READ"
-        ]
-    },
-    "businessModel": {
-        "taxes": [
-            {
-            "region": "SE",
-            "name": "VAT",
-            "percentage": 25
-            }
-        ],
-        "plans": [
-            {
-            "name": "ESSENTIAL",
-            "prices": [
-                {
-                "region": "SE",
-                "amount": 500,
-                "currency": "SEK",
-                "recurrenceInterval": "month"
-                },
-                {
-                "region": "DE",
-                "amount": 50,
-                "currency": "EUR",
-                "recurrenceInterval": "month"
-                }
-            ]
-            },
-            {
-            "name": "TEAM",
-            "trialDays": 14,
-            "prices": [
-                {
-                "region": "SE",
-                "amount": 1000,
-                "currency": "SEK",
-                "recurrenceInterval": "month"
-                },
-                {
-                "region": "DE",
-                "amount": 100,
-                "currency": "EUR",
-                "recurrenceInterval": "month"
-                }
-            ]
-            }
-        ]
-    },
-    "logo": "https://public.nblocks.dev/assets/logos/nblocks-logo-purple.png",
-    "websiteUrl": "http://localhost",
-    "privacyPolicyUrl": "",
-    "termsOfServiceUrl": ""
-}
-```
+<%= partial "/includes/app_profile_json.md.erb" %>
 
 You can update the app with the same JSON you got from `Get app model` or just provide the field you want to update
 
@@ -292,9 +66,10 @@ You can update the app with the same JSON you got from `Get app model` or just p
 | Parameter          | Type                     | Required | Description                                                                                                                                                |
 | ------------------ | ------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | name               | string                   | Optional | Name of the app                                                                                                                                            | d
-| apiUrl             | string                   | Optional | URL to your api (to receive webhooks etc). **Must be HTTPS**                                                                                               |
+| apiUrl             | string                   | Optional | URL to your api (to receive webhooks etc).                                                                                               |
 | defaultRole        | string                   | Optional | Default user role                                                                                                                                          |
-| uiUrl              | string                   | Optional | URL to your frontend app (for onboarding redirects etc). **Must be HTTPS**                                                                                 |
+| uiUrl              | string                   | Optional | URL to your frontend app (for onboarding redirects etc).                                                                               |
+| webhookUrl              | string                   | Optional | Enable webhook and events to be sent to this url                                                                                 |
 | roles              | Record<string, string[]> | Optional | All user roles and their granted privileges                                                                                                                |
 | businessModel      | [BusinessModel](#business-model)             | Optional | The business model defines what plans are available to subscribe to and what taxes applies.                                                                |
 | logo               | string                   | Optional | URL to your logo                                                                                                                                           |

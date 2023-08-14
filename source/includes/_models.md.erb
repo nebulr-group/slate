@@ -3,129 +3,17 @@
 
 > Model example:
 
-```json
-{
-    "id": "624c14cc0c01e70033356282",
-    "name": "My app",
-    "domain": "MY_APP",
-    "apiUrl": "",
-    "uiUrl": "http://localhost:8100",
-    "stripeEnabled": true,
-    "azureMarketplaceEnabled": false,
-    "onboardingFlow": "B2B",
-    "cloudViews": true,
-    "redirectUris": ["http://localhost:8080/auth/oauth-callback"],
-    "defaultCallbackUri": "http://localhost:8080/auth/oauth-callback",
-    "defaultRole": "OWNER",
-    "roles": {
-        "OWNER": [
-            "TENANT_READ",
-            "TENANT_WRITE",
-            "CASE_READ",
-            "CASE_WRITE",
-            "TAG_READ",
-            "TAG_WRITE",
-            "USER_READ",
-            "USER_WRITE",
-            "GROUP_WRITE",
-            "GROUP_READ",
-            "ASSIGNEES_WRITE",
-            "SETTINGS_READ",
-            "SETTINGS_WRITE"
-        ],
-        "ADMIN": [
-            "TENANT_READ",
-            "CASE_READ",
-            "CASE_WRITE",
-            "TAG_READ",
-            "TAG_WRITE",
-            "USER_READ",
-            "USER_WRITE",
-            "GROUP_WRITE",
-            "GROUP_READ",
-            "ASSIGNEES_WRITE",
-            "SETTINGS_READ",
-            "SETTINGS_WRITE"
-        ],
-        "MANAGER": [
-            "TENANT_READ",
-            "CASE_READ",
-            "CASE_WRITE",
-            "TAG_READ",
-            "USER_READ",
-            "GROUP_READ",
-            "SETTINGS_READ"
-        ],
-        "VIEWER": [
-            "TENANT_READ",
-            "CASE_READ",
-            "TAG_READ",
-            "USER_READ",
-            "GROUP_READ",
-            "SETTINGS_READ"
-        ]
-    },
-    "businessModel": {
-        "taxes": [
-            {
-            "region": "SE",
-            "name": "VAT",
-            "percentage": 25
-            }
-        ],
-        "plans": [
-            {
-            "name": "ESSENTIAL",
-            "prices": [
-                {
-                "region": "SE",
-                "amount": 500,
-                "currency": "SEK",
-                "recurrenceInterval": "month"
-                },
-                {
-                "region": "DE",
-                "amount": 50,
-                "currency": "EUR",
-                "recurrenceInterval": "month"
-                }
-            ]
-            },
-            {
-            "name": "TEAM",
-            "trialDays": 14,
-            "prices": [
-                {
-                "region": "SE",
-                "amount": 1000,
-                "currency": "SEK",
-                "recurrenceInterval": "month"
-                },
-                {
-                "region": "DE",
-                "amount": 100,
-                "currency": "EUR",
-                "recurrenceInterval": "month"
-                }
-            ]
-            }
-        ]
-    },
-    "logo": "https://public.nblocks.dev/assets/logos/nblocks-logo-purple.png",
-    "websiteUrl": "http://localhost",
-    "privacyPolicyUrl": "",
-    "termsOfServiceUrl": ""
-}
-```
+<%= partial "/includes/app_profile_json.md.erb" %>
 
 | Parameter               | Type                     | Description                                                                                                                                                |
 | ----------------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | id                      | string                   | Unique ID (Read only)                                                                                                                                      |
 | name                    | string                   | Name of the app                                                                                                                                            |
 | domain                  | string                   | Unique domain name of the app (Read only)                                                                                                                  |
-| apiUrl                  | string                   | URL to your api (to receive webhooks etc). **Must be HTTPS**                                                                                               |
+| apiUrl                  | string                   | URL to your api (to receive webhooks etc).                                                                                               |
+| webhookUrl                  | string                   | Enable webhook and events to be sent to this url                                                                                                 |
 | defaultRole             | string                   | Default user role                                                                                                                                          |
-| uiUrl                   | string                   | URL to your frontend app (for onboarding redirects etc). **Must be HTTPS**                                                                                 |
+| uiUrl                   | string                   | URL to your frontend app (for onboarding redirects etc).                                                                               |
 | roles                   | Record<string, string[]> | All user roles and their granted privileges                                                                                                                |
 | businessModel           | [BusinessModel](#business-model)            | The business model defines what plans are available to subscribe to and what taxes applies.                                                                |
 | logo                    | string                   | URL to your logo                                                                                                                                           |
@@ -136,6 +24,8 @@
 | emailSenderEmail        | string                   | Emails sent from Nblocks will have this sender email. You'll have to verify this email before                                                              |
 | stripeEnabled           | boolean                  | Boolean value telling the user if Stripe is enabled (Read only)                                                                                            |
 | azureMarketplaceEnabled | boolean                  | Boolean value telling the user if Azure marketplace is enabled (Read only)                                                                                 |
+| googleSsoEnabled | boolean                  | Boolean value telling the user if Login with Google SSO is enabled (Read only)                                                                                 |
+| azureAdSsoEnabled | boolean                  | Boolean value telling the user if Login with Azure SSO is enabled (Read only)                                                                                 |
 | onboardingFlow          | OnboardingFlow           | Configure how users will be onboarded                                                                                                                      |
 | cloudViews              | boolean                  | Toggle this to true if you want to use a UI provided by NBlocks instead of your own                                                                        |
 | redirectUris            | string[]                 | Allowed redirect uris                                                                                                                                      |
@@ -231,6 +121,55 @@
 | metadata         | Record<string, string> | Custom key value meta data that you can use                                                                                                    |
 | onboarded        | string                 | If this tenant is considered onboarded (Read only)                                                                                             |
 | createdAt        | string                 | Timestamp when created (Read only)                                                                                                             |
+
+## Tenant user model
+
+```json
+{
+    "id": "63cad6ac48dcba47e9322853",
+    "role": "OWNER",
+    "email": "john.doe@example.com",
+    "username": "john.doe@example.com",
+    "firstName": "John",
+    "lastName": "Doe",
+    "fullName": "John Doe",
+    "onboarded": true,
+    "consentsToPrivacyPolicy": false,
+    "enabled": true,
+    "teams": [
+        "cool_gang"
+    ],
+    "createdAt": "2023-01-20T18:00:12.489Z",
+    "tenant": {
+        "id": "63cad6ac48dcba47e9322848",
+        "mfa": false,
+        "locale": "en",
+        "name": "John's place",
+        "logo": "",
+        "metadata": {},
+        "createdAt": "2023-01-20T18:00:12.393Z",
+        "paymentsEnabled": false,
+        "paymentsRequired": false,
+        "onboarded": true
+    }
+}
+```
+
+| Parameter        | Type                   | Description                                                                                                                                    |
+| ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| id               | string                 | Unique ID (Read only)                                                                                                                          |
+| role             | string                 | Role of the user. Grants a set of privileges. Privileges are configured on the `App` model.                                    |
+| email           | string                 | Email address      |
+| username             | string                 | Username                                                                                                                             |
+| firstName             | string                 | Users first name                                                                                                                                 |
+| lastName              | string                | Users last name                                                                                                           |
+| fullName  | string                | Users full name (first name and last name concatenated)                                                                                              |
+| onboarded | boolean                | If user is onboarded or not |
+| consentsToPrivacyPolicy         | boolean | If user have left consent to the app privacy policy or not (should be set during app onboarding)                                                                                                    |
+| enabled        | boolean                 | If user should be allowed to login or not                                                                                             |
+| teams        | string[]                 | Array of identifiers that can be used to group several users into teams or groups                                                                                                             |
+| createdAt        | string                 | Timestamp when created (Read only)                                                                                                             |
+| tenant        | [Tenant](#tenant-model)                 | The tenant                                                                                                             |
 
 ## Tokens response
 | Parameter     | Type   | Description                                                                                         |
