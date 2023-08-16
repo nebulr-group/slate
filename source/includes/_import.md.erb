@@ -1,0 +1,64 @@
+# Import data
+Import data into your Nblocks app using these endpoints.
+
+## Import tenants
+
+> Request example:
+
+<%= partial "/includes/import_tenants_request_example.md.erb" %>
+
+> Response example:
+
+```json
+{
+    "status": "SCHEDULED",
+    "import": {
+        "tenants": 2,
+        "users": 4,
+        "passwords": false,
+        "errors": [],
+        "warnings": [],
+        "approved": true
+    }
+}
+```
+This endpoint allows you to import tenants and their users. No notification emails wil be sent to the imported users. 
+The import is asynchronous so it will be scheduled immediately and then completed once every tenant and user has been imported. 
+A notification will be sent to your email when the import has completed.
+Before you make the request, you can [validate](#validate-import-tenants-data) your input and check for errors or warnings
+
+### HTTP Request
+
+`POST <%= config[:account_api_url] %>/import/tenants`
+
+<%= partial "/includes/import_tenants_parameters.md.erb" %>
+
+<%= partial "/includes/response_success.md" %>
+[Tenant model](#tenant-model)
+
+## Validate import tenants data
+
+<%= partial "/includes/import_tenants_request_example.md.erb" %>
+
+> Response example:
+
+```json
+{
+    "tenants": 2,
+    "users": 4,
+    "passwords": false,
+    "errors": [
+        "One or more users are missing an username"
+    ],
+    "warnings": [],
+    "approved": false
+}
+```
+
+Validates the import body and returns a result that summarizes the import and if there are any errors or warnings.
+
+### HTTP Request
+
+`POST <%= config[:account_api_url] %>/import/validateTenants`
+
+<%= partial "/includes/import_tenants_parameters.md.erb" %>

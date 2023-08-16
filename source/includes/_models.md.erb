@@ -172,6 +172,7 @@
 | tenant        | [Tenant](#tenant-model)                 | The tenant                                                                                                             |
 
 ## Tokens response
+
 | Parameter     | Type   | Description                                                                                         |
 | ------------- | ------ | --------------------------------------------------------------------------------------------------- |
 | token_type    | string | Token type                                                                                          |
@@ -180,7 +181,6 @@
 | refresh_token | string | (JWT) The token use for refreshing the access token before it expires app                           |
 | id_token      | string | (JWT) The OpenId Connect user profile id                                                            |
 | user_profile  | object | A decoded id_token JWT as JSON. Available in [Shorthand get tokens](#shorthand-get-tokens) endpoint |
-
 
 ## Access token model
 
@@ -243,6 +243,56 @@ Decoded JWT payload.
 | tenant_name        | string  | Tenant name                               |
 | tenant_locale      | string  | The preferred locale of the whole tenant  |
 | tenant_logo        | string  | Tenant logo URI                           |
+
+## Import tenant response
+
+> Model example:
+
+```json
+{
+    "status": "SCHEDULED",
+    "import": {
+        "tenants": 2,
+        "users": 4,
+        "passwords": false,
+        "errors": [],
+        "warnings": [],
+        "approved": true
+    }
+}
+```
+
+| Parameter          | Type    | Description                               |
+| ------------------ | ------- | ----------------------------------------- |
+| status                | string  | User context                            |
+| import               | [Validate response](#validate-import-tenant-response)  | A summary of the import and if there are any errors                           |
+
+## Validate import tenant response
+
+> Model example:
+
+```json
+{
+    "tenants": 2,
+    "users": 4,
+    "passwords": false,
+    "errors": [
+        "One or more users are missing an username"
+    ],
+    "warnings": [],
+    "approved": false
+}
+```
+
+| Parameter          | Type    | Description                               |
+| ------------------ | ------- | ----------------------------------------- |
+| tenants               | number  | The total numbers of tenants that will be imported                            |
+| users                | number  | The total numbers of users (across all tenants) that will be imported                            |
+| passwords        | boolean  | If there will be any user credentials migrated during the import                           |
+| errors                | string[]  | A list of errors. These errors are blocking the import                            |
+| warnings               | string[]  | A list of warnings. These warnings are not blocking the import                           |
+| approved        | boolean  | If the data will or was approved for import                           |
+
 
 ## Feature flags evaluation context
 

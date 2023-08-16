@@ -17,6 +17,7 @@ includes:
     - tenants.md.erb
     - feature_flags.md.erb
     # - auth.md
+    - import.md.erb
     - webhook.md.erb
     - models.md.erb
     - errors.md

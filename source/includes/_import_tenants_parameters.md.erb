@@ -1,0 +1,25 @@
+### Body Parameters
+
+| Parameter | Type                  | Required | Description                                                                                                                                  |
+| --------- | --------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| tenant      | ImportTenant        | Required | Import data for the tenant                                                                       |
+| users    | ImportUser[]           | Optional | All other users than the owner that should be imported to this tenant    |
+
+**ImportTenant**
+
+| Parameter | Type                  | Required | Description                                                                                                                                  |
+| --------- | --------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| name      | string                | Optional | Name of the tenant.                                                                       |
+| owner    | ImportUser             | Required | The owner for this tenant. There must be one owner    |
+| plan      | string                | Optional | The plan must be present in the configured App business model                                                                                |
+| logo      | string                | Optional | A URI to a logo.                                                                                                                             |
+| metadata  | Record<string,string> | Optional | Store metadata for your own business logic that will be returned in every Tenant response. This data will never be outputted to the end user |
+
+**ImportUser**
+
+| Parameter | Type                  | Required | Description                                                                                                                                  |
+| --------- | --------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| username      | string                | Required | The username / email.                                                                       |
+| role    | string                | Optional | Role of the user    |
+| firstName      | string                | Optional | Users first name                                                                                 |
+| lastName      | string                | Optional | Users last name                                                                                                                              |
