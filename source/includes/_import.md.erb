@@ -26,7 +26,14 @@ Import data into your Nblocks app using these endpoints.
 This endpoint allows you to import tenants and their users. No notification emails wil be sent to the imported users. 
 The import is asynchronous so it will be scheduled immediately and then completed once every tenant and user has been imported. 
 A notification will be sent to your email when the import has completed.
-Before you make the request, you can [validate](#validate-import-tenants-data) your input and check for errors or warnings
+Before you make the request, you can [validate](#validate-import-tenants-data) your input and check for errors or warnings.
+
+**How will the imported users authenticate?**   
+The import supports importing new users both with or without existing passwords. 
+
+New users imported without a password can authenticated using the configured SSO option. Then will be asked to reset their password should they try to login with username.
+
+When importing passwords Nblocks will use the imported password to authenticate the user once. Thereafter a new password digest is generated this will be used in all future authentications.
 
 ### HTTP Request
 
