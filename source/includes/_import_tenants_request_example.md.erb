@@ -21,7 +21,15 @@
             "username":"lisa@doe.com",
             "firstName":"Lisa",
             "lastName":"Doe",
-            "role":"ADMIN"
+            "role":"ADMIN",
+            "password": { 
+               "value": "$2a$10$f8zztJfuSgYc0Z8SGA3jb./KB5a2GY8lmwa9bgbRv/P0.1XNBhovy", 
+               "algorithm": "BCRYPT",
+               "pepper": {
+                  "value": "foobar", 
+                  "position": "END"
+               }
+            }
          }
       ]
    },

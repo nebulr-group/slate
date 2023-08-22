@@ -23,3 +23,20 @@
 | role    | string                | Optional | Role of the user    |
 | firstName      | string                | Optional | Users first name                                                                                 |
 | lastName      | string                | Optional | Users last name                                                                                                                              |
+| password      | ImportPassword                | Optional | Import an existing password                                                                                                                              |
+
+
+**ImportPassword**
+
+| Parameter | Type                  | Required | Description                                                                                                                                  |
+| --------- | --------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| value      | string                | Required | The password digest.                                                                       |
+| algorithm    | string                | Required | The algorithm that is being used.  Possible values: `BCRYPT`, `ARGON2I`, `MD5`, `SHA1`, `SHA256` or `SHA512`.
+| pepper      | ImportPasswordPepper                | Optional | If the password should be peppered prior to validation. [Read more.](https://en.wikipedia.org/wiki/Pepper_(cryptography))                                                                                 |
+
+**ImportPasswordPepper**
+
+| Parameter | Type                  | Required | Description                                                                                                                                  |
+| --------- | --------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| value      | string                | Required | The pepper value.                                                                       |
+| position    | string                | Required | If the pepper should be prepended or appended the password. Possible values: `BEGIN` or `END`.   |
