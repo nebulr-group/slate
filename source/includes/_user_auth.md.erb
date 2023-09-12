@@ -28,7 +28,7 @@ Start the Oauth 2.0 user login flow by redirecting the user to the `/authorize` 
 | redirect_uri     | string  | Required | A target URI where the authenticated user will be redirected to together with tokens. Must be a valid URI in your App `redirectUris` |
 | scope            | string  | Required | Any or all of the following: `openid`, `profile`, `email`, `address`, `phone`, `onboarding`, `tenant`                                |
 | state            | string  | Optional | This can be used to resume a state in your app. The state will be available in the response code                                     |
-| force_federation | boolean | Optional | If you want to force a certain federated login flow instead of letting the user choose during login. We support `ms-azure-ad`        |
+| force_federation | string | Optional | If you want to force a certain federated login flow instead of letting the user choose during login. Possible values `ms-azure-ad` and `google`       |
 
 <aside class="notice">
 You should redirect the user agent to this endpoint to initate the login flow. This is not an API <-> API call.
