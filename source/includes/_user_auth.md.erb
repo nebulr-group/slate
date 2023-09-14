@@ -4,7 +4,7 @@ User authentication is done using Nblocks Auth Service that supports Oauth 2.0 /
 
 **At a glance, the authentication process looks like this:**
 
-1. You initiate the login process by redirecting the user to the `/authorize` endpoint (or the simpler shorthand `/login` endpoint).
+1. You initiate the login process by redirecting the user to the `/authorize` endpoint (or the simpler <a href="#short-hand-authorize">shorthand</a> `/login` and `/signup` endpoints).
 2. User is pulled through an authentication process provided by Nblocks with cloud views.
 3. Once the user is authenticated and has selected the tenant to access the user is redirect back to your app with a code.
 4. You make a call to the `/token` endpoint with this code to exchange it for access tokens and user profile information (openid).
@@ -28,7 +28,8 @@ Start the Oauth 2.0 user login flow by redirecting the user to the `/authorize` 
 | redirect_uri     | string  | Required | A target URI where the authenticated user will be redirected to together with tokens. Must be a valid URI in your App `redirectUris` |
 | scope            | string  | Required | Any or all of the following: `openid`, `profile`, `email`, `address`, `phone`, `onboarding`, `tenant`                                |
 | state            | string  | Optional | This can be used to resume a state in your app. The state will be available in the response code                                     |
-| force_federation | string | Optional | If you want to force a certain federated login flow instead of letting the user choose during login. Possible values `ms-azure-ad` and `google`       |
+| force_federation | string  | Optional | If you want to force a certain federated login flow instead of letting the user choose during login. Possible values `ms-azure-ad` and `google`       |
+| signup           | boolean | Optional | If you want to initiate a signup instead of the default login flow for the user. |
 
 <aside class="notice">
 You should redirect the user agent to this endpoint to initate the login flow. This is not an API <-> API call.
@@ -117,7 +118,32 @@ Shorthand endpoints exists so you can use them with less parameters using sensib
 | --------------- | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | redirectUri     | string  | Optional | A target URI where the authenticated user will be redirected to together with tokens. The default value is your App `defaultCallbackUri`. |
 | state           | string  | Optional | This can be used to resume a state in your app. The state will be available in the response code                                          |
-| forceFederation | boolean | Optional | If you want to force a certain federated login flow instead of letting the user choose during login. We support `ms-azure-ad`             |
+| forceFederation | string  | Optional | If you want to force a certain federated login flow instead of letting the user choose during login. We support `ms-azure-ad`             |
+
+<aside class="notice">
+You should redirect the user agent to this endpoint to initate the login flow. This is not an API <-> API call.
+</aside>
+
+## Short hand signup
+
+Shorthand endpoints exists so you can use them with less parameters using sensible defaults. Use the simpler short hand endpoint `/url/signup` to initiate the signup flow. The Nblocks will collect your default config and issue the Oauth 2.0 flow.
+
+### HTTP Request
+
+`GET <%= config[:auth_url] %>/url/signup/:<%= config[:app_id] %>`
+
+### URL Parameters
+| Parameter              | Description        |
+| ---------------------- | ------------------ |
+| <%= config[:app_id] %> | The ID of your app |
+
+### Query Parameters
+
+| Parameter       | Type    | Required | Description                                                                                                                               |
+| --------------- | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| redirectUri     | string  | Optional | A target URI where the authenticated user will be redirected to together with tokens. The default value is your App `defaultCallbackUri`. |
+| state           | string  | Optional | This can be used to resume a state in your app. The state will be available in the response code                                          |
+| forceFederation | string  | Optional | If you want to force a certain federated login flow instead of letting the user choose during login. We support `ms-azure-ad`             |
 
 <aside class="notice">
 You should redirect the user agent to this endpoint to initate the login flow. This is not an API <-> API call.
