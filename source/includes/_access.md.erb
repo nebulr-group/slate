@@ -1,0 +1,471 @@
+# Access
+Access roles and privileges enable you to manage and specify the level of access that different users have within your application.
+
+To effectively control user access, you must first create a set of **Privileges** and associate them with a **Role**. 
+Afterward, you can assign these roles to individual **Tenant users** and ensure that their privileges are evaluated for various actions and resources within the application.
+
+Some use cases for roles and privileges include:
+
+- Granting admin roles for full control over the system
+- Limiting guest users to read-only access
+- Assigning user-specific access to sensitive data
+
+## List roles
+
+> Request example
+
+```typescript
+const roles = await client.access.roles.list();
+```
+
+```shell
+curl --request GET '<%= config[:admin_api_url] %>/role' \
+--header 'x-api-key: <%= config[:api_key] %>'
+```
+
+> Response example:
+
+```json
+[
+    {
+        "id": "650cd8510ccba777cc9623de",
+        "name": "OWNER",
+        "key": "OWNER",
+        "privileges": [
+            {
+                "id": "650cd8510ccba777cc9623d4",
+                "key": "AUTHENTICATED",
+                "description": "Privilege for all authenticated users"
+            },
+            {
+                "id": "650cd8510ccba777cc9623d5",
+                "key": "USER_READ"
+            },
+            {
+                "id": "650cd8510ccba777cc9623d6",
+                "key": "USER_WRITE"
+            },
+            {
+                "id": "650cd8510ccba777cc9623d7",
+                "key": "TENANT_READ"
+            },
+            {
+                "id": "650cd8510ccba777cc9623d8",
+                "key": "TENANT_WRITE"
+            }
+        ],
+        "isDefault": false
+    },
+    {
+        "id": "650ce65de49d5da5d31fa1c9",
+        "name": "Super admin",
+        "key": "SUPER_ADMIN",
+        "description": "Super admin with user management privileges",
+        "privileges": [
+            {
+                "id": "650cd8510ccba777cc9623d4",
+                "key": "AUTHENTICATED",
+                "description": "Privilege for all authenticated users"
+            },
+            {
+                "id": "650cd8510ccba777cc9623d5",
+                "key": "USER_READ"
+            },
+            {
+                "id": "650cd8510ccba777cc9623d6",
+                "key": "USER_WRITE"
+            },
+        ],
+        "isDefault": true
+    }
+]
+```
+
+List all roles
+
+### HTTP Request
+
+`GET <%= config[:admin_api_url] %>/role`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+<%= partial "/includes/response_success.md" %>
+List of [Roles](#access-role-model)
+
+## Create a role
+
+> Request example
+
+```typescript
+const data = {
+    name: "Admin",
+    key: "ADMIN",
+    description: "Admin with user read privileges",
+    privileges: [
+        "650cd8510ccba777cc9623d4",
+        "650cd8510ccba777cc9623d5"
+    ],
+    isDefault: false
+};
+const createdRole = await client.access.roles.create(data);
+```
+
+```shell
+curl --request POST '<%= config[:admin_api_url] %>/role' \
+--header 'x-api-key: <%= config[:api_key] %>' \
+--data-raw '{
+    "name": "Admin",
+    "key": "ADMIN",
+    "description": "Admin with user read privileges",
+    "privileges": [
+        "650cd8510ccba777cc9623d4",
+        "650cd8510ccba777cc9623d5"
+    ],
+    "isDefault": false
+}'
+```
+
+> Response example:
+
+```json
+{
+    "id": "6516a9bd492d28b55cca8d6f",
+    "name": "Admin",
+    "key": "ADMIN",
+    "description": "Admin with user read privileges",
+    "privileges": [
+        {
+            "id": "650cd8510ccba777cc9623d4",
+            "key": "AUTHENTICATED",
+            "description": "Privilege for all authenticated users"
+        },
+        {
+            "id": "650cd8510ccba777cc9623d5",
+            "key": "USER_READ"
+        }
+    ],
+    "isDefault": false
+}
+```
+
+Create a role
+
+### HTTP Request
+
+`POST <%= config[:admin_api_url] %>/role`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### Body Parameters
+| Parameter     | Type   | Required | Description                                                           |
+| ------------- | ------ | -------- | --------------------------------------------------------------------- |
+| name          | string | Yes      | A presentable label for this role                      |
+| key          | string | Yes      | A unique key for this role                      |
+| description | string | No       | Optional description |
+| privileges       | [Privilege IDs](#access-privilege-model)[] | Yes      | A list of privilege IDs. The list cannot be empty                                          |
+| isDefault | boolean | No       | Default value is `false`. If set to `true`, the existing default role will be set to `false` |
+
+<%= partial "/includes/response_success.md" %>
+[Role](#access-role-model)
+
+## Update a role
+
+> Request example
+
+```typescript
+const id = "6516a9bd492d28b55cca8d6f";
+const data = {
+    description: "Updated description for the admin role",
+};
+const updatedRole = await client.access.role(id).update(data);
+```
+
+```shell
+curl --request PUT '<%= config[:admin_api_url] %>/role/6516a9bd492d28b55cca8d6f' \
+--header 'x-api-key: <%= config[:api_key] %>' \
+--data-raw '{
+    "description": "Updated description for the admin role"
+}'
+```
+
+> Response example:
+
+```json
+{
+    "id": "6516a9bd492d28b55cca8d6f",
+    "name": "Admin",
+    "key": "ADMIN",
+    "description": "Updated description for the admin role",
+    "privileges": [
+        {
+            "id": "650cd8510ccba777cc9623d4",
+            "key": "AUTHENTICATED",
+            "description": "Privilege for all authenticated users"
+        },
+        {
+            "id": "650cd8510ccba777cc9623d5",
+            "key": "USER_READ"
+        }
+    ],
+    "isDefault": false
+}
+```
+
+Update an existing role
+
+### HTTP Request
+
+`PUT <%= config[:admin_api_url] %>/role/ROLE_ID`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### URL Parameters
+| Parameter | Description          |
+| --------- | -------------------- |
+| ROLE_ID | The ID of the role |
+
+### Body Parameters
+| Parameter     | Type   | Required | Description                                                           |
+| ------------- | ------ | -------- | --------------------------------------------------------------------- |
+| name          | string | No      | A presentable label for this role                      |
+| key          | string | No      | A unique key for this role. The `OWNER` key cannot be changed                      |
+| description | string | No       | Optional description |
+| privileges       | [Privilege IDs](#access-privilege-model)[] | No      | A list of privilege IDs. The list cannot be empty                                          |
+| isDefault | boolean | No       | Changing to `false` from `true` is not possible. If set to `true` from `false`, the existing default role will be set to `false` |
+
+<%= partial "/includes/response_success.md" %>
+[Role](#access-role-model)
+
+## Delete a role
+
+> Request example
+
+```typescript
+const id = "6516a9bd492d28b55cca8d6f";
+await client.access.role(id).delete();
+```
+
+```shell
+curl --request DELETE '<%= config[:admin_api_url] %>/role/6516a9bd492d28b55cca8d6f' \
+--header 'x-api-key: <%= config[:api_key] %>'
+```
+
+Delete an existing role. Deleting a role will **not** remove related privileges. Default roles and the `OWNER` role cannot be deleted.
+
+### HTTP Request
+
+`DELETE <%= config[:admin_api_url] %>/role/ROLE_ID`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### URL Parameters
+| Parameter | Description          |
+| --------- | -------------------- |
+| ROLE_ID | The ID of the role |
+
+<%= partial "/includes/response_success.md" %>
+
+## List privileges
+
+> Request example
+
+```typescript
+const privileges = await client.access.privileges.list();
+```
+
+```shell
+curl --request GET '<%= config[:admin_api_url] %>/role/privilege' \
+--header 'x-api-key: <%= config[:api_key] %>'
+```
+
+> Response example:
+
+```json
+[
+    {
+        "id": "650cd8510ccba777cc9623d4",
+        "key": "AUTHENTICATED",
+        "description": "Privilege for all authenticated users"
+    },
+    {
+        "id": "650cd8510ccba777cc9623d5",
+        "key": "USER_READ"
+    },
+    {
+        "id": "650cd8510ccba777cc9623d6",
+        "key": "USER_WRITE"
+    },
+    {
+        "id": "650cd8510ccba777cc9623d7",
+        "key": "TENANT_READ"
+    },
+    {
+        "id": "650cd8510ccba777cc9623d8",
+        "key": "TENANT_WRITE"
+    }
+]
+```
+
+List all privileges
+
+### HTTP Request
+
+`GET <%= config[:admin_api_url] %>/role/privilege`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+<%= partial "/includes/response_success.md" %>
+List of [Privileges](#access-privilege-model)
+
+## Create a privilege
+
+> Request example
+
+```typescript
+const data = {
+    key: "SENSITIVE_DATA",
+    description: "Access to sensitive data",
+};
+const createdPrivilege = await client.access.privileges.create(data);
+```
+
+```shell
+curl --request POST '<%= config[:admin_api_url] %>/role' \
+--header 'x-api-key: <%= config[:api_key] %>' \
+--data-raw '{
+    "key": "SENSITIVE_DATA",
+    "description": "Access to sensitive data"
+}'
+```
+
+> Response example:
+
+```json
+{
+    "id": "6516b9cb492d28b55cca8daf",
+    "key": "SENSITIVE_DATA",
+    "description": "Access to sensitive data"
+}
+```
+
+Create a privilege
+
+### HTTP Request
+
+`POST <%= config[:admin_api_url] %>/role/privilege`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### Body Parameters
+| Parameter     | Type   | Required | Description                                                           |
+| ------------- | ------ | -------- | --------------------------------------------------------------------- |
+| key          | string | Yes      | A unique key for this privilege                      |
+| description | string | No       | Optional description |
+
+<%= partial "/includes/response_success.md" %>
+[Privileges](#access-privilege-model)
+
+## Update a privilege
+
+> Request example
+
+```typescript
+const id = "6516b9cb492d28b55cca8daf";
+const data = {
+    description: "Updated description for the sensitive data privilege",
+};
+const updatedPrivilege = await client.access.privilege(id).update(data);
+```
+
+```shell
+curl --request PUT '<%= config[:admin_api_url] %>/role/privilege/6516b9cb492d28b55cca8daf' \
+--header 'x-api-key: <%= config[:api_key] %>' \
+--data-raw '{
+    "description": "Updated description for the sensitive data privilege"
+}'
+```
+
+> Response example:
+
+```json
+{
+    "id": "6516b9cb492d28b55cca8daf",
+    "key": "SENSITIVE_DATA",
+    "description": "Updated description for the sensitive data privilege"
+}
+```
+
+Update an existing privilege
+
+### HTTP Request
+
+`PUT <%= config[:admin_api_url] %>/role/privilege/PRIVILEGE_ID`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### URL Parameters
+| Parameter | Description          |
+| --------- | -------------------- |
+| PRIVILEGE_ID | The ID of the privilege |
+
+### Body Parameters
+| Parameter     | Type   | Required | Description                                                           |
+| ------------- | ------ | -------- | --------------------------------------------------------------------- |
+| key          | string | No      | A unique key for this privilege.                      |
+| description | string | No       | Optional description |
+
+<%= partial "/includes/response_success.md" %>
+[Privileges](#access-privilege-model)
+
+## Delete a privilege
+
+> Request example
+
+```typescript
+const id = "6516b9cb492d28b55cca8daf";
+await client.access.privilege(id).delete()
+```
+
+```shell
+curl --request DELETE '<%= config[:admin_api_url] %>/role/privilege/6516b9cb492d28b55cca8daf' \
+--header 'x-api-key: <%= config[:api_key] %>'
+```
+
+Delete an existing privilege.
+
+### HTTP Request
+
+`DELETE <%= config[:admin_api_url] %>/role/privilege/PRIVILEGE_ID`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### URL Parameters
+| Parameter | Description          |
+| --------- | -------------------- |
+| PRIVILEGE_ID | The ID of the privilege |
+
+<%= partial "/includes/response_success.md" %>

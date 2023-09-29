@@ -12,9 +12,7 @@
 | domain                  | string                   | Unique domain name of the app (Read only)                                                                                                                  |
 | apiUrl                  | string                   | URL to your api (to receive webhooks etc).                                                                                               |
 | webhookUrl                  | string                   | Enable webhook and events to be sent to this url                                                                                                 |
-| defaultRole             | string                   | Default user role                                                                                                                                          |
 | uiUrl                   | string                   | URL to your frontend app (for onboarding redirects etc).                                                                               |
-| roles                   | Record<string, string[]> | All user roles and their granted privileges                                                                                                                |
 | businessModel           | [BusinessModel](#business-model)            | The business model defines what plans are available to subscribe to and what taxes applies.                                                                |
 | logo                    | string                   | URL to your logo                                                                                                                                           |
 | websiteUrl              | string                   | URL to your website or landing page. E.g. Branded emails will link to this URL, checkout process will redirect to `/payment-success` and `/payment-cancel` |
@@ -159,7 +157,7 @@
 | Parameter        | Type                   | Description                                                                                                                                    |
 | ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | id               | string                 | Unique ID (Read only)                                                                                                                          |
-| role             | string                 | Role of the user. Grants a set of privileges. Privileges are configured on the `App` model.                                    |
+| role             | string                 | Role of the user. Grants a set of privileges. The set of privileges is configured on the `Role` model.                                    |
 | email           | string                 | Email address      |
 | username             | string                 | Username                                                                                                                             |
 | firstName             | string                 | Users first name                                                                                                                                 |
@@ -244,6 +242,54 @@ Decoded JWT payload.
 | tenant_name        | string  | Tenant name                               |
 | tenant_locale      | string  | The preferred locale of the whole tenant  |
 | tenant_logo        | string  | Tenant logo URI                           |
+
+## Access role model
+
+> Model example:
+
+```json
+{
+    "id": "6516a01891eca485bfc230ba",
+    "name": "Owner",
+    "key": "OWNER",
+    "description": "The owner of the app",
+    "privileges": [
+        {
+            "id": "6516a0ee38183223122704e3",
+            "key": "AUTHENTICATED",
+            "description": "Privilege for all authenticated users"
+        }
+    ],
+    "isDefault": false
+}
+```
+
+| Parameter        | Type                   | Description                                                                                                                                    |
+| ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| id               | string                 | Unique ID (Read only)                                                                                                                          |
+| name             | string                 | Role name. Presentable label of the role                                    |
+| key             | string                 | Role key. Use this to reference the role in the `Tenant user` model                                |
+| description           | string                 | Description text      |
+| privileges             | List of [Privileges](#access-privilege-model)                 |  The set of privileges linked to this role                                                                                                                              |
+| isDefault           | boolean                 | If a role is default it will be applied to new tenant users. Only **one** role can be the default.     |
+
+## Access privilege model
+
+> Model example:
+
+```json
+{
+    "id": "6516a0ee38183223122704e3",
+    "key": "AUTHENTICATED",
+    "description": "Privilege for all authenticated users"
+}
+```
+
+| Parameter        | Type                   | Description                                                                                                                                    |
+| ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| id               | string                 | Unique ID (Read only)                                                                                                                          |
+| key             | string                 | Privilege key. Use this to evaluate and grant user access                                    |
+| description           | string                 | Description text      |
 
 ## Import tenant response
 
