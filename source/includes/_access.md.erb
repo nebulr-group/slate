@@ -74,7 +74,7 @@ curl --request GET '<%= config[:admin_api_url] %>/role' \
             {
                 "id": "650cd8510ccba777cc9623d6",
                 "key": "USER_WRITE"
-            },
+            }
         ],
         "isDefault": true
     }
@@ -345,7 +345,7 @@ const createdPrivilege = await client.access.privileges.create(data);
 ```
 
 ```shell
-curl --request POST '<%= config[:admin_api_url] %>/role' \
+curl --request POST '<%= config[:admin_api_url] %>/role/privilege' \
 --header 'x-api-key: <%= config[:api_key] %>' \
 --data-raw '{
     "key": "SENSITIVE_DATA",
