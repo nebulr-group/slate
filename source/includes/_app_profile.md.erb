@@ -1,5 +1,5 @@
 # App Profile
-As the developer, the App profile is your entrypoint to Nblocks. This is your unique set of settings to tailor the Nblocks experience. You can have several different Profiles, e.g. one for production and one for testing. This helps organize and separate configurations from different stages in your development process.
+As the developer, the App and its profile is your entrypoint to Nblocks. This is your unique set of settings to tailor the Nblocks experience. You can have several different apps, e.g. one for production and one for testing. This helps organize and separate configurations from different stages in your development process.
 
 ## Get app profile
 
@@ -68,8 +68,7 @@ You can update the app with the same JSON you got from `Get app model` or just p
 | name               | string                   | Optional | Name of the app                                                                                                                                            | d
 | apiUrl             | string                   | Optional | URL to your api (to receive webhooks etc).                                                                                               |
 | uiUrl              | string                   | Optional | URL to your frontend app (for onboarding redirects etc).                                                                               |
-| webhookUrl              | string                   | Optional | Enable webhook and events to be sent to this url                                                                                 |
-| businessModel      | [BusinessModel](#business-model)             | Optional | The business model defines what plans are available to subscribe to and what taxes applies.                                                                |
+| webhookUrl         | string                   | Optional | Enable webhook and events to be sent to this url                                                                                 |
 | logo               | string                   | Optional | URL to your logo                                                                                                                                           |
 | websiteUrl         | string                   | Optional | URL to your website or landing page. E.g. Branded emails will link to this URL, checkout process will redirect to `/payment-success` and `/payment-cancel` |
 | privacyPolicyUrl   | string                   | Optional | URL to a page on your website containing a Privacy policy for your app users. E.g. checkout process will link to this url.                                 |

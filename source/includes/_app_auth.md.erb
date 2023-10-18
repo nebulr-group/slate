@@ -19,10 +19,16 @@ The apis expect you to authorize each call by including your api key in the HTTP
 
 `x-api-key: <%= config[:api_key] %>`
 
-This should not be confused with your users authenticating. When they login into your app they authenticate with their own credentails using a Oauth 2.0 [flow](#user-auth).
+This should not be confused with your users authenticating. When they login into your app they authenticate with their own credentails using a Oauth 2.0 [flow](#user-authentication).
 
-## Registrating for a new app profile
+## Registrating for a new Nblocks app
 
+### Creating via Nblocks Admin
+Go to [Nblocks Admin](https://admin-stage.nblocks.cloud) and signup for a new account if you don't already have one.
+
+Once you have logged in to your account you will be able to create new apps. Use the API key and the App ID to start calling our APIs.
+
+### Creating via terminal
 `npx @nebulr-group/nblocks-cli create-app`
 
 The NPX tool will create a new folder and place a `.env` file containing your Nblocks API key and download a copy of your app profile into a file `app-configuration.json`. Use this API key from the env file and the App ID from your app profile to start calling our APIs.

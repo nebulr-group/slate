@@ -13,7 +13,6 @@
 | apiUrl                  | string                   | URL to your api (to receive webhooks etc).                                                                                               |
 | webhookUrl                  | string                   | Enable webhook and events to be sent to this url                                                                                                 |
 | uiUrl                   | string                   | URL to your frontend app (for onboarding redirects etc).                                                                               |
-| businessModel           | [BusinessModel](#business-model)            | The business model defines what plans are available to subscribe to and what taxes applies.                                                                |
 | logo                    | string                   | URL to your logo                                                                                                                                           |
 | websiteUrl              | string                   | URL to your website or landing page. E.g. Branded emails will link to this URL, checkout process will redirect to `/payment-success` and `/payment-cancel` |
 | privacyPolicyUrl        | string                   | URL to a page on your website containing a Privacy policy for your app users. E.g. checkout process will link to this url.                                 |
@@ -29,64 +28,6 @@
 | cloudViews              | boolean                  | Toggle this to true if you want to use a UI provided by NBlocks instead of your own                                                                        |
 | redirectUris            | string[]                 | Allowed redirect uris                                                                                                                                      |
 | defaultCallbackUri      | string                   | Default handover/callback uri used by Nblocks                                                                                                              |
-
-## Business model
-
-> Model example:
-
-```json
-{
-        "taxes": [
-            {
-            "region": "SE",
-            "name": "VAT",
-            "percentage": 25
-            }
-        ],
-        "plans": [
-            {
-            "name": "ESSENTIAL",
-            "prices": [
-                {
-                "region": "SE",
-                "amount": 500,
-                "currency": "SEK",
-                "recurrenceInterval": "month"
-                },
-                {
-                "region": "DE",
-                "amount": 50,
-                "currency": "EUR",
-                "recurrenceInterval": "month"
-                }
-            ]
-            },
-            {
-            "name": "TEAM",
-            "trialDays": 14,
-            "prices": [
-                {
-                "region": "SE",
-                "amount": 1000,
-                "currency": "SEK",
-                "recurrenceInterval": "month"
-                },
-                {
-                "region": "DE",
-                "amount": 100,
-                "currency": "EUR",
-                "recurrenceInterval": "month"
-                }
-            ]
-            }
-        ]
-}
-```
-
-| Parameter | Type   | Description                                           |
-| --------- | ------ | ----------------------------------------------------- |
-| taxes     | Tax[]  | A list of Taxes for different countries               |
-| plans     | Plan[] | A list of Plans which your customers can subscribe to |
 
 
 ## Tenant model
