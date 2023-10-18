@@ -3,7 +3,7 @@
 
 > Model example:
 
-<%= partial "/includes/app_profile_json.md.erb" %>
+<%= partial "/includes/json/app_profile_json.md.erb" %>
 
 | Parameter               | Type                     | Description                                                                                                                                                |
 | ----------------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -32,68 +32,40 @@
 
 ## Tenant model
 
-```json
-{
-    "id": "624c14cc0c01e70033356285",
-    "plan": "TEAM",
-    "mfa": false,
-    "paymentsEnabled": false,
-    "paymentsRequired": false,
-    "locale": "en",
-    "name": "Nebulr AB",
-    "logo": "https://nebulr-group.github.io/nblocks-docs/img/logo.png",
-    "metadata": {},
-    "onboarded": true,
-    "createdAt": "2022-04-05T10:07:08.235Z"
-}
-```
+<%= partial "/includes/json/tenant_json.md.erb" %>
 
 | Parameter        | Type                   | Description                                                                                                                                    |
 | ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | id               | string                 | Unique ID (Read only)                                                                                                                          |
 | plan             | string                 | Name of the subscription plan. Automatically set by the payment service if tenant used the checkout process                                    |
+| trial            | boolean                | The tenant is currently trialing on the selected plan      |
 | locale           | string                 | The default locale / lang code for all users in this tenant (`ISO_639-1` format). This property will set the i18n for all platform emails      |
 | name             | string                 | Name of the tenant                                                                                                                             |
 | logo             | string                 | URI to a logo                                                                                                                                  |
 | mfa              | boolean                | Require users to login with MFA/2FA                                                                                                            |
-| paymentsEnabled  | boolean                | The tenant has been setup with a payment solution                                                                                              |
+| paymentStatus  | [Payment status](#tenant-payment-status)                | The tenant current payment status                                                                                             |
 | paymentsRequired | boolean                | The tenant should setup payment immediately because tenant has not setup payments and the subscribing plan carry a cost or the trial has ended |
 | metadata         | Record<string, string> | Custom key value meta data that you can use                                                                                                    |
 | onboarded        | string                 | If this tenant is considered onboarded (Read only)                                                                                             |
 | createdAt        | string                 | Timestamp when created (Read only)                                                                                                             |
 
+## Tenant payment status
+
+> Model example:
+
+<%= partial "/includes/json/_tenant-payment-status_json.md.erb" %>
+
+| Parameter        | Type                   | Description                                                                                                                                    |
+| ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| shouldSelectPlan  | boolean                | The tenant should immediately select a plan. Redirect the owner to Subscription portal / select plan                                                                                             |
+| shouldSetupPayments | boolean                |  The tenant should setup payment immediately because tenant has not setup payments and the subscribing plan carry a cost and the trial has ended. Redirect the owner to Subscription portal / select plan |
+| paymentsEnabled | boolean                | Payment method has been set up. Nblocks can bill this tenant |
+| provider | string                | The provider used for this tenant |
+
+
 ## Tenant user model
 
-```json
-{
-    "id": "63cad6ac48dcba47e9322853",
-    "role": "OWNER",
-    "email": "john.doe@example.com",
-    "username": "john.doe@example.com",
-    "firstName": "John",
-    "lastName": "Doe",
-    "fullName": "John Doe",
-    "onboarded": true,
-    "consentsToPrivacyPolicy": false,
-    "enabled": true,
-    "teams": [
-        "cool_gang"
-    ],
-    "createdAt": "2023-01-20T18:00:12.489Z",
-    "tenant": {
-        "id": "63cad6ac48dcba47e9322848",
-        "mfa": false,
-        "locale": "en",
-        "name": "John's place",
-        "logo": "",
-        "metadata": {},
-        "createdAt": "2023-01-20T18:00:12.393Z",
-        "paymentsEnabled": false,
-        "paymentsRequired": false,
-        "onboarded": true
-    }
-}
-```
+<%= partial "/includes/json/tenant-user_json.md.erb" %>
 
 | Parameter        | Type                   | Description                                                                                                                                    |
 | ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |

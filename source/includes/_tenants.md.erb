@@ -16,36 +16,7 @@ curl --request GET '<%= config[:account_api_url] %>/tenant' \
 
 > Response example:
 
-```json
-[
-    {
-        "id": "606b00a61679e20008a5654d",
-        "plan": "TEAM",
-        "mfa": false,
-        "locale": "en",
-        "name": "John Inc",
-        "logo": "",
-        "metadata": {},
-        "createdAt": "2021-04-05T12:20:54.890Z",
-        "paymentsEnabled": false,
-        "paymentsRequired": true,
-        "onboarded": true
-    },
-    {
-        "id": "605dd819e8fd3e00086cc552",
-        "plan": "ESSENTIAL",
-        "mfa": false,
-        "locale": "en",
-        "name": "Dave Ltd",
-        "logo": "",
-        "metadata": {},
-        "createdAt": "2021-03-26T12:48:25.187Z",
-        "paymentsEnabled": false,
-        "paymentsRequired": true,
-        "onboarded": true
-    }
-]
-```
+<%= partial "/includes/json/multi-tenant_json.md.erb" %>
 
 Lists all tenants in your app. Each tenant will have their own sets of users.
 
@@ -76,21 +47,7 @@ curl --request GET '<%= config[:account_api_url] %>/tenant/byId/606b00a61679e200
 
 > Response example:
 
-```json
-{
-    "id": "606b00a61679e20008a5654d",
-    "plan": "TEAM",
-    "mfa": false,
-    "locale": "en",
-    "name": "John Inc",
-    "logo": "",
-    "metadata": {},
-    "createdAt": "2021-04-05T12:20:54.890Z",
-    "paymentsEnabled": false,
-    "paymentsRequired": true,
-    "onboarded": true
-}
-```
+<%= partial "/includes/json/tenant_json.md.erb" %>
 
 Get a single tenant in your app
 
@@ -141,21 +98,7 @@ curl --request POST '<%= config[:account_api_url] %>/tenant' \
 
 > Response example:
 
-```json
-{
-    "id": "606b00a61679e20008a5654d",
-    "plan": "TEAM",
-    "mfa": false,
-    "locale": "en",
-    "name": "John Inc",
-    "logo": "",
-    "metadata": {},
-    "createdAt": "2021-04-05T12:20:54.890Z",
-    "paymentsEnabled": false,
-    "paymentsRequired": true,
-    "onboarded": true
-}
-```
+<%= partial "/includes/json/tenant_json.md.erb" %>
 
 Creates a new tenant with an initial user that is regarded as the tenant owner.
 
@@ -207,21 +150,7 @@ curl --request PUT '<%= config[:account_api_url] %>/tenant/606b00a61679e20008a56
 
 > Response example:
 
-```json
-{
-    "id": "606b00a61679e20008a5654d",
-    "plan": "TEAM",
-    "mfa": false,
-    "locale": "en",
-    "name": "John Inc",
-    "logo": "",
-    "metadata": {},
-    "createdAt": "2021-04-05T12:20:54.890Z",
-    "paymentsEnabled": false,
-    "paymentsRequired": true,
-    "onboarded": true
-}
-```
+<%= partial "/includes/json/tenant_json.md.erb" %>
 
 Update an existing tenant.
 

@@ -16,7 +16,7 @@ curl --request GET '<%= config[:account_api_url] %>/app' \
 
 > Response example:
 
-<%= partial "/includes/app_profile_json.md.erb" %>
+<%= partial "/includes/json/app_profile_json.md.erb" %>
 
 Gets the complete `App` model of your app.
 The app is your top most entity and holds all configurations for how your App interacts with the platform in any sub call. 
@@ -53,7 +53,7 @@ curl --request PUT '<%= config[:account_api_url] %>/app' \
 
 > Response example:
 
-<%= partial "/includes/app_profile_json.md.erb" %>
+<%= partial "/includes/json/app_profile_json.md.erb" %>
 
 You can update the app with the same JSON you got from `Get app model` or just provide the field you want to update
 
