@@ -55,10 +55,10 @@ The evaluation api doesn't require authentication. It can be called from unsafe 
 </aside>
 
 ### URL Parameters
-| Parameter | Description          |
-| --------- | -------------------- |
-| APP_ID | Your app id |
-| FLAG_ID | The ID of the flag |
+| Parameter | Description        |
+| --------- | ------------------ |
+| APP_ID    | Your app id        |
+| FLAG_ID   | The ID of the flag |
 
 ### Headers
 | Parameter | Type   | Required | Description      |
@@ -66,15 +66,15 @@ The evaluation api doesn't require authentication. It can be called from unsafe 
 | x-api-key | string | Required | Your app api key |
 
 ### Body Parameters
-| Parameter     | Type   | Required | Description                                                           |
-| ------------- | ------ | -------- | --------------------------------------------------------------------- |
-| context          | [Context](#feature-flags-evaluation-context) | No      | A context object                      |
-| accessToken | string | No       | A user token |
+| Parameter   | Type                                         | Required | Description      |
+| ----------- | -------------------------------------------- | -------- | ---------------- |
+| context     | [Context](#feature-flags-evaluation-context) | No       | A context object |
+| accessToken | string                                       | No       | A user token     |
 
 <%= partial "/includes/response_success.md" %>
-| Parameter          | Type    | Description                               |
-| ------------------ | ------- | ----------------------------------------- |
-| enabled                | boolean  | Evaluation result. If the flag is enabled or not. Use this to conditionally render the feature                            |
+| Parameter | Type    | Description                                                                                    |
+| --------- | ------- | ---------------------------------------------------------------------------------------------- |
+| enabled   | boolean | Evaluation result. If the flag is enabled or not. Use this to conditionally render the feature |
 
 <aside class="success">
 The evaluation api doesn't require authentication. It can be called from unsafe enviroments like user clients.
@@ -131,9 +131,9 @@ The evaluation api doesn't require authentication. It can be called from unsafe 
 </aside>
 
 ### URL Parameters
-| Parameter | Description          |
-| --------- | -------------------- |
-| APP_ID | Your app id |
+| Parameter | Description |
+| --------- | ----------- |
+| APP_ID    | Your app id |
 
 ### Headers
 | Parameter | Type   | Required | Description      |
@@ -141,28 +141,28 @@ The evaluation api doesn't require authentication. It can be called from unsafe 
 | x-api-key | string | Required | Your app api key |
 
 ### Body Parameters
-| Parameter     | Type   | Required | Description                                                           |
-| ------------- | ------ | -------- | --------------------------------------------------------------------- |
-| context          | [Context](#feature-flags-evaluation-context) | No      | A context object                      |
-| accessToken | string | No       | A user token |
+| Parameter   | Type                                         | Required | Description      |
+| ----------- | -------------------------------------------- | -------- | ---------------- |
+| context     | [Context](#feature-flags-evaluation-context) | No       | A context object |
+| accessToken | string                                       | No       | A user token     |
 
 <%= partial "/includes/response_success.md" %>
-| Parameter          | Type    | Description                               |
-| ------------------ | ------- | ----------------------------------------- |
-| flags                | EvaluatedFlag[]  | Individual evaluation response for each flag                            |
+| Parameter | Type            | Description                                  |
+| --------- | --------------- | -------------------------------------------- |
+| flags     | EvaluatedFlag[] | Individual evaluation response for each flag |
 
 **EvaluatedFlag**
 
-| Parameter          | Type    | Description                               |
-| ------------------ | ------- | ----------------------------------------- |
-| flag                | string  | Flag key                            |
-| evaluation                | EvaluationResponse  | The evaluation response                            |
+| Parameter  | Type               | Description             |
+| ---------- | ------------------ | ----------------------- |
+| flag       | string             | Flag key                |
+| evaluation | EvaluationResponse | The evaluation response |
 
 **EvaluationResponse**
 
-| Parameter          | Type    | Description                               |
-| ------------------ | ------- | ----------------------------------------- |
-| enabled                | boolean  | If the flag is enabled or not. Use this to conditionally render the feature                            |
+| Parameter | Type    | Description                                                                 |
+| --------- | ------- | --------------------------------------------------------------------------- |
+| enabled   | boolean | If the flag is enabled or not. Use this to conditionally render the feature |
 
 
 <aside class="success">
@@ -292,11 +292,11 @@ Create a segment
 | x-api-key | string | Required | Your app api key |
 
 ### Body Parameters
-| Parameter     | Type   | Required | Description                                                           |
-| ------------- | ------ | -------- | --------------------------------------------------------------------- |
-| key          | string | Yes      | A unique key for this segment                      |
-| description | string | No       | Optional description |
-| targets       | [Target](#feature-flags-segment-target)[] | No      | The targets to match                                          |
+| Parameter   | Type                                      | Required | Description                   |
+| ----------- | ----------------------------------------- | -------- | ----------------------------- |
+| key         | string                                    | Yes      | A unique key for this segment |
+| description | string                                    | No       | Optional description          |
+| targets     | [Target](#feature-flags-segment-target)[] | No       | The targets to match          |
 
 <%= partial "/includes/response_success.md" %>
 [Segment](#feature-flags-segment)
@@ -349,16 +349,16 @@ Update an existing segment
 | x-api-key | string | Required | Your app api key |
 
 ### URL Parameters
-| Parameter | Description          |
-| --------- | -------------------- |
+| Parameter  | Description           |
+| ---------- | --------------------- |
 | SEGMENT_ID | The ID of the segment |
 
 ### Body Parameters
-| Parameter     | Type   | Required | Description                                                           |
-| ------------- | ------ | -------- | --------------------------------------------------------------------- |
-| key          | string | No      | A unique key for this segment                      |
-| description | string | No       | Optional description |
-| targets       | [Target](#feature-flags-segment-target)[] | No      | The targets to match                                          |
+| Parameter   | Type                                      | Required | Description                   |
+| ----------- | ----------------------------------------- | -------- | ----------------------------- |
+| key         | string                                    | No       | A unique key for this segment |
+| description | string                                    | No       | Optional description          |
+| targets     | [Target](#feature-flags-segment-target)[] | No       | The targets to match          |
 
 <%= partial "/includes/response_success.md" %>
 [Segment](#feature-flags-segment)
@@ -388,8 +388,8 @@ Delete an existing segment. Deleting a segment will also remove the relationship
 | x-api-key | string | Required | Your app api key |
 
 ### URL Parameters
-| Parameter | Description          |
-| --------- | -------------------- |
+| Parameter  | Description           |
+| ---------- | --------------------- |
 | SEGMENT_ID | The ID of the segment |
 
 <%= partial "/includes/response_success.md" %>
@@ -512,14 +512,14 @@ Create a flag
 | x-api-key | string | Required | Your app api key |
 
 ### Body Parameters
-| Parameter     | Type   | Required | Description                                                           |
-| ------------- | ------ | -------- | --------------------------------------------------------------------- |
-| key          | string | Yes      | A unique key for this flag                      |
-| description | string | No       | Optional description |
-| defaultValue       | boolean | No      | The value to return if no segment was found or matched                                          |
-| segments       | string[] | No      | List of IDs of the segments which should be matched                                          |
-| targetValue       | boolean | No      | The value to return of a segment was matched                                          |
-| enabled       | boolean | No      | Active state. Only enabled flags are available for evaluation. Otherwise evaluation falls back to false.                                          |
+| Parameter    | Type     | Required | Description                                                                                              |
+| ------------ | -------- | -------- | -------------------------------------------------------------------------------------------------------- |
+| key          | string   | Yes      | A unique key for this flag                                                                               |
+| description  | string   | No       | Optional description                                                                                     |
+| defaultValue | boolean  | No       | The value to return if no segment was found or matched                                                   |
+| segments     | string[] | No       | List of IDs of the segments which should be matched                                                      |
+| targetValue  | boolean  | No       | The value to return of a segment was matched                                                             |
+| enabled      | boolean  | No       | Active state. Only enabled flags are available for evaluation. Otherwise evaluation falls back to false. |
 
 <%= partial "/includes/response_success.md" %>
 [Flag](#feature-flags-flag)
@@ -579,19 +579,19 @@ Update an existing flag
 | x-api-key | string | Required | Your app api key |
 
 ### URL Parameters
-| Parameter | Description          |
-| --------- | -------------------- |
-| FLAG_ID | The ID of the flag |
+| Parameter | Description        |
+| --------- | ------------------ |
+| FLAG_ID   | The ID of the flag |
 
 ### Body Parameters
-| Parameter     | Type   | Required | Description                                                           |
-| ------------- | ------ | -------- | --------------------------------------------------------------------- |
-| key          | string | No      | A unique key for this flag                      |
-| description | string | No       | Optional description |
-| defaultValue       | boolean | No      | The value to return if no segment was found or matched                                          |
-| segments       | string[] | No      | List of IDs of the segments which should be matched                                          |
-| targetValue       | boolean | No      | The value to return of a segment was matched                                          |
-| enabled       | boolean | No      | Active state. Only enabled flags are available for evaluation. Otherwise evaluation falls back to false.                                          |
+| Parameter    | Type     | Required | Description                                                                                              |
+| ------------ | -------- | -------- | -------------------------------------------------------------------------------------------------------- |
+| key          | string   | No       | A unique key for this flag                                                                               |
+| description  | string   | No       | Optional description                                                                                     |
+| defaultValue | boolean  | No       | The value to return if no segment was found or matched                                                   |
+| segments     | string[] | No       | List of IDs of the segments which should be matched                                                      |
+| targetValue  | boolean  | No       | The value to return of a segment was matched                                                             |
+| enabled      | boolean  | No       | Active state. Only enabled flags are available for evaluation. Otherwise evaluation falls back to false. |
 
 <%= partial "/includes/response_success.md" %>
 [Flag](#feature-flags-flag)
@@ -621,8 +621,8 @@ Delete an existing flag.
 | x-api-key | string | Required | Your app api key |
 
 ### URL Parameters
-| Parameter | Description          |
-| --------- | -------------------- |
-| FLAG_ID | The ID of the flag |
+| Parameter | Description        |
+| --------- | ------------------ |
+| FLAG_ID   | The ID of the flag |
 
 <%= partial "/includes/response_success.md" %>

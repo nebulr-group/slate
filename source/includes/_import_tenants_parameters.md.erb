@@ -1,42 +1,42 @@
 ### Body Parameters
 
-| Parameter | Type                  | Required | Description                                                                                                                                  |
-| --------- | --------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| tenant      | ImportTenant        | Required | Import data for the tenant                                                                       |
-| users    | ImportUser[]           | Optional | All other users than the owner that should be imported to this tenant    |
+| Parameter | Type         | Required | Description                                                           |
+| --------- | ------------ | -------- | --------------------------------------------------------------------- |
+| tenant    | ImportTenant | Required | Import data for the tenant                                            |
+| users     | ImportUser[] | Optional | All other users than the owner that should be imported to this tenant |
 
 **ImportTenant**
 
 | Parameter | Type                  | Required | Description                                                                                                                                  |
 | --------- | --------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| name      | string                | Optional | Name of the tenant.                                                                       |
-| owner    | ImportUser             | Required | The owner for this tenant. There must be one owner    |
-| plan      | string                | Optional | The key of an existing [plan](#plan-model)                                                                                |
+| name      | string                | Optional | Name of the tenant.                                                                                                                          |
+| owner     | ImportUser            | Required | The owner for this tenant. There must be one owner                                                                                           |
+| plan      | string                | Optional | The key of an existing [plan](#plan-model)                                                                                                   |
 | logo      | string                | Optional | A URI to a logo.                                                                                                                             |
 | metadata  | Record<string,string> | Optional | Store metadata for your own business logic that will be returned in every Tenant response. This data will never be outputted to the end user |
 
 **ImportUser**
 
-| Parameter | Type                  | Required | Description                                                                                                                                  |
-| --------- | --------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| username      | string                | Required | The username / email.                                                                       |
-| role    | string                | Optional | Role of the user    |
-| firstName      | string                | Optional | Users first name                                                                                 |
-| lastName      | string                | Optional | Users last name                                                                                                                              |
-| password      | ImportPassword                | Optional | Import an existing password                                                                                                                              |
+| Parameter | Type           | Required | Description                 |
+| --------- | -------------- | -------- | --------------------------- |
+| username  | string         | Required | The username / email.       |
+| role      | string         | Optional | Role of the user            |
+| firstName | string         | Optional | Users first name            |
+| lastName  | string         | Optional | Users last name             |
+| password  | ImportPassword | Optional | Import an existing password |
 
 
 **ImportPassword**
 
-| Parameter | Type                  | Required | Description                                                                                                                                  |
-| --------- | --------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| value      | string                | Required | The password digest.                                                                       |
-| algorithm    | `'BCRYPT'`, `'ARGON2I'`, `'MD5'`, `'SHA1'`, `'SHA256'`, `'SHA512'`                | Required | The algorithm that is being used.
-| pepper      | ImportPasswordPepper                | Optional | If the password should be peppered prior to validation. [Read more.](https://en.wikipedia.org/wiki/Pepper_(cryptography))                                                                                 |
+| Parameter | Type                                                               | Required | Description                                                                                                               |
+| --------- | ------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------- |
+| value     | string                                                             | Required | The password digest.                                                                                                      |
+| algorithm | `'BCRYPT'`, `'ARGON2I'`, `'MD5'`, `'SHA1'`, `'SHA256'`, `'SHA512'` | Required | The algorithm that is being used.                                                                                         |
+| pepper    | ImportPasswordPepper                                               | Optional | If the password should be peppered prior to validation. [Read more.](https://en.wikipedia.org/wiki/Pepper_(cryptography)) |
 
 **ImportPasswordPepper**
 
-| Parameter | Type                  | Required | Description                                                                                                                                  |
-| --------- | --------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| value      | string                | Required | The pepper value.                                                                       |
-| position    | `'BEGIN'` or `'END'`                | Required | If the pepper should be prepended or appended the password.   |
+| Parameter | Type                 | Required | Description                                                 |
+| --------- | -------------------- | -------- | ----------------------------------------------------------- |
+| value     | string               | Required | The pepper value.                                           |
+| position  | `'BEGIN'` or `'END'` | Required | If the pepper should be prepended or appended the password. |

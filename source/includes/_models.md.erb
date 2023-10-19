@@ -5,49 +5,49 @@
 
 <%= partial "/includes/json/app_profile_json.md.erb" %>
 
-| Parameter               | Type                     | Description                                                                                                                                                |
-| ----------------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id                      | string                   | Unique ID (Read only)                                                                                                                                      |
-| name                    | string                   | Name of the app                                                                                                                                            |
-| domain                  | string                   | Unique domain name of the app (Read only)                                                                                                                  |
-| apiUrl                  | string                   | URL to your api (to receive webhooks etc).                                                                                               |
-| webhookUrl                  | string                   | Enable webhook and events to be sent to this url                                                                                                 |
-| uiUrl                   | string                   | URL to your frontend app (for onboarding redirects etc).                                                                               |
-| logo                    | string                   | URL to your logo                                                                                                                                           |
-| websiteUrl              | string                   | URL to your website or landing page. E.g. Branded emails will link to this URL, checkout process will redirect to `/payment-success` and `/payment-cancel` |
-| privacyPolicyUrl        | string                   | URL to a page on your website containing a Privacy policy for your app users. E.g. checkout process will link to this url.                                 |
-| termsOfServiceUrl       | string                   | URL to a page on your website containing a Terms of service for your app users. E.g. checkout process will link to this url.                               |
-| emailSenderName         | string                   | Emails sent from Nblocks will have this sender name                                                                                                        |
-| emailSenderEmail        | string                   | Emails sent from Nblocks will have this sender email. You'll have to verify this email before                                                              |
-| stripeEnabled           | boolean                  | Boolean value telling the user if Stripe is enabled (Read only)                                                                                            |
-| passkeysEnabled | boolean                  | Boolean value telling the user if Login with Passkeys is enabled                                                                                 |
-| azureMarketplaceEnabled | boolean                  | Boolean value telling the user if Azure marketplace is enabled (Read only)                                                                                 |
-| googleSsoEnabled | boolean                  | Boolean value telling the user if Login with Google SSO is enabled (Read only)                                                                                 |
-| azureAdSsoEnabled | boolean                  | Boolean value telling the user if Login with Azure SSO is enabled (Read only)                                                                                 |
-| onboardingFlow          | OnboardingFlow           | Configure how users will be onboarded                                                                                                                      |
-| cloudViews              | boolean                  | Toggle this to true if you want to use a UI provided by NBlocks instead of your own                                                                        |
-| redirectUris            | string[]                 | Allowed redirect uris                                                                                                                                      |
-| defaultCallbackUri      | string                   | Default handover/callback uri used by Nblocks                                                                                                              |
+| Parameter               | Type           | Description                                                                                                                                                |
+| ----------------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id                      | string         | Unique ID (Read only)                                                                                                                                      |
+| name                    | string         | Name of the app                                                                                                                                            |
+| domain                  | string         | Unique domain name of the app (Read only)                                                                                                                  |
+| apiUrl                  | string         | URL to your api (to receive webhooks etc).                                                                                                                 |
+| webhookUrl              | string         | Enable webhook and events to be sent to this url                                                                                                           |
+| uiUrl                   | string         | URL to your frontend app (for onboarding redirects etc).                                                                                                   |
+| logo                    | string         | URL to your logo                                                                                                                                           |
+| websiteUrl              | string         | URL to your website or landing page. E.g. Branded emails will link to this URL, checkout process will redirect to `/payment-success` and `/payment-cancel` |
+| privacyPolicyUrl        | string         | URL to a page on your website containing a Privacy policy for your app users. E.g. checkout process will link to this url.                                 |
+| termsOfServiceUrl       | string         | URL to a page on your website containing a Terms of service for your app users. E.g. checkout process will link to this url.                               |
+| emailSenderName         | string         | Emails sent from Nblocks will have this sender name                                                                                                        |
+| emailSenderEmail        | string         | Emails sent from Nblocks will have this sender email. You'll have to verify this email before                                                              |
+| stripeEnabled           | boolean        | Boolean value telling the user if Stripe is enabled (Read only)                                                                                            |
+| passkeysEnabled         | boolean        | Boolean value telling the user if Login with Passkeys is enabled                                                                                           |
+| azureMarketplaceEnabled | boolean        | Boolean value telling the user if Azure marketplace is enabled (Read only)                                                                                 |
+| googleSsoEnabled        | boolean        | Boolean value telling the user if Login with Google SSO is enabled (Read only)                                                                             |
+| azureAdSsoEnabled       | boolean        | Boolean value telling the user if Login with Azure SSO is enabled (Read only)                                                                              |
+| onboardingFlow          | OnboardingFlow | Configure how users will be onboarded                                                                                                                      |
+| cloudViews              | boolean        | Toggle this to true if you want to use a UI provided by NBlocks instead of your own                                                                        |
+| redirectUris            | string[]       | Allowed redirect uris                                                                                                                                      |
+| defaultCallbackUri      | string         | Default handover/callback uri used by Nblocks                                                                                                              |
 
 
 ## Tenant model
 
 <%= partial "/includes/json/tenant_json.md.erb" %>
 
-| Parameter        | Type                   | Description                                                                                                                                    |
-| ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| id               | string                 | Unique ID (Read only)                                                                                                                          |
-| plan             | string                 | Plan key. Tells what plan the tenant is subscribing to. See [Plan model](#plan-model)                                    |
-| trial            | boolean                | The tenant is currently trialing on the selected plan      |
-| locale           | string                 | The default locale / lang code for all users in this tenant (`ISO_639-1` format). This property will set the i18n for all platform emails      |
-| name             | string                 | Name of the tenant                                                                                                                             |
-| logo             | string                 | URI to a logo                                                                                                                                  |
-| mfa              | boolean                | Require users to login with MFA/2FA                                                                                                            |
-| paymentStatus  | [Payment status](#tenant-payment-status)                | The tenant current payment status                                                                                             |
-| paymentsRequired | boolean                | The tenant should setup payment immediately because tenant has not setup payments and the subscribing plan carry a cost or the trial has ended |
-| metadata         | Record<string, string> | Custom key value meta data that you can use                                                                                                    |
-| onboarded        | string                 | If this tenant is considered onboarded (Read only)                                                                                             |
-| createdAt        | string                 | Timestamp when created (Read only)                                                                                                             |
+| Parameter        | Type                                     | Description                                                                                                                                    |
+| ---------------- | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| id               | string                                   | Unique ID (Read only)                                                                                                                          |
+| plan             | string                                   | Plan key. Tells what plan the tenant is subscribing to. See [Plan model](#plan-model)                                                          |
+| trial            | boolean                                  | The tenant is currently trialing on the selected plan                                                                                          |
+| locale           | string                                   | The default locale / lang code for all users in this tenant (`ISO_639-1` format). This property will set the i18n for all platform emails      |
+| name             | string                                   | Name of the tenant                                                                                                                             |
+| logo             | string                                   | URI to a logo                                                                                                                                  |
+| mfa              | boolean                                  | Require users to login with MFA/2FA                                                                                                            |
+| paymentStatus    | [Payment status](#tenant-payment-status) | The tenant current payment status                                                                                                              |
+| paymentsRequired | boolean                                  | The tenant should setup payment immediately because tenant has not setup payments and the subscribing plan carry a cost or the trial has ended |
+| metadata         | Record<string, string>                   | Custom key value meta data that you can use                                                                                                    |
+| onboarded        | string                                   | If this tenant is considered onboarded (Read only)                                                                                             |
+| createdAt        | string                                   | Timestamp when created (Read only)                                                                                                             |
 
 ## Tenant payment status
 
@@ -55,12 +55,12 @@
 
 <%= partial "/includes/json/_tenant-payment-status_json.md.erb" %>
 
-| Parameter        | Type                   | Description                                                                                                                                    |
-| ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| shouldSelectPlan  | boolean                | The tenant should immediately select a plan. Redirect the owner to Subscription portal / select plan                                                                                             |
-| shouldSetupPayments | boolean                |  The tenant should setup payment immediately because tenant has not setup payments and the subscribing plan carry a cost and the trial has ended. Redirect the owner to Subscription portal / select plan |
-| paymentsEnabled | boolean                | Payment method has been set up. Nblocks can bill this tenant |
-| provider | string                | The provider used for this tenant |
+| Parameter           | Type    | Description                                                                                                                                                                                              |
+| ------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| shouldSelectPlan    | boolean | The tenant should immediately select a plan. Redirect the owner to Subscription portal / select plan                                                                                                     |
+| shouldSetupPayments | boolean | The tenant should setup payment immediately because tenant has not setup payments and the subscribing plan carry a cost and the trial has ended. Redirect the owner to Subscription portal / select plan |
+| paymentsEnabled     | boolean | Payment method has been set up. Nblocks can bill this tenant                                                                                                                                             |
+| provider            | string  | The provider used for this tenant                                                                                                                                                                        |
 
 
 ## Tenant payment details
@@ -70,10 +70,10 @@ More in depth details about a tenants payment and subscription
 
 <%= partial "/includes/json/tenant-payment-details_json.md.erb" %>
 
-| Parameter        | Type                   | Description                                                                                                                                    |
-| ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| status           | [Tenant payment status](#tenant-payment-status)                 | Current payment status                                                                                                                          |
-| details          | [Tenant plan Details](#tenant-plan-details)   |           Details about the plan this tenant is subscribing to                                                                               |
+| Parameter | Type                                            | Description                                          |
+| --------- | ----------------------------------------------- | ---------------------------------------------------- |
+| status    | [Tenant payment status](#tenant-payment-status) | Current payment status                               |
+| details   | [Tenant plan Details](#tenant-plan-details)     | Details about the plan this tenant is subscribing to |
 
 ## Tenant plan details
 
@@ -81,32 +81,32 @@ More in depth details about a tenants payment and subscription
 
 <%= partial "/includes/json/_tenant-plan-details_json.md.erb" %>
 
-| Parameter        | Type                   | Description                                                                                                                                    |
-| ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| plan             | [Plan](#plan-model)    | The plan this tenant subscribes to                                                                                                             |
-| price            | [Price](#price-model)  | The price within the plan this tenant subscribes to                                                                                            |
-| trial            | boolean                | If this tenant is currently trialing      |
-| trialDaysLeft    | number                 | The number of days left until trial ends for this tenant     |
+| Parameter     | Type                  | Description                                              |
+| ------------- | --------------------- | -------------------------------------------------------- |
+| plan          | [Plan](#plan-model)   | The plan this tenant subscribes to                       |
+| price         | [Price](#price-model) | The price within the plan this tenant subscribes to      |
+| trial         | boolean               | If this tenant is currently trialing                     |
+| trialDaysLeft | number                | The number of days left until trial ends for this tenant |
 
 ## Tenant user model
 
 <%= partial "/includes/json/tenant-user_json.md.erb" %>
 
-| Parameter        | Type                   | Description                                                                                                                                    |
-| ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| id               | string                 | Unique ID (Read only)                                                                                                                          |
-| role             | string                 | Role of the user. Grants a set of privileges. The set of privileges is configured on the `Role` model.                                    |
-| email           | string                 | Email address      |
-| username             | string                 | Username                                                                                                                             |
-| firstName             | string                 | Users first name                                                                                                                                 |
-| lastName              | string                | Users last name                                                                                                           |
-| fullName  | string                | Users full name (first name and last name concatenated)                                                                                              |
-| onboarded | boolean                | If user is onboarded or not |
-| consentsToPrivacyPolicy         | boolean | If user have left consent to the app privacy policy or not (should be set during app onboarding)                                                                                                    |
-| enabled        | boolean                 | If user should be allowed to login or not                                                                                             |
-| teams        | string[]                 | Array of identifiers that can be used to group several users into teams or groups                                                                                                             |
-| createdAt        | string                 | Timestamp when created (Read only)                                                                                                             |
-| tenant        | [Tenant](#tenant-model)                 | The tenant                                                                                                             |
+| Parameter               | Type                    | Description                                                                                            |
+| ----------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------ |
+| id                      | string                  | Unique ID (Read only)                                                                                  |
+| role                    | string                  | Role of the user. Grants a set of privileges. The set of privileges is configured on the `Role` model. |
+| email                   | string                  | Email address                                                                                          |
+| username                | string                  | Username                                                                                               |
+| firstName               | string                  | Users first name                                                                                       |
+| lastName                | string                  | Users last name                                                                                        |
+| fullName                | string                  | Users full name (first name and last name concatenated)                                                |
+| onboarded               | boolean                 | If user is onboarded or not                                                                            |
+| consentsToPrivacyPolicy | boolean                 | If user have left consent to the app privacy policy or not (should be set during app onboarding)       |
+| enabled                 | boolean                 | If user should be allowed to login or not                                                              |
+| teams                   | string[]                | Array of identifiers that can be used to group several users into teams or groups                      |
+| createdAt               | string                  | Timestamp when created (Read only)                                                                     |
+| tenant                  | [Tenant](#tenant-model) | The tenant                                                                                             |
 
 ## Tokens response
 
@@ -134,13 +134,13 @@ More in depth details about a tenants payment and subscription
 
 Decoded JWT payload.
 
-| Parameter | Type   | Description      |
-| --------- | ------ | ---------------- |
-| sub       | string | User id          |
-| scope     | string | User privileges  |
-| role      | string | User role        |
-| aid       | string | Your app id      |
-| tid       | string | User tenant id   |
+| Parameter | Type   | Description          |
+| --------- | ------ | -------------------- |
+| sub       | string | User id              |
+| scope     | string | User privileges      |
+| role      | string | User role            |
+| aid       | string | Your app id          |
+| tid       | string | User tenant id       |
 | plan      | string | User tenant plan key |
 
 ## Id token model
@@ -167,7 +167,7 @@ Decoded JWT payload.
 
 | Parameter          | Type    | Description                               |
 | ------------------ | ------- | ----------------------------------------- |
-| sub                | string  | User id                            |
+| sub                | string  | User id                                   |
 | name               | string  | Users full name                           |
 | family_name        | string  | Users last name                           |
 | given_name         | string  | Users first name                          |
@@ -202,14 +202,14 @@ Decoded JWT payload.
 }
 ```
 
-| Parameter        | Type                   | Description                                                                                                                                    |
-| ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| id               | string                 | Unique ID (Read only)                                                                                                                          |
-| name             | string                 | Role name. Presentable label of the role                                    |
-| key             | string                 | Role key. Use this to reference the role in the `Tenant user` model                                |
-| description           | string                 | Description text      |
-| privileges             | [Privileges[]](#access-privilege-model)                 |  The set of privileges linked to this role                                                                                                                              |
-| isDefault           | boolean                 | If a role is default it will be applied to new tenant users. Only **one** role can be the default.     |
+| Parameter   | Type                                    | Description                                                                                        |
+| ----------- | --------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| id          | string                                  | Unique ID (Read only)                                                                              |
+| name        | string                                  | Role name. Presentable label of the role                                                           |
+| key         | string                                  | Role key. Use this to reference the role in the `Tenant user` model                                |
+| description | string                                  | Description text                                                                                   |
+| privileges  | [Privileges[]](#access-privilege-model) | The set of privileges linked to this role                                                          |
+| isDefault   | boolean                                 | If a role is default it will be applied to new tenant users. Only **one** role can be the default. |
 
 ## Access privilege model
 
@@ -223,11 +223,11 @@ Decoded JWT payload.
 }
 ```
 
-| Parameter        | Type                   | Description                                                                                                                                    |
-| ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| id               | string                 | Unique ID (Read only)                                                                                                                          |
-| key             | string                 | Privilege key. Use this to evaluate and grant user access                                    |
-| description           | string                 | Description text      |
+| Parameter   | Type   | Description                                               |
+| ----------- | ------ | --------------------------------------------------------- |
+| id          | string | Unique ID (Read only)                                     |
+| key         | string | Privilege key. Use this to evaluate and grant user access |
+| description | string | Description text                                          |
 
 ## Import tenant response
 
@@ -247,10 +247,10 @@ Decoded JWT payload.
 }
 ```
 
-| Parameter          | Type    | Description                               |
-| ------------------ | ------- | ----------------------------------------- |
-| status                | string  | User context                            |
-| import               | [Validate response](#validate-import-tenant-response)  | A summary of the import and if there are any errors                           |
+| Parameter | Type                                                  | Description                                         |
+| --------- | ----------------------------------------------------- | --------------------------------------------------- |
+| status    | string                                                | User context                                        |
+| import    | [Validate response](#validate-import-tenant-response) | A summary of the import and if there are any errors |
 
 ## Validate import tenant response
 
@@ -269,14 +269,14 @@ Decoded JWT payload.
 }
 ```
 
-| Parameter          | Type    | Description                               |
-| ------------------ | ------- | ----------------------------------------- |
-| tenants               | number  | The total numbers of tenants that will be imported                            |
-| users                | number  | The total numbers of users (across all tenants) that will be imported                            |
-| passwords        | boolean  | If there will be any user credentials migrated during the import                           |
-| errors                | string[]  | A list of errors. These errors are blocking the import                            |
-| warnings               | string[]  | A list of warnings. These warnings are not blocking the import                           |
-| approved        | boolean  | If the data will or was approved for import                           |
+| Parameter | Type     | Description                                                           |
+| --------- | -------- | --------------------------------------------------------------------- |
+| tenants   | number   | The total numbers of tenants that will be imported                    |
+| users     | number   | The total numbers of users (across all tenants) that will be imported |
+| passwords | boolean  | If there will be any user credentials migrated during the import      |
+| errors    | string[] | A list of errors. These errors are blocking the import                |
+| warnings  | string[] | A list of warnings. These warnings are not blocking the import        |
+| approved  | boolean  | If the data will or was approved for import                           |
 
 ## Plan model
 
@@ -284,15 +284,15 @@ Decoded JWT payload.
 
 <%= partial "/includes/json/plan_json.md.erb" %>
 
-| Parameter        | Type                   | Description                                                                                                                                    |
-| ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| id               | string                 | Unique ID (Read only)                                                                                                                          |
-| key             | string                 | Plan key, must be unique and cannot be changed. This is used identify the plan amongst subscribers and is used as argument during signup.                                  |
-| name           | string                 | The name of the plan. Visible to customers      |
-| trial           | string                 | If new subscribers should start with trial. When trialing, subscribers can subscribe to plans with costs without being charged      |
-| trialDays           | number                 | The number of days before the trial expires      |
-| prices           | [Price[]](#price-model)                 | A list of prices which configures how this plan is offered      |
-| createdAt        | string                 | Timestamp when created (Read only)                                                                                                             |
+| Parameter | Type                    | Description                                                                                                                               |
+| --------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| id        | string                  | Unique ID (Read only)                                                                                                                     |
+| key       | string                  | Plan key, must be unique and cannot be changed. This is used identify the plan amongst subscribers and is used as argument during signup. |
+| name      | string                  | The name of the plan. Visible to customers                                                                                                |
+| trial     | string                  | If new subscribers should start with trial. When trialing, subscribers can subscribe to plans with costs without being charged            |
+| trialDays | number                  | The number of days before the trial expires                                                                                               |
+| prices    | [Price[]](#price-model) | A list of prices which configures how this plan is offered                                                                                |
+| createdAt | string                  | Timestamp when created (Read only)                                                                                                        |
 
 ## Price model
 
@@ -306,11 +306,11 @@ Decoded JWT payload.
 }
 ```
 
-| Parameter        | Type                   | Description                                                                                                                                    |
-| ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| amount               | number                 | The amount for each recurring charge                                                                                                                          |
-| currency             | string                 | Three-letter ISO currency code. Must be a supported currency. https://www.iso.org/iso-4217-currency-codes.html                               |
-| recurrenceInterval   | `'day', 'month', 'week', 'year'`                 | An interval for how often the customer will be charged for the subscription / plan.      |
+| Parameter          | Type                             | Description                                                                                                    |
+| ------------------ | -------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| amount             | number                           | The amount for each recurring charge                                                                           |
+| currency           | string                           | Three-letter ISO currency code. Must be a supported currency. https://www.iso.org/iso-4217-currency-codes.html |
+| recurrenceInterval | `'day', 'month', 'week', 'year'` | An interval for how often the customer will be charged for the subscription / plan.                            |
 
 ## Tax model
 
@@ -318,13 +318,13 @@ Decoded JWT payload.
 
 <%= partial "/includes/json/tax_json.md.erb" %>
 
-| Parameter        | Type                   | Description                                                                                                                                    |
-| ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| id               | string                 | Unique ID (Read only)                                                                                                                          |
-| countryCode      | string                 | Two-letter ISO country code. https://www.nationsonline.org/oneworld/country_code_list.htm                                                                                                                          |
-| name             | string                 | Name of the tax. Visible to customers                               |
-| percentage       | number                 | Percentage with which the sub total is increased with. `0` - `100`      |
-| createdAt        | string                 | Timestamp when created (Read only)                                                                                                             |
+| Parameter   | Type   | Description                                                                               |
+| ----------- | ------ | ----------------------------------------------------------------------------------------- |
+| id          | string | Unique ID (Read only)                                                                     |
+| countryCode | string | Two-letter ISO country code. https://www.nationsonline.org/oneworld/country_code_list.htm |
+| name        | string | Name of the tax. Visible to customers                                                     |
+| percentage  | number | Percentage with which the sub total is increased with. `0` - `100`                        |
+| createdAt   | string | Timestamp when created (Read only)                                                        |
 
 ## Feature flags evaluation context
 
@@ -352,35 +352,35 @@ Decoded JWT payload.
 }
 ```
 
-| Parameter          | Type    | Description                               |
-| ------------------ | ------- | ----------------------------------------- |
-| user                | UserContext  | User context                            |
-| org               | OrgContext  | Org context                           |
-| device        | KeyContext  | Device context                           |
+| Parameter | Type        | Description    |
+| --------- | ----------- | -------------- |
+| user      | UserContext | User context   |
+| org       | OrgContext  | Org context    |
+| device    | KeyContext  | Device context |
 
 **UserContext**
 
-| Parameter          | Type    | Description                               |
-| ------------------ | ------- | ----------------------------------------- |
-| key                | string  | Custom value                            |
-| id                | string  | User id                            |
-| role               | string  | User role                           |
-| name        | string  | User name                           |
+| Parameter | Type   | Description  |
+| --------- | ------ | ------------ |
+| key       | string | Custom value |
+| id        | string | User id      |
+| role      | string | User role    |
+| name      | string | User name    |
 
 **OrgContext**
 
-| Parameter          | Type    | Description                               |
-| ------------------ | ------- | ----------------------------------------- |
-| key                | string  | Custom value                            |
-| id                | string  | Tenant id                            |
-| plan               | string  | Tenant plan key                          |
-| name        | string  | Tenant name                           |
+| Parameter | Type   | Description     |
+| --------- | ------ | --------------- |
+| key       | string | Custom value    |
+| id        | string | Tenant id       |
+| plan      | string | Tenant plan key |
+| name      | string | Tenant name     |
 
 **KeyContext**
 
-| Parameter          | Type    | Description                               |
-| ------------------ | ------- | ----------------------------------------- |
-| key                | string  | The value to be matched (==)                           |
+| Parameter | Type   | Description                  |
+| --------- | ------ | ---------------------------- |
+| key       | string | The value to be matched (==) |
 
 ## Feature flags segment
 
@@ -404,12 +404,12 @@ Decoded JWT payload.
 }
 ```
 
-| Parameter        | Type                   | Description                                                                                                                                    |
-| ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| id               | string                 | Unique ID (Read only)                                                                                                                          |
-| key             | string                 | Segment key. Use this to reference the segment in a flag                                    |
-| description           | string                 | Description text      |
-| targets             | [Target](#feature-flags-segment-target)[]                 |  The target which will be used to match                                                                                                                              |
+| Parameter   | Type                                      | Description                                              |
+| ----------- | ----------------------------------------- | -------------------------------------------------------- |
+| id          | string                                    | Unique ID (Read only)                                    |
+| key         | string                                    | Segment key. Use this to reference the segment in a flag |
+| description | string                                    | Description text                                         |
+| targets     | [Target](#feature-flags-segment-target)[] | The target which will be used to match                   |
 
 ## Feature flags segment target
 
@@ -426,42 +426,42 @@ Decoded JWT payload.
 }
 ```
 
-| Parameter          | Type    | Description                               |
-| ------------------ | ------- | ----------------------------------------- |
-| user                | UserTarget  | User id                            |
-| org               | OrgTarget  | Users full name                           |
-| device        | KeyTarget  | Users last name                           |
+| Parameter | Type       | Description     |
+| --------- | ---------- | --------------- |
+| user      | UserTarget | User id         |
+| org       | OrgTarget  | Users full name |
+| device    | KeyTarget  | Users last name |
 
 **UserTarget**
 
-| Parameter          | Type    | Description                               |
-| ------------------ | ------- | ----------------------------------------- |
-| key                | TargetValue  | Custom value                            |
-| id                | string  | User id                            |
-| role               | TargetValue  | User role                           |
-| name        | TargetValue  | User name                           |
+| Parameter | Type        | Description  |
+| --------- | ----------- | ------------ |
+| key       | TargetValue | Custom value |
+| id        | string      | User id      |
+| role      | TargetValue | User role    |
+| name      | TargetValue | User name    |
 
 **OrgTarget**
 
-| Parameter          | Type    | Description                               |
-| ------------------ | ------- | ----------------------------------------- |
-| key                | TargetValue  | Custom value                            |
-| id                | string  | Tenant id                            |
-| plan               | TargetValue  | Tenant plan key                          |
-| name        | TargetValue  | Tenant name                           |
+| Parameter | Type        | Description     |
+| --------- | ----------- | --------------- |
+| key       | TargetValue | Custom value    |
+| id        | string      | Tenant id       |
+| plan      | TargetValue | Tenant plan key |
+| name      | TargetValue | Tenant name     |
 
 **KeyTarget**
 
-| Parameter          | Type    | Description                               |
-| ------------------ | ------- | ----------------------------------------- |
-| key                | TargetValue  | The value to be matched                          |
+| Parameter | Type        | Description             |
+| --------- | ----------- | ----------------------- |
+| key       | TargetValue | The value to be matched |
 
 **TargetValue**
 
-| Parameter          | Type    | Description                               |
-| ------------------ | ------- | ----------------------------------------- |
-| operator                | Operator  | The matching operator                           |
-| value                | string  | The value to be matched using the operator                           |
+| Parameter | Type     | Description                                |
+| --------- | -------- | ------------------------------------------ |
+| operator  | Operator | The matching operator                      |
+| value     | string   | The value to be matched using the operator |
 
 **Operator**
 
@@ -496,12 +496,12 @@ Decoded JWT payload.
 }
 ```
 
-| Parameter        | Type                   | Description                                                                                                                                    |
-| ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| id               | string                 | Unique ID (Read only)                                                                                                                          |
-| key             | string                 | Flag key. Use this to reference the flag when evaluating                                    |
-| description           | string                 | Description text      |
-| defaultValue           | boolean                 | The value to return if no segment was found or matched     |
-| segments             | [Segment[]](#feature-flags-segment)                 |  The segments and matchers that are linked to this flag                                                                                                                              |
-| targetValue           | boolean                 | The value to return of a segment was matched      |
-| enabled             | boolean                 |  Active state. Only enabled flags are available for evaluation. Otherwise evaluation falls back to false.                                                                                                                              |
+| Parameter    | Type                                | Description                                                                                              |
+| ------------ | ----------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| id           | string                              | Unique ID (Read only)                                                                                    |
+| key          | string                              | Flag key. Use this to reference the flag when evaluating                                                 |
+| description  | string                              | Description text                                                                                         |
+| defaultValue | boolean                             | The value to return if no segment was found or matched                                                   |
+| segments     | [Segment[]](#feature-flags-segment) | The segments and matchers that are linked to this flag                                                   |
+| targetValue  | boolean                             | The value to return of a segment was matched                                                             |
+| enabled      | boolean                             | Active state. Only enabled flags are available for evaluation. Otherwise evaluation falls back to false. |

@@ -21,19 +21,19 @@ Start the Oauth 2.0 user login flow by redirecting the user to the `/authorize` 
 
 ### Query Parameters
 
-| Parameter        | Type    | Required | Description                                                                                                                          |
-| ---------------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| client_id        | string  | Required | Your app id                                                                                                                          |
-| response_type    | string  | Required | What kind of tokens will be generated. We support `code`                                                                             |
-| redirect_uri     | string  | Required | A target URI where the authenticated user will be redirected to together with tokens. Must be a valid URI in your App `redirectUris` |
-| scope            | string  | Required | Any or all of the following: `openid`, `profile`, `email`, `address`, `phone`, `onboarding`, `tenant`                                |
-| state            | string  | Optional | This can be used to resume a state in your app. The state will be available in the response code                                     |
-| forceFederation | `'ms-azure-ad'` or `'google'`  | Optional | If you want to force a certain federated login flow instead of letting the user choose during login.             |
-| responseType | `'code'` or `'id_token'`  | Optional | If the response should be a code that could be exchanged for tokens or just an Id token             |
-| signup           | boolean | Optional | If you want to initiate a signup instead of the default login flow for the user. |
-| signupPlan | string  | Optional | The key to an existing [plan](#plan-model). Allows the signup end with the new tenant subscribing to a specific plan.              |
-| signupCurrency | string  | Optional | A currency that matches one of the price in the plan.             |
-| signupRecurrenceInterval | string  | Optional | An interval that matches one of the price in the plan.             |
+| Parameter                | Type                          | Required | Description                                                                                                                          |
+| ------------------------ | ----------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| client_id                | string                        | Required | Your app id                                                                                                                          |
+| response_type            | string                        | Required | What kind of tokens will be generated. We support `code`                                                                             |
+| redirect_uri             | string                        | Required | A target URI where the authenticated user will be redirected to together with tokens. Must be a valid URI in your App `redirectUris` |
+| scope                    | string                        | Required | Any or all of the following: `openid`, `profile`, `email`, `address`, `phone`, `onboarding`, `tenant`                                |
+| state                    | string                        | Optional | This can be used to resume a state in your app. The state will be available in the response code                                     |
+| forceFederation          | `'ms-azure-ad'` or `'google'` | Optional | If you want to force a certain federated login flow instead of letting the user choose during login.                                 |
+| responseType             | `'code'` or `'id_token'`      | Optional | If the response should be a code that could be exchanged for tokens or just an Id token                                              |
+| signup                   | boolean                       | Optional | If you want to initiate a signup instead of the default login flow for the user.                                                     |
+| signupPlan               | string                        | Optional | The key to an existing [plan](#plan-model). Allows the signup end with the new tenant subscribing to a specific plan.                |
+| signupCurrency           | string                        | Optional | A currency that matches one of the price in the plan.                                                                                |
+| signupRecurrenceInterval | string                        | Optional | An interval that matches one of the price in the plan.                                                                               |
 
 <aside class="notice">
 You should redirect the user agent to this endpoint to initate the login flow. This is not an API <-> API call.
@@ -118,12 +118,12 @@ Shorthand endpoints exists so you can use them with less parameters using sensib
 
 ### Query Parameters
 
-| Parameter       | Type    | Required | Description                                                                                                                               |
-| --------------- | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| redirectUri     | string  | Optional | A target URI where the authenticated user will be redirected to together with tokens. The default value is your App `defaultCallbackUri`. |
-| state           | string  | Optional | This can be used to resume a state in your app. The state will be available in the response code                                          |
-| forceFederation | `'ms-azure-ad'` or `'google'`  | Optional | If you want to force a certain federated login flow instead of letting the user choose during login.             |
-| responseType | `'code'` or `'id_token'`  | Optional | If the response should be a code that could be exchanged for tokens or just an Id token             |
+| Parameter       | Type                          | Required | Description                                                                                                                               |
+| --------------- | ----------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| redirectUri     | string                        | Optional | A target URI where the authenticated user will be redirected to together with tokens. The default value is your App `defaultCallbackUri`. |
+| state           | string                        | Optional | This can be used to resume a state in your app. The state will be available in the response code                                          |
+| forceFederation | `'ms-azure-ad'` or `'google'` | Optional | If you want to force a certain federated login flow instead of letting the user choose during login.                                      |
+| responseType    | `'code'` or `'id_token'`      | Optional | If the response should be a code that could be exchanged for tokens or just an Id token                                                   |
 
 <aside class="notice">
 You should redirect the user agent to this endpoint to initate the login flow. This is not an API <-> API call.
@@ -144,15 +144,15 @@ Shorthand endpoints exists so you can use them with less parameters using sensib
 
 ### Query Parameters
 
-| Parameter       | Type    | Required | Description                                                                                                                               |
-| --------------- | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| redirectUri     | string  | Optional | A target URI where the authenticated user will be redirected to together with tokens. The default value is your App `defaultCallbackUri`. |
-| state           | string  | Optional | This can be used to resume a state in your app. The state will be available in the response code                                          |
-| forceFederation | `'ms-azure-ad'` or `'google'`  | Optional | If you want to force a certain federated login flow instead of letting the user choose during login.             |
-| responseType | `'code'` or `'id_token'`  | Optional | If the response should be a code that could be exchanged for tokens or just an Id token             |
-| signupPlan | string  | Optional | The key to an existing [plan](#plan-model). Allows the signup end with the new tenant subscribing to a specific plan.              |
-| signupCurrency | string  | Optional | A currency that matches one of the price in the plan.             |
-| signupRecurrenceInterval | string  | Optional | An interval that matches one of the price in the plan.             |
+| Parameter                | Type                          | Required | Description                                                                                                                               |
+| ------------------------ | ----------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| redirectUri              | string                        | Optional | A target URI where the authenticated user will be redirected to together with tokens. The default value is your App `defaultCallbackUri`. |
+| state                    | string                        | Optional | This can be used to resume a state in your app. The state will be available in the response code                                          |
+| forceFederation          | `'ms-azure-ad'` or `'google'` | Optional | If you want to force a certain federated login flow instead of letting the user choose during login.                                      |
+| responseType             | `'code'` or `'id_token'`      | Optional | If the response should be a code that could be exchanged for tokens or just an Id token                                                   |
+| signupPlan               | string                        | Optional | The key to an existing [plan](#plan-model). Allows the signup end with the new tenant subscribing to a specific plan.                     |
+| signupCurrency           | string                        | Optional | A currency that matches one of the price in the plan.                                                                                     |
+| signupRecurrenceInterval | string                        | Optional | An interval that matches one of the price in the plan.                                                                                    |
 
 
 <aside class="notice">
@@ -221,18 +221,18 @@ Shorthand endpoints exists so you can use them with less parameters using sensib
 `POST <%= config[:auth_url] %>/token/:grantType/:<%= config[:app_id] %>`
 
 ### URL Parameters
-| Parameter | Description        |
-| --------- | ------------------ |
-| grantType    | `code` or `refresh` |
-| <%= config[:app_id] %>    | The ID of your app |
+| Parameter              | Description         |
+| ---------------------- | ------------------- |
+| grantType              | `code` or `refresh` |
+| <%= config[:app_id] %> | The ID of your app  |
 
 ### Body Parameters
 
-| Parameter     | Type   | Required                          | Description                                                                                                                          |
-| ------------- | ------ | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| code          | string | Required for code grant | The code you recieved from the authenticated user.                                                                                   |
-| refreshToken | string | Required for refresh grant      | The refresh token that was issued when getting the tokens before                                                                     |
-| redirectUri  | string | Optional for code grant | A target URI where the authenticated user will be redirected to together with tokens. The default value is your App `defaultCallbackUri`. |
+| Parameter    | Type   | Required                   | Description                                                                                                                               |
+| ------------ | ------ | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| code         | string | Required for code grant    | The code you recieved from the authenticated user.                                                                                        |
+| refreshToken | string | Required for refresh grant | The refresh token that was issued when getting the tokens before                                                                          |
+| redirectUri  | string | Optional for code grant    | A target URI where the authenticated user will be redirected to together with tokens. The default value is your App `defaultCallbackUri`. |
 
 
 <%= partial "/includes/response_success.md" %>
@@ -273,17 +273,17 @@ The code is shortlived and should be consumed with a follow up call to which int
 `POST <%= config[:auth_url] %>/handover/code/:<%= config[:app_id] %>`
 
 ### URL Parameters
-| Parameter | Description        |
-| --------- | ------------------ |
-| <%= config[:app_id] %>    | The ID of your app |
+| Parameter              | Description        |
+| ---------------------- | ------------------ |
+| <%= config[:app_id] %> | The ID of your app |
 
 ### Body Parameters
 
-| Parameter     | Type   | Required                          | Description                                                                                                                          |
-| ------------- | ------ | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| accessToken          | string | Yes | A valid user access token                                                                                   |
+| Parameter   | Type   | Required | Description               |
+| ----------- | ------ | -------- | ------------------------- |
+| accessToken | string | Yes      | A valid user access token |
 
 <%= partial "/includes/response_success.md" %>
-| Parameter     | Type   | Description                                                                                         |
-| ------------- | ------ | --------------------------------------------------------------------------------------------------- |
-| code    | string | A shortlived unique token                                                                                          |
+| Parameter | Type   | Description               |
+| --------- | ------ | ------------------------- |
+| code      | string | A shortlived unique token |

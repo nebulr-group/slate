@@ -163,13 +163,13 @@ Create a role
 | x-api-key | string | Required | Your app api key |
 
 ### Body Parameters
-| Parameter     | Type   | Required | Description                                                           |
-| ------------- | ------ | -------- | --------------------------------------------------------------------- |
-| name          | string | Yes      | A presentable label for this role                      |
-| key          | string | Yes      | A unique key for this role                      |
-| description | string | No       | Optional description |
-| privileges       | [Privilege IDs](#access-privilege-model)[] | Yes      | A list of privilege IDs. The list cannot be empty                                          |
-| isDefault | boolean | No       | Default value is `false`. If set to `true`, the existing default role will be set to `false` |
+| Parameter   | Type                                       | Required | Description                                                                                  |
+| ----------- | ------------------------------------------ | -------- | -------------------------------------------------------------------------------------------- |
+| name        | string                                     | Yes      | A presentable label for this role                                                            |
+| key         | string                                     | Yes      | A unique key for this role                                                                   |
+| description | string                                     | No       | Optional description                                                                         |
+| privileges  | [Privilege IDs](#access-privilege-model)[] | Yes      | A list of privilege IDs. The list cannot be empty                                            |
+| isDefault   | boolean                                    | No       | Default value is `false`. If set to `true`, the existing default role will be set to `false` |
 
 <%= partial "/includes/response_success.md" %>
 [Role](#access-role-model)
@@ -229,18 +229,18 @@ Update an existing role
 | x-api-key | string | Required | Your app api key |
 
 ### URL Parameters
-| Parameter | Description          |
-| --------- | -------------------- |
-| ROLE_ID | The ID of the role |
+| Parameter | Description        |
+| --------- | ------------------ |
+| ROLE_ID   | The ID of the role |
 
 ### Body Parameters
-| Parameter     | Type   | Required | Description                                                           |
-| ------------- | ------ | -------- | --------------------------------------------------------------------- |
-| name          | string | No      | A presentable label for this role                      |
-| key          | string | No      | A unique key for this role. The `OWNER` key cannot be changed                      |
-| description | string | No       | Optional description |
-| privileges       | [Privilege IDs](#access-privilege-model)[] | No      | A list of privilege IDs. The list cannot be empty                                          |
-| isDefault | boolean | No       | Changing to `false` from `true` is not possible. If set to `true` from `false`, the existing default role will be set to `false` |
+| Parameter   | Type                                       | Required | Description                                                                                                                      |
+| ----------- | ------------------------------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| name        | string                                     | No       | A presentable label for this role                                                                                                |
+| key         | string                                     | No       | A unique key for this role. The `OWNER` key cannot be changed                                                                    |
+| description | string                                     | No       | Optional description                                                                                                             |
+| privileges  | [Privilege IDs](#access-privilege-model)[] | No       | A list of privilege IDs. The list cannot be empty                                                                                |
+| isDefault   | boolean                                    | No       | Changing to `false` from `true` is not possible. If set to `true` from `false`, the existing default role will be set to `false` |
 
 <%= partial "/includes/response_success.md" %>
 [Role](#access-role-model)
@@ -271,9 +271,9 @@ Delete an existing role. Deleting a role will **not** remove related privileges.
 | x-api-key | string | Required | Your app api key |
 
 ### URL Parameters
-| Parameter | Description          |
-| --------- | -------------------- |
-| ROLE_ID | The ID of the role |
+| Parameter | Description        |
+| --------- | ------------------ |
+| ROLE_ID   | The ID of the role |
 
 <%= partial "/includes/response_success.md" %>
 
@@ -375,10 +375,10 @@ Create a privilege
 | x-api-key | string | Required | Your app api key |
 
 ### Body Parameters
-| Parameter     | Type   | Required | Description                                                           |
-| ------------- | ------ | -------- | --------------------------------------------------------------------- |
-| key          | string | Yes      | A unique key for this privilege                      |
-| description | string | No       | Optional description |
+| Parameter   | Type   | Required | Description                     |
+| ----------- | ------ | -------- | ------------------------------- |
+| key         | string | Yes      | A unique key for this privilege |
+| description | string | No       | Optional description            |
 
 <%= partial "/includes/response_success.md" %>
 [Privileges](#access-privilege-model)
@@ -425,15 +425,15 @@ Update an existing privilege
 | x-api-key | string | Required | Your app api key |
 
 ### URL Parameters
-| Parameter | Description          |
-| --------- | -------------------- |
+| Parameter    | Description             |
+| ------------ | ----------------------- |
 | PRIVILEGE_ID | The ID of the privilege |
 
 ### Body Parameters
-| Parameter     | Type   | Required | Description                                                           |
-| ------------- | ------ | -------- | --------------------------------------------------------------------- |
-| key          | string | No      | A unique key for this privilege.                      |
-| description | string | No       | Optional description |
+| Parameter   | Type   | Required | Description                      |
+| ----------- | ------ | -------- | -------------------------------- |
+| key         | string | No       | A unique key for this privilege. |
+| description | string | No       | Optional description             |
 
 <%= partial "/includes/response_success.md" %>
 [Privileges](#access-privilege-model)
@@ -464,8 +464,8 @@ Delete an existing privilege.
 | x-api-key | string | Required | Your app api key |
 
 ### URL Parameters
-| Parameter | Description          |
-| --------- | -------------------- |
+| Parameter    | Description             |
+| ------------ | ----------------------- |
 | PRIVILEGE_ID | The ID of the privilege |
 
 <%= partial "/includes/response_success.md" %>

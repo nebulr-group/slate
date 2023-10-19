@@ -534,17 +534,17 @@ It is recommended to use the <a href="#subscription-portal-select-plan">Select p
 | TENANT_ID | The ID of the tenant |
 
 ### Body Parameters
-| Parameter | Type       | Required | Description                            |
-| --------- | ---------- | -------- | -------------------------------------- |
-| planKey   | string     | Yes      | The key of the plan to subscribe to    |
+| Parameter  | Type       | Required | Description                            |
+| ---------- | ---------- | -------- | -------------------------------------- |
+| planKey    | string     | Yes      | The key of the plan to subscribe to    |
 | priceOffer | PriceOffer | Yes      | One of the offering prices of the plan |
 
 **PriceOffer**
 
-| Parameter | Type       | Required | Description                            |
-| --------- | ---------- | -------- | -------------------------------------- |
-| currency             | string   | Yes              | Three-letter ISO currency code. Must be a supported currency. https://www.iso.org/iso-4217-currency-codes.html                               |
-| recurrenceInterval   | `'day', 'month', 'week', 'year'` | Yes                | An interval for how often the customer will be charged for the subscription / plan.      |
+| Parameter          | Type                             | Required | Description                                                                                                    |
+| ------------------ | -------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------- |
+| currency           | string                           | Yes      | Three-letter ISO currency code. Must be a supported currency. https://www.iso.org/iso-4217-currency-codes.html |
+| recurrenceInterval | `'day', 'month', 'week', 'year'` | Yes      | An interval for how often the customer will be charged for the subscription / plan.                            |
 
 
 <%= partial "/includes/response_success.md" %>
