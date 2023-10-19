@@ -37,7 +37,7 @@
 | Parameter        | Type                   | Description                                                                                                                                    |
 | ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | id               | string                 | Unique ID (Read only)                                                                                                                          |
-| plan             | string                 | Name of the subscription plan. Automatically set by the payment service if tenant used the checkout process                                    |
+| plan             | string                 | Plan key. Tells what plan the tenant is subscribing to. See [Plan model](#plan-model)                                    |
 | trial            | boolean                | The tenant is currently trialing on the selected plan      |
 | locale           | string                 | The default locale / lang code for all users in this tenant (`ISO_639-1` format). This property will set the i18n for all platform emails      |
 | name             | string                 | Name of the tenant                                                                                                                             |
@@ -183,7 +183,7 @@ Decoded JWT payload.
 | name             | string                 | Role name. Presentable label of the role                                    |
 | key             | string                 | Role key. Use this to reference the role in the `Tenant user` model                                |
 | description           | string                 | Description text      |
-| privileges             | List of [Privileges](#access-privilege-model)                 |  The set of privileges linked to this role                                                                                                                              |
+| privileges             | [Privileges[]](#access-privilege-model)                 |  The set of privileges linked to this role                                                                                                                              |
 | isDefault           | boolean                 | If a role is default it will be applied to new tenant users. Only **one** role can be the default.     |
 
 ## Access privilege model
@@ -253,6 +253,39 @@ Decoded JWT payload.
 | warnings               | string[]  | A list of warnings. These warnings are not blocking the import                           |
 | approved        | boolean  | If the data will or was approved for import                           |
 
+## Plan model
+
+> Model example:
+
+<%= partial "/includes/json/plan_json.md.erb" %>
+
+| Parameter        | Type                   | Description                                                                                                                                    |
+| ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| id               | string                 | Unique ID (Read only)                                                                                                                          |
+| key             | string                 | Plan key, must be unique and cannot be changed. This is used identify the plan amongst subscribers and is used as argument during signup.                                  |
+| name           | string                 | The name of the plan. Visible to customers      |
+| trial           | string                 | If new subscribers should start with trial. When trialing, subscribers can subscribe to plans with costs without being charged      |
+| trialDays           | string                 | The number of days before the trial expires      |
+| prices           | [Price[]](#price-model)                 | A list of prices which configures how this plan is offered      |
+| createdAt        | string                 | Timestamp when created (Read only)                                                                                                             |
+
+## Price model
+
+> Model example:
+
+```
+{
+    "amount": 50,
+    "currency": "EUR",
+    "recurrenceInterval": "month"
+}
+```
+
+| Parameter        | Type                   | Description                                                                                                                                    |
+| ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| amount               | number                 | The amount for each recurring charge                                                                                                                          |
+| currency             | string                 | Three-letter ISO currency code. Must be a supported currency. https://www.iso.org/iso-4217-currency-codes.html                               |
+| recurrenceInterval   | `'day', 'month', 'week', 'year'`                 | An interval for how often the customer will be charged for the subscription / plan.      |
 
 ## Feature flags evaluation context
 
@@ -430,6 +463,6 @@ Decoded JWT payload.
 | key             | string                 | Flag key. Use this to reference the flag when evaluating                                    |
 | description           | string                 | Description text      |
 | defaultValue           | boolean                 | The value to return if no segment was found or matched     |
-| segments             | List of [Segment](#feature-flags-segment)                 |  The segments and matchers that are linked to this flag                                                                                                                              |
+| segments             | [Segment[]](#feature-flags-segment)                 |  The segments and matchers that are linked to this flag                                                                                                                              |
 | targetValue           | boolean                 | The value to return of a segment was matched      |
 | enabled             | boolean                 |  Active state. Only enabled flags are available for evaluation. Otherwise evaluation falls back to false.                                                                                                                              |

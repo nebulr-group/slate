@@ -1,0 +1,264 @@
+# Payments
+Payments enable you to setup a business model and add a paywall to your app and start recieving money through subscriptions from your customers in matter of minutes.
+
+
+
+## List plans
+> Request example
+
+```typescript
+const plans = await client.config.payments.listPlans();
+```
+
+```shell
+curl --request GET '<%= config[:account_api_url] %>/payments/plan' \
+--header 'x-api-key: <%= config[:api_key] %>'
+```
+
+> Response example:
+
+<%= partial "/includes/json/plans_json.md.erb" %>
+
+List all plans
+
+### HTTP Request
+
+`GET <%= config[:account_api_url] %>/payments/plan`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+<%= partial "/includes/response_success.md" %>
+List of [Plans](#plan-model)
+
+
+## Create a plan
+
+> Request example
+
+```typescript
+const data = {
+    name: "Premium",
+    key: "premium", 
+    description: "This is a premium plan for premium features", 
+    trial: true, 
+    trialDays: 14, 
+    prices: [{
+        {
+            amount: 50,
+            currency: "EUR",
+            recurrenceInterval: "month"
+        }
+    }]
+};
+const newPlan = await client.config.payments.createPlan(data);
+```
+
+```shell
+curl --request POST '<%= config[:account_api_url] %>/payments/plan' \
+--header 'x-api-key: <%= config[:api_key] %>' \
+--data-raw '{
+    "name": "Premium",
+    "key": "premium", 
+    "description": "This is a premium plan for premium features", 
+    "trial": true, 
+    "trialDays": 14, 
+    "prices": [{
+        {
+            "amount": 50,
+            "currency": "EUR",
+            "recurrenceInterval": "month"
+        }
+    }]
+}'
+```
+
+> Response example:
+
+<%= partial "/includes/json/plan_json.md.erb" %>
+
+Creates a plan that tenants can subscribe to
+
+### HTTP Request
+
+`POST <%= config[:account_api_url] %>/payments/plan`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### Body Parameters
+| Parameter     | Type   | Required | Description                                                           |
+| ------------- | ------ | -------- | --------------------------------------------------------------------- |
+| key             | string  | Yes               | Plan key, must be unique and cannot be changed. This is used identify the plan amongst subscribers and is used as argument during signup.                                  |
+| name           | string   | Yes              | The name of the plan. Visible to customers      |
+| description           | string   | No              | The description of the plan. Visible to customers      |
+| trial           | bolean  | No               | If new subscribers should start with trial. When trialing, subscribers can subscribe to plans with costs without being charged      |
+| trialDays           | number  | No               | The number of days before the trial expires      |
+| prices           | [Price[]](#price-model)   | Yes              | A list of prices which configures how this plan is offered      |
+
+<%= partial "/includes/response_success.md" %>
+[Plan](#plan-model)
+
+## Get a plan
+
+> Request example
+
+```typescript
+const plan = await client.config.payments.getPlan("PLAN_ID");
+```
+
+```shell
+curl --request GET '<%= config[:account_api_url] %>/payments/plan/PLAN_ID' \
+--header 'x-api-key: <%= config[:api_key] %>'
+```
+
+> Response example:
+
+<%= partial "/includes/json/plan_json.md.erb" %>
+
+Get a plan
+
+### HTTP Request
+
+`GET <%= config[:account_api_url] %>/payments/plan/PLAN_ID`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### URL Parameters
+| Parameter | Description          |
+| --------- | -------------------- |
+| PLAN_ID | The ID of the plan |
+
+<%= partial "/includes/response_success.md" %>
+[Plan](#plan-model)
+
+## Update a plan
+
+> Request example
+
+```typescript
+const data = {
+    trial: true, 
+    trialDays: 14,
+};
+const updatedPlan = await client.config.payments.updatePlan("PLAN_ID", data);
+```
+
+```shell
+curl --request PUT '<%= config[:account_api_url] %>/payments/plan/PLAN_ID' \
+--header 'x-api-key: <%= config[:api_key] %>' \
+--data-raw '{ 
+    "trial": true, 
+    "trialDays": 14
+}'
+```
+
+> Response example:
+
+<%= partial "/includes/json/plan_json.md.erb" %>
+
+Updates an existing plan
+
+### HTTP Request
+
+`PUT <%= config[:account_api_url] %>/payments/plan/PLAN_ID`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### URL Parameters
+| Parameter | Description          |
+| --------- | -------------------- |
+| PLAN_ID | The ID of the plan |
+
+### Body Parameters
+| Parameter     | Type   | Required | Description                                                           |
+| ------------- | ------ | -------- | --------------------------------------------------------------------- |
+| name           | string   | No              | The name of the plan. Visible to customers      |
+| description           | string   | No              | The description of the plan. Visible to customers      |
+| trial           | bolean  | No               | If new subscribers should start with trial. When trialing, subscribers can subscribe to plans with costs without being charged      |
+| trialDays           | number  | No               | The number of days before the trial expires      |
+| prices           | [Price[]](#price-model)   | No              | A list of prices which configures how this plan is offered      |
+
+<%= partial "/includes/response_success.md" %>
+[Plan](#plan-model)
+
+## Delete a plan
+
+> Request example
+
+```typescript
+await client.config.payments.deletePlan("PLAN_ID");
+```
+
+```shell
+curl --request DELETE '<%= config[:account_api_url] %>/payments/plan/PLAN_ID' \
+--header 'x-api-key: <%= config[:api_key] %>'
+```
+
+Delete an existing plan. Deleting a plan will **not** affect tenants already subscribing to this role.
+
+### HTTP Request
+
+`DELETE <%= config[:account_api_url] %>/payments/plan/PLAN_ID`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### URL Parameters
+| Parameter | Description          |
+| --------- | -------------------- |
+| PLAN_ID | The ID of the plan |
+
+<%= partial "/includes/response_success.md" %>
+
+## List taxes
+
+## Create a tax
+
+## Get a tax
+
+## Update a tax
+
+## Delete a tax
+
+## Connect to a payment provider
+Nblocks uses [Stripe](https://stripe.com) as the payment provider to facilitate credit card, invoice, wallet and bank transfer payments.
+Nblocks will use your business model and create the required data in Stripe like Product, Prices and Taxes and keep this up to date.
+
+See [Update credentials](#update-credentials) how to provide your secret and public keys from Stripe to enable the integration.
+
+## Subscription portal - Select plan
+
+This endpoint renders Nblocks hosted subscriptions views for selecting or managing subscriptions. Redirect the user agent or embedd this url into an iframe to render the view.
+Users will be able to select what plan to subscribe to. See [Handover code](#handover-code) for how to obtain the code parameter required for this call.
+
+After the user has selected the plan, and provided setup payment information if required, the user will be redirected back to your app with new tokens.
+
+### HTTP Request
+
+`GET <%= config[:backendless_api_url] %>/subscription-portal/selectPlan?code=XXXX`
+
+### URL Parameters
+| Parameter | Description        |
+| --------- | ------------------ |
+| code    | The code recieved from handover endpoint |
+
+<aside class="notice">
+You should redirect the user agent to this endpoint, or embedd it in an IFrame. This is not an API <-> API call.
+</aside>
+
+## Get tenant payment details
+
+## Set tenant plan details

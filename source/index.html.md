@@ -13,10 +13,11 @@ includes:
     - app_profile.md.erb
     - branding.md.erb
     - user_auth.md.erb
-    - users.md.erb
     - access.md.erb
+    - users.md.erb
     - tenants.md.erb
     - feature_flags.md.erb
+    - payments.md.erb
     # - auth.md
     - import.md.erb
     - webhook.md.erb

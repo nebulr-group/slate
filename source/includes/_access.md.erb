@@ -15,7 +15,7 @@ Some use cases for roles and privileges include:
 > Request example
 
 ```typescript
-const roles = await client.access.roles.list();
+const roles = await client.config.access.roles.list();
 ```
 
 ```shell
@@ -110,7 +110,7 @@ const data = {
     ],
     isDefault: false
 };
-const createdRole = await client.access.roles.create(data);
+const createdRole = await client.config.access.roles.create(data);
 ```
 
 ```shell
@@ -183,7 +183,7 @@ const id = "6516a9bd492d28b55cca8d6f";
 const data = {
     description: "Updated description for the admin role",
 };
-const updatedRole = await client.access.role(id).update(data);
+const updatedRole = await client.config.access.role(id).update(data);
 ```
 
 ```shell
@@ -251,7 +251,7 @@ Update an existing role
 
 ```typescript
 const id = "6516a9bd492d28b55cca8d6f";
-await client.access.role(id).delete();
+await client.config.access.role(id).delete();
 ```
 
 ```shell
@@ -282,7 +282,7 @@ Delete an existing role. Deleting a role will **not** remove related privileges.
 > Request example
 
 ```typescript
-const privileges = await client.access.privileges.list();
+const privileges = await client.config.access.privileges.list();
 ```
 
 ```shell
@@ -341,7 +341,7 @@ const data = {
     key: "SENSITIVE_DATA",
     description: "Access to sensitive data",
 };
-const createdPrivilege = await client.access.privileges.create(data);
+const createdPrivilege = await client.config.access.privileges.create(data);
 ```
 
 ```shell
@@ -392,7 +392,7 @@ const id = "6516b9cb492d28b55cca8daf";
 const data = {
     description: "Updated description for the sensitive data privilege",
 };
-const updatedPrivilege = await client.access.privilege(id).update(data);
+const updatedPrivilege = await client.config.access.privilege(id).update(data);
 ```
 
 ```shell
@@ -444,7 +444,7 @@ Update an existing privilege
 
 ```typescript
 const id = "6516b9cb492d28b55cca8daf";
-await client.access.privilege(id).delete()
+await client.config.access.privilege(id).delete()
 ```
 
 ```shell
