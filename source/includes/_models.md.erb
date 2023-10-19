@@ -63,6 +63,31 @@
 | provider | string                | The provider used for this tenant |
 
 
+## Tenant payment details
+More in depth details about a tenants payment and subscription
+
+> Model example:
+
+<%= partial "/includes/json/tenant-payment-details_json.md.erb" %>
+
+| Parameter        | Type                   | Description                                                                                                                                    |
+| ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| status           | [Tenant payment status](#tenant-payment-status)                 | Current payment status                                                                                                                          |
+| details          | [Tenant plan Details](#tenant-plan-details)   |           Details about the plan this tenant is subscribing to                                                                               |
+
+## Tenant plan details
+
+> Model example:
+
+<%= partial "/includes/json/_tenant-plan-details_json.md.erb" %>
+
+| Parameter        | Type                   | Description                                                                                                                                    |
+| ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| plan             | [Plan](#plan-model)    | The plan this tenant subscribes to                                                                                                             |
+| price            | [Price](#price-model)  | The price within the plan this tenant subscribes to                                                                                            |
+| trial            | boolean                | If this tenant is currently trialing      |
+| trialDaysLeft    | number                 | The number of days left until trial ends for this tenant     |
+
 ## Tenant user model
 
 <%= partial "/includes/json/tenant-user_json.md.erb" %>
@@ -116,7 +141,7 @@ Decoded JWT payload.
 | role      | string | User role        |
 | aid       | string | Your app id      |
 | tid       | string | User tenant id   |
-| plan      | string | User tenant plan |
+| plan      | string | User tenant plan key |
 
 ## Id token model
 
@@ -265,7 +290,7 @@ Decoded JWT payload.
 | key             | string                 | Plan key, must be unique and cannot be changed. This is used identify the plan amongst subscribers and is used as argument during signup.                                  |
 | name           | string                 | The name of the plan. Visible to customers      |
 | trial           | string                 | If new subscribers should start with trial. When trialing, subscribers can subscribe to plans with costs without being charged      |
-| trialDays           | string                 | The number of days before the trial expires      |
+| trialDays           | number                 | The number of days before the trial expires      |
 | prices           | [Price[]](#price-model)                 | A list of prices which configures how this plan is offered      |
 | createdAt        | string                 | Timestamp when created (Read only)                                                                                                             |
 
@@ -348,7 +373,7 @@ Decoded JWT payload.
 | ------------------ | ------- | ----------------------------------------- |
 | key                | string  | Custom value                            |
 | id                | string  | Tenant id                            |
-| plan               | string  | Tenant plan                           |
+| plan               | string  | Tenant plan key                          |
 | name        | string  | Tenant name                           |
 
 **KeyContext**
@@ -422,7 +447,7 @@ Decoded JWT payload.
 | ------------------ | ------- | ----------------------------------------- |
 | key                | TargetValue  | Custom value                            |
 | id                | string  | Tenant id                            |
-| plan               | TargetValue  | Tenant plan                           |
+| plan               | TargetValue  | Tenant plan key                          |
 | name        | TargetValue  | Tenant name                           |
 
 **KeyTarget**

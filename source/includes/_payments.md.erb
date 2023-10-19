@@ -93,14 +93,14 @@ Creates a plan that tenants can subscribe to
 | x-api-key | string | Required | Your app api key |
 
 ### Body Parameters
-| Parameter     | Type   | Required | Description                                                           |
-| ------------- | ------ | -------- | --------------------------------------------------------------------- |
-| key             | string  | Yes               | Plan key, must be unique and cannot be changed. This is used identify the plan amongst subscribers and is used as argument during signup.                                  |
-| name           | string   | Yes              | The name of the plan. Visible to customers      |
-| description           | string   | No              | The description of the plan. Visible to customers      |
-| trial           | bolean  | No               | If new subscribers should start with trial. When trialing, subscribers can subscribe to plans with costs without being charged      |
-| trialDays           | number  | No               | The number of days before the trial expires      |
-| prices           | [Price[]](#price-model)   | Yes              | A list of prices which configures how this plan is offered      |
+| Parameter   | Type                    | Required | Description                                                                                                                               |
+| ----------- | ----------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| key         | string                  | Yes      | Plan key, must be unique and cannot be changed. This is used identify the plan amongst subscribers and is used as argument during signup. |
+| name        | string                  | Yes      | The name of the plan. Visible to customers                                                                                                |
+| description | string                  | No       | The description of the plan. Visible to customers                                                                                         |
+| trial       | bolean                  | No       | If new subscribers should start with trial. When trialing, subscribers can subscribe to plans with costs without being charged            |
+| trialDays   | number                  | No       | The number of days before the trial expires                                                                                               |
+| prices      | [Price[]](#price-model) | Yes      | A list of prices which configures how this plan is offered                                                                                |
 
 <%= partial "/includes/response_success.md" %>
 [Plan](#plan-model)
@@ -134,9 +134,9 @@ Get a plan
 | x-api-key | string | Required | Your app api key |
 
 ### URL Parameters
-| Parameter | Description          |
-| --------- | -------------------- |
-| PLAN_ID | The ID of the plan |
+| Parameter | Description        |
+| --------- | ------------------ |
+| PLAN_ID   | The ID of the plan |
 
 <%= partial "/includes/response_success.md" %>
 [Plan](#plan-model)
@@ -178,18 +178,18 @@ Updates an existing plan
 | x-api-key | string | Required | Your app api key |
 
 ### URL Parameters
-| Parameter | Description          |
-| --------- | -------------------- |
-| PLAN_ID | The ID of the plan |
+| Parameter | Description        |
+| --------- | ------------------ |
+| PLAN_ID   | The ID of the plan |
 
 ### Body Parameters
-| Parameter     | Type   | Required | Description                                                           |
-| ------------- | ------ | -------- | --------------------------------------------------------------------- |
-| name           | string   | No              | The name of the plan. Visible to customers      |
-| description           | string   | No              | The description of the plan. Visible to customers      |
-| trial           | bolean  | No               | If new subscribers should start with trial. When trialing, subscribers can subscribe to plans with costs without being charged      |
-| trialDays           | number  | No               | The number of days before the trial expires      |
-| prices           | [Price[]](#price-model)   | No              | A list of prices which configures how this plan is offered      |
+| Parameter   | Type                    | Required | Description                                                                                                                    |
+| ----------- | ----------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| name        | string                  | No       | The name of the plan. Visible to customers                                                                                     |
+| description | string                  | No       | The description of the plan. Visible to customers                                                                              |
+| trial       | bolean                  | No       | If new subscribers should start with trial. When trialing, subscribers can subscribe to plans with costs without being charged |
+| trialDays   | number                  | No       | The number of days before the trial expires                                                                                    |
+| prices      | [Price[]](#price-model) | No       | A list of prices which configures how this plan is offered                                                                     |
 
 <%= partial "/includes/response_success.md" %>
 [Plan](#plan-model)
@@ -219,9 +219,9 @@ Delete an existing plan. Deleting a plan will **not** affect tenants already sub
 | x-api-key | string | Required | Your app api key |
 
 ### URL Parameters
-| Parameter | Description          |
-| --------- | -------------------- |
-| PLAN_ID | The ID of the plan |
+| Parameter | Description        |
+| --------- | ------------------ |
+| PLAN_ID   | The ID of the plan |
 
 <%= partial "/includes/response_success.md" %>
 
@@ -295,11 +295,11 @@ Creates a tax for tenants from a specific country.
 | x-api-key | string | Required | Your app api key |
 
 ### Body Parameters
-| Parameter     | Type   | Required | Description                                                           |
-| ------------- | ------ | -------- | --------------------------------------------------------------------- |
-| countryCode   | string  | Yes               | Two-letter ISO country code. https://www.nationsonline.org/oneworld/country_code_list.htm                                  |
-| name          | string  | Yes              | Name of the tax. Visible to customers       |
-| percentage    | string  | Yes              | Percentage with which the sub total is increased with. `0` - `100`      |
+| Parameter   | Type   | Required | Description                                                                               |
+| ----------- | ------ | -------- | ----------------------------------------------------------------------------------------- |
+| countryCode | string | Yes      | Two-letter ISO country code. https://www.nationsonline.org/oneworld/country_code_list.htm |
+| name        | string | Yes      | Name of the tax. Visible to customers                                                     |
+| percentage  | string | Yes      | Percentage with which the sub total is increased with. `0` - `100`                        |
 
 <%= partial "/includes/response_success.md" %>
 [Tax](#tax-model)
@@ -333,9 +333,9 @@ Get a tax
 | x-api-key | string | Required | Your app api key |
 
 ### URL Parameters
-| Parameter | Description          |
-| --------- | -------------------- |
-| TAX_ID | The ID of the tax |
+| Parameter | Description       |
+| --------- | ----------------- |
+| TAX_ID    | The ID of the tax |
 
 <%= partial "/includes/response_success.md" %>
 [Tax](#tax-model)
@@ -375,16 +375,16 @@ Updates an existing tax
 | x-api-key | string | Required | Your app api key |
 
 ### URL Parameters
-| Parameter | Description          |
-| --------- | -------------------- |
-| TAX_ID | The ID of the tax |
+| Parameter | Description       |
+| --------- | ----------------- |
+| TAX_ID    | The ID of the tax |
 
 ### Body Parameters
-| Parameter     | Type   | Required | Description                                                           |
-| ------------- | ------ | -------- | --------------------------------------------------------------------- |
-| countryCode   | string  | No               | Two-letter ISO country code. https://www.nationsonline.org/oneworld/country_code_list.htm                                  |
-| name          | string  | No              | Name of the tax. Visible to customers       |
-| percentage    | string  | No              | Percentage with which the sub total is increased with. `0` - `100`      |
+| Parameter   | Type   | Required | Description                                                                               |
+| ----------- | ------ | -------- | ----------------------------------------------------------------------------------------- |
+| countryCode | string | No       | Two-letter ISO country code. https://www.nationsonline.org/oneworld/country_code_list.htm |
+| name        | string | No       | Name of the tax. Visible to customers                                                     |
+| percentage  | string | No       | Percentage with which the sub total is increased with. `0` - `100`                        |
 
 <%= partial "/includes/response_success.md" %>
 [Tax](#tax-model)
@@ -414,9 +414,9 @@ Delete an existing tax. Deleting a tax will **not** affect tenants already subsc
 | x-api-key | string | Required | Your app api key |
 
 ### URL Parameters
-| Parameter | Description          |
-| --------- | -------------------- |
-| TAX_ID | The ID of the tax |
+| Parameter | Description       |
+| --------- | ----------------- |
+| TAX_ID    | The ID of the tax |
 
 <%= partial "/includes/response_success.md" %>
 
@@ -438,9 +438,9 @@ After the user has selected the plan, and provided setup payment information if 
 `GET <%= config[:backendless_api_url] %>/subscription-portal/selectPlan?code=XXXX`
 
 ### URL Parameters
-| Parameter | Description        |
-| --------- | ------------------ |
-| code    | The code recieved from handover endpoint |
+| Parameter | Description                              |
+| --------- | ---------------------------------------- |
+| code      | The code recieved from handover endpoint |
 
 <aside class="notice">
 You should redirect the user agent to this endpoint, or embedd it in an IFrame. This is not an API <-> API call.
@@ -448,4 +448,104 @@ You should redirect the user agent to this endpoint, or embedd it in an IFrame. 
 
 ## Get tenant payment details
 
+> Request example
+
+```typescript
+const details = await client.tenant(TENANT_ID).getPaymentDetails()
+```
+
+```shell
+curl --request GET '<%= config[:account_api_url] %>/tenant/TENANT_ID/paymentDetails' \
+--header 'x-api-key: <%= config[:api_key] %>'
+```
+
+> Response example:
+
+<%= partial "/includes/json/tenant-payment-details_json.md.erb" %>
+
+Gets payment and subscriptions details about a specific tenant. This information is more in-depth than the status property attached to the [Tenant](#tenant-model).
+
+### HTTP Request
+
+`GET <%= config[:account_api_url] %>/tenant/TENANT_ID/paymentDetails`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### URL Parameters
+| Parameter | Description          |
+| --------- | -------------------- |
+| TENANT_ID | The ID of the tenant |
+
+<%= partial "/includes/response_success.md" %>
+[Tenant payment details](#tenant-payment-details)
+
 ## Set tenant plan details
+
+> Request example
+
+```typescript
+const data = {
+    planKey: "premium",
+    priceOffer: {
+        currency: "EUR",
+        recurrenceInterval: "month"
+    }
+}
+const details = await client.tenant(TENANT_ID).setPaymentDetails(data)
+```
+
+```shell
+curl --request POST '<%= config[:account_api_url] %>/tenant/TENANT_ID/paymentDetails' \
+--header 'x-api-key: <%= config[:api_key] %>' \
+--data-raw '{ 
+    "planKey": "premium",
+    "priceOffer": {
+        "currency": "EUR",
+        "recurrenceInterval": "month"
+    }
+}'
+```
+
+> Response example:
+
+<%= partial "/includes/json/tenant-payment-details_json.md.erb" %>
+This endpoint let you manually change subscriptions details for a specific tenant. You can change the plan and/or the current price the tenant is subscribing to. 
+If the app has enabled payment provider and tenant has setup payments this change will affect future transactions.
+
+<aside class="notice">
+It is recommended to use the <a href="#subscription-portal-select-plan">Select plan view</a> where the end user can manage and change its plan and subscription.
+</aside>
+
+### HTTP Request
+
+`POST <%= config[:account_api_url] %>/tenant/TENANT_ID/paymentDetails`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### URL Parameters
+| Parameter | Description          |
+| --------- | -------------------- |
+| TENANT_ID | The ID of the tenant |
+
+### Body Parameters
+| Parameter | Type       | Required | Description                            |
+| --------- | ---------- | -------- | -------------------------------------- |
+| planKey   | string     | Yes      | The key of the plan to subscribe to    |
+| priceOffer | PriceOffer | Yes      | One of the offering prices of the plan |
+
+**PriceOffer**
+
+| Parameter | Type       | Required | Description                            |
+| --------- | ---------- | -------- | -------------------------------------- |
+| currency             | string   | Yes              | Three-letter ISO currency code. Must be a supported currency. https://www.iso.org/iso-4217-currency-codes.html                               |
+| recurrenceInterval   | `'day', 'month', 'week', 'year'` | Yes                | An interval for how often the customer will be charged for the subscription / plan.      |
+
+
+<%= partial "/includes/response_success.md" %>
+[Tenant payment details](#tenant-payment-details)

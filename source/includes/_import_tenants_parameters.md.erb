@@ -11,7 +11,7 @@
 | --------- | --------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | name      | string                | Optional | Name of the tenant.                                                                       |
 | owner    | ImportUser             | Required | The owner for this tenant. There must be one owner    |
-| plan      | string                | Optional | The plan must be present in the configured App business model                                                                                |
+| plan      | string                | Optional | The key of an existing [plan](#plan-model)                                                                                |
 | logo      | string                | Optional | A URI to a logo.                                                                                                                             |
 | metadata  | Record<string,string> | Optional | Store metadata for your own business logic that will be returned in every Tenant response. This data will never be outputted to the end user |
 
