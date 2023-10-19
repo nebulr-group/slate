@@ -273,7 +273,7 @@ Decoded JWT payload.
 
 > Model example:
 
-```
+```json
 {
     "amount": 50,
     "currency": "EUR",
@@ -286,6 +286,20 @@ Decoded JWT payload.
 | amount               | number                 | The amount for each recurring charge                                                                                                                          |
 | currency             | string                 | Three-letter ISO currency code. Must be a supported currency. https://www.iso.org/iso-4217-currency-codes.html                               |
 | recurrenceInterval   | `'day', 'month', 'week', 'year'`                 | An interval for how often the customer will be charged for the subscription / plan.      |
+
+## Tax model
+
+> Model example:
+
+<%= partial "/includes/json/tax_json.md.erb" %>
+
+| Parameter        | Type                   | Description                                                                                                                                    |
+| ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| id               | string                 | Unique ID (Read only)                                                                                                                          |
+| countryCode      | string                 | Two-letter ISO country code. https://www.nationsonline.org/oneworld/country_code_list.htm                                                                                                                          |
+| name             | string                 | Name of the tax. Visible to customers                               |
+| percentage       | number                 | Percentage with which the sub total is increased with. `0` - `100`      |
+| createdAt        | string                 | Timestamp when created (Read only)                                                                                                             |
 
 ## Feature flags evaluation context
 

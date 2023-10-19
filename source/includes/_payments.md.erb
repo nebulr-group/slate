@@ -1,7 +1,9 @@
 # Payments
 Payments enable you to setup a business model and add a paywall to your app and start recieving money through subscriptions from your customers in matter of minutes.
 
+Tenants will be able to subscribe to different **Plans** and you can use this information to tailor the user experience either manually or with [Feature flags](#feature-flags)
 
+If you connect a payment provider to your app, Nblocks will use that provider to collect and facitilate transactions using credit card, invoice, wallet and bank transfer payments. 
 
 ## List plans
 > Request example
@@ -205,7 +207,7 @@ curl --request DELETE '<%= config[:account_api_url] %>/payments/plan/PLAN_ID' \
 --header 'x-api-key: <%= config[:api_key] %>'
 ```
 
-Delete an existing plan. Deleting a plan will **not** affect tenants already subscribing to this role.
+Delete an existing plan. Deleting a plan will **not** affect tenants already subscribing to this plan.
 
 ### HTTP Request
 
@@ -224,14 +226,199 @@ Delete an existing plan. Deleting a plan will **not** affect tenants already sub
 <%= partial "/includes/response_success.md" %>
 
 ## List taxes
+> Request example
+
+```typescript
+const taxes = await client.config.payments.listTaxes();
+```
+
+```shell
+curl --request GET '<%= config[:account_api_url] %>/payments/tax' \
+--header 'x-api-key: <%= config[:api_key] %>'
+```
+
+> Response example:
+
+<%= partial "/includes/json/taxes_json.md.erb" %>
+
+List all taxes
+
+### HTTP Request
+
+`GET <%= config[:account_api_url] %>/payments/tax`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+<%= partial "/includes/response_success.md" %>
+List of [Taxes](#tax-model)
+
 
 ## Create a tax
 
+> Request example
+
+```typescript
+const data = {
+    countryCode: "DE",
+    name: "VAT",
+    percentage: 19
+};
+const newTax = await client.config.payments.createTax(data);
+```
+
+```shell
+curl --request POST '<%= config[:account_api_url] %>/payments/tax' \
+--header 'x-api-key: <%= config[:api_key] %>' \
+--data-raw '{
+    "countryCode": "DE",
+    "name": "VAT",
+    "percentage": 19
+}'
+```
+
+> Response example:
+
+<%= partial "/includes/json/tax_json.md.erb" %>
+
+Creates a tax for tenants from a specific country.
+
+### HTTP Request
+
+`POST <%= config[:account_api_url] %>/payments/tax`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### Body Parameters
+| Parameter     | Type   | Required | Description                                                           |
+| ------------- | ------ | -------- | --------------------------------------------------------------------- |
+| countryCode   | string  | Yes               | Two-letter ISO country code. https://www.nationsonline.org/oneworld/country_code_list.htm                                  |
+| name          | string  | Yes              | Name of the tax. Visible to customers       |
+| percentage    | string  | Yes              | Percentage with which the sub total is increased with. `0` - `100`      |
+
+<%= partial "/includes/response_success.md" %>
+[Tax](#tax-model)
+
 ## Get a tax
+
+> Request example
+
+```typescript
+const tax = await client.config.payments.getTax("TAX_ID");
+```
+
+```shell
+curl --request GET '<%= config[:account_api_url] %>/payments/tax/TAX_ID' \
+--header 'x-api-key: <%= config[:api_key] %>'
+```
+
+> Response example:
+
+<%= partial "/includes/json/tax_json.md.erb" %>
+
+Get a tax
+
+### HTTP Request
+
+`GET <%= config[:account_api_url] %>/payments/tax/TAX_ID`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### URL Parameters
+| Parameter | Description          |
+| --------- | -------------------- |
+| TAX_ID | The ID of the tax |
+
+<%= partial "/includes/response_success.md" %>
+[Tax](#tax-model)
 
 ## Update a tax
 
+> Request example
+
+```typescript
+const data = {
+    percentage: 19
+};
+const updatedTax = await client.config.payments.updateTax("TAX_ID", data);
+```
+
+```shell
+curl --request PUT '<%= config[:account_api_url] %>/payments/tax/TAX_ID' \
+--header 'x-api-key: <%= config[:api_key] %>' \
+--data-raw '{ 
+    "percentage": 19
+}'
+```
+
+> Response example:
+
+<%= partial "/includes/json/tax_json.md.erb" %>
+
+Updates an existing tax
+
+### HTTP Request
+
+`PUT <%= config[:account_api_url] %>/payments/tax/TAX_ID`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### URL Parameters
+| Parameter | Description          |
+| --------- | -------------------- |
+| TAX_ID | The ID of the tax |
+
+### Body Parameters
+| Parameter     | Type   | Required | Description                                                           |
+| ------------- | ------ | -------- | --------------------------------------------------------------------- |
+| countryCode   | string  | No               | Two-letter ISO country code. https://www.nationsonline.org/oneworld/country_code_list.htm                                  |
+| name          | string  | No              | Name of the tax. Visible to customers       |
+| percentage    | string  | No              | Percentage with which the sub total is increased with. `0` - `100`      |
+
+<%= partial "/includes/response_success.md" %>
+[Tax](#tax-model)
+
 ## Delete a tax
+
+> Request example
+
+```typescript
+await client.config.payments.deleteTax("TAX_ID");
+```
+
+```shell
+curl --request DELETE '<%= config[:account_api_url] %>/payments/tax/TAX_ID' \
+--header 'x-api-key: <%= config[:api_key] %>'
+```
+
+Delete an existing tax. Deleting a tax will **not** affect tenants already subscribing to plans.
+
+### HTTP Request
+
+`DELETE <%= config[:account_api_url] %>/payments/tax/TAX_ID`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### URL Parameters
+| Parameter | Description          |
+| --------- | -------------------- |
+| TAX_ID | The ID of the tax |
+
+<%= partial "/includes/response_success.md" %>
 
 ## Connect to a payment provider
 Nblocks uses [Stripe](https://stripe.com) as the payment provider to facilitate credit card, invoice, wallet and bank transfer payments.
