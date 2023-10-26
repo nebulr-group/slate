@@ -103,6 +103,10 @@ curl --request PUT '<%= config[:account_api_url] %>/app/credentials' \
 }'
 ```
 
+> Response example:
+
+<%= partial "/includes/json/credentials-state_json.md.erb" %>
+
 Store sensitive credentials for your app so NBlocks can authorize with 3d party services on your behalf.
 
 These credentials are never outputted back again
@@ -124,12 +128,40 @@ E.g. Stripe integration, social login providers like Google, Facebook, Github et
 | microsoftAzureMarketplaceTenantId     | string | Optional | Microsoft Azure Marketplace integration App |
 | googleClientId                        | string | Optional | Google social login                         |
 | googleClientSecret                    | string | Optional | Google social login                         |
-| githubClientId                        | string | Optional | Gitlab social login                         |
-| githubClientSecret                    | string | Optional | Gitlab social login                         |
-| facebookAppId                         | string | Optional | Facebook social login                       |
-| facebookAppSecret                     | string | Optional | Facebook social login                       |
 | microsoftAzureADClientId              | string | Optional | MS Azure AD SSO                             |
 | microsoftAzureADClientSecret          | string | Optional | MS Azure AD SSO                             |
 | microsoftAzureADTenantId              | string | Optional | MS Azure AD SSO                             |
 
 <%= partial "/includes/response_success.md" %>
+Your [Credentials state model](#credentials-state-model)
+
+## Get credentials state
+
+> Request example
+
+```typescript
+const credentialsState = await client.config.getCredentialsState();
+```
+
+```shell
+curl --request GET '<%= config[:account_api_url] %>/app/credentialsState' \
+--header 'x-api-key: <%= config[:api_key] %>'
+```
+
+> Response example:
+
+<%= partial "/includes/json/credentials-state_json.md.erb" %>
+
+Although the credentials are never displayed again, you can always get their states to confirm they've been added.
+
+### HTTP Request
+
+`GET <%= config[:account_api_url] %>/app/credentialsState`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+<%= partial "/includes/response_success.md" %>
+Your [Credentials state model](#credentials-state-model)
