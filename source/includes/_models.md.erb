@@ -29,6 +29,18 @@
 | redirectUris            | string[]       | Allowed redirect uris                                                                                                                                      |
 | defaultCallbackUri      | string         | Default handover/callback uri used by Nblocks                                                                                                              |
 
+## Credentials state model
+
+> Model example:
+
+<%= partial "/includes/json/_credentials-state_json.md.erb" %>
+
+| Parameter                         | Type                  | Description                                                                                                                         |
+| -------------                     | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| stripeCredentialsAdded            | boolean               | If `stripeSecretKey` and `stripePublicKey` exist                                                                                    |
+| azureMarketplaceCredentialsAdded  | boolean               | If `microsoftAzureMarketplaceClientId`, `microsoftAzureMarketplaceClientSecret`, and `microsoftAzureMarketplaceTenantId` exist      |
+| azureAdSsoCredentialsAdded        | boolean               | If `microsoftAzureADClientId`, `microsoftAzureADClientSecret`, and `microsoftAzureADTenantId` exist                                 |
+| googleSsoCredentialsAdded         | boolean               | If `googleClientId` and `googleClientSecret` exist                                                                                  |
 
 ## Tenant model
 
