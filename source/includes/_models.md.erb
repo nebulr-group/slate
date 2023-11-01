@@ -19,15 +19,18 @@
 | termsOfServiceUrl       | string         | URL to a page on your website containing a Terms of service for your app users. E.g. checkout process will link to this url.                               |
 | emailSenderName         | string         | Emails sent from Nblocks will have this sender name                                                                                                        |
 | emailSenderEmail        | string         | Emails sent from Nblocks will have this sender email. You'll have to verify this email before                                                              |
-| stripeEnabled           | boolean        | Boolean value telling the user if Stripe is enabled (Read only)                                                                                            |
+| stripeEnabled           | boolean        | Boolean value telling the user if Stripe is enabled                                                                                                        |
 | passkeysEnabled         | boolean        | Boolean value telling the user if Login with Passkeys is enabled                                                                                           |
-| azureMarketplaceEnabled | boolean        | Boolean value telling the user if Azure marketplace is enabled (Read only)                                                                                 |
-| googleSsoEnabled        | boolean        | Boolean value telling the user if Login with Google SSO is enabled (Read only)                                                                             |
-| azureAdSsoEnabled       | boolean        | Boolean value telling the user if Login with Azure SSO is enabled (Read only)                                                                              |
+| mfaEnabled              | boolean        | Boolean value telling the user if multi-factor authentication is enabled                                                                                   |
+| azureMarketplaceEnabled | boolean        | Boolean value telling the user if Azure marketplace is enabled                                                                                             |
+| googleSsoEnabled        | boolean        | Boolean value telling the user if Login with Google SSO is enabled                                                                                         |
+| azureAdSsoEnabled       | boolean        | Boolean value telling the user if Login with Azure SSO is enabled                                                                                          |
 | onboardingFlow          | OnboardingFlow | Configure how users will be onboarded                                                                                                                      |
 | cloudViews              | boolean        | Toggle this to true if you want to use a UI provided by NBlocks instead of your own                                                                        |
 | redirectUris            | string[]       | Allowed redirect uris                                                                                                                                      |
 | defaultCallbackUri      | string         | Default handover/callback uri used by Nblocks                                                                                                              |
+| accessTokenTTL          | number         | Access token lifetime in seconds                                                                                                                           |
+| refreshTokenTTL         | number         | Refresh token lifetime seconds                                                                                                                             |
 
 ## Credentials state model
 

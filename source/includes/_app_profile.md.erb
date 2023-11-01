@@ -63,22 +63,31 @@ You can update the app with the same JSON you got from `Get app model` or just p
 
 ### Body Parameters
 
-| Parameter          | Type                     | Required | Description                                                                                                                                                |
-| ------------------ | ------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| name               | string                   | Optional | Name of the app                                                                                                                                            | d
-| apiUrl             | string                   | Optional | URL to your api (to receive webhooks etc).                                                                                               |
-| uiUrl              | string                   | Optional | URL to your frontend app (for onboarding redirects etc).                                                                               |
-| webhookUrl         | string                   | Optional | Enable webhook and events to be sent to this url                                                                                 |
-| logo               | string                   | Optional | URL to your logo                                                                                                                                           |
-| websiteUrl         | string                   | Optional | URL to your website or landing page. E.g. Branded emails will link to this URL, checkout process will redirect to `/payment-success` and `/payment-cancel` |
-| privacyPolicyUrl   | string                   | Optional | URL to a page on your website containing a Privacy policy for your app users. E.g. checkout process will link to this url.                                 |
-| termsOfServiceUrl  | string                   | Optional | URL to a page on your website containing a Terms of service for your app users. E.g. checkout process will link to this url.                               |
-| emailSenderName    | string                   | Optional | Emails sent from Nblocks will have this sender name                                                                                                        |
-| emailSenderEmail   | string                   | Optional | Emails sent from Nblocks will have this sender email. You'll have to verify this email before                                                              |
-| onboardingFlow     | OnboardingFlow           | Optional | Configure how users will be onboarded                                                                                                                      |
-| cloudViews         | boolean                  | Optional | Toggle this to true if you want to use a UI provided by NBlocks instead of your own                                                                        |
-| redirectUris       | string[]                 | Optional | Allowed redirect uris                                                                                                                                      |
-| defaultCallbackUri | string                   | Optional | Default handover/callback uri used by Nblocks                                                                                                              |
+| Parameter                    | Type                     | Required | Description                                                                                                                                                |
+| ---------------------------- | ------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name                         | string                   | Optional | Name of the app                                                                                                                                            |
+| apiUrl                       | string                   | Optional | URL to your api (to receive webhooks etc).                                                                                                                 |
+| uiUrl                        | string                   | Optional | URL to your frontend app (for onboarding redirects etc).                                                                                                   |
+| webhookUrl                   | string                   | Optional | Enable webhook and events to be sent to this url                                                                                                           |
+| logo                         | string                   | Optional | URL to your logo                                                                                                                                           |
+| websiteUrl                   | string                   | Optional | URL to your website or landing page. E.g. Branded emails will link to this URL, checkout process will redirect to `/payment-success` and `/payment-cancel` |
+| privacyPolicyUrl             | string                   | Optional | URL to a page on your website containing a Privacy policy for your app users. E.g. checkout process will link to this url.                                 |
+| termsOfServiceUrl            | string                   | Optional | URL to a page on your website containing a Terms of service for your app users. E.g. checkout process will link to this url.                               |
+| emailSenderName              | string                   | Optional | Emails sent from Nblocks will have this sender name                                                                                                        |
+| emailSenderEmail             | string                   | Optional | Emails sent from Nblocks will have this sender email. You'll have to verify this email before                                                              |
+| onboardingFlow               | OnboardingFlow           | Optional | Configure how users will be onboarded                                                                                                                      |
+| cloudViews                   | boolean                  | Optional | Toggle this to true if you want to use a UI provided by NBlocks instead of your own                                                                        |
+| redirectUris                 | string[]                 | Optional | Allowed redirect uris                                                                                                                                      |
+| defaultCallbackUri           | string                   | Optional | Default handover/callback uri used by Nblocks                                                                                                              |
+| stripeEnabled                | boolean                  | Optional | Toggle this to true if you want to allow payments through Stripe for your users                                                                                            |
+| passkeysEnabled              | boolean                  | Optional | Toggle this to true if you want to allow your users to login with passkeys                                                                                 |
+| mfaEnabled                   | boolean                  | Optional | Toggle this to true if you want to allow your tenants to use multi-factor authentication                                                                   |
+| azureMarketplaceEnabled      | boolean                  | Optional | Toggle this to true if you want to allow your users to register through Azure marketplace                                                                  |
+| googleSsoEnabled             | boolean                  | Optional | Toggle this to true if you want to allow your users to login using Google SSO                                                                              |
+| azureAdSsoEnabled            | boolean                  | Optional | Toggle this to true if you want to allow your users to login using Azure SSO                                                                               |
+| accessTokenTTL               | number                   | Optional | Configure the access token lifetime in seconds                                                                                                             |
+| refreshTokenTTL              | number                   | Optional | Configure the refresh token lifetime in seconds                                                                                                            |
+
 
 <%= partial "/includes/response_success.md" %>
 Your [App profile model](#app-profile-model)
@@ -111,7 +120,7 @@ Store sensitive credentials for your app so NBlocks can authorize with 3d party 
 
 These credentials are never outputted back again
 
-E.g. Stripe integration, social login providers like Google, Facebook, Github etc.
+E.g. Stripe integration and social login providers like Google and Microsoft Azure AD.
 
 ### HTTP Request
 
