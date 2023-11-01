@@ -19,7 +19,7 @@ const roles = await client.config.access.roles.list();
 ```
 
 ```shell
-curl --request GET '<%= config[:admin_api_url] %>/role' \
+curl --request GET '<%= config[:account_api_url] %>/role' \
 --header 'x-api-key: <%= config[:api_key] %>'
 ```
 
@@ -85,7 +85,7 @@ List all roles
 
 ### HTTP Request
 
-`GET <%= config[:admin_api_url] %>/role`
+`GET <%= config[:account_api_url] %>/role`
 
 ### Headers
 | Parameter | Type   | Required | Description      |
@@ -114,7 +114,7 @@ const createdRole = await client.config.access.roles.create(data);
 ```
 
 ```shell
-curl --request POST '<%= config[:admin_api_url] %>/role' \
+curl --request POST '<%= config[:account_api_url] %>/role' \
 --header 'x-api-key: <%= config[:api_key] %>' \
 --data-raw '{
     "name": "Admin",
@@ -155,7 +155,7 @@ Create a role
 
 ### HTTP Request
 
-`POST <%= config[:admin_api_url] %>/role`
+`POST <%= config[:account_api_url] %>/role`
 
 ### Headers
 | Parameter | Type   | Required | Description      |
@@ -187,7 +187,7 @@ const updatedRole = await client.config.access.role(id).update(data);
 ```
 
 ```shell
-curl --request PUT '<%= config[:admin_api_url] %>/role/6516a9bd492d28b55cca8d6f' \
+curl --request PUT '<%= config[:account_api_url] %>/role/6516a9bd492d28b55cca8d6f' \
 --header 'x-api-key: <%= config[:api_key] %>' \
 --data-raw '{
     "description": "Updated description for the admin role"
@@ -221,7 +221,7 @@ Update an existing role
 
 ### HTTP Request
 
-`PUT <%= config[:admin_api_url] %>/role/ROLE_ID`
+`PUT <%= config[:account_api_url] %>/role/ROLE_ID`
 
 ### Headers
 | Parameter | Type   | Required | Description      |
@@ -255,7 +255,7 @@ await client.config.access.role(id).delete();
 ```
 
 ```shell
-curl --request DELETE '<%= config[:admin_api_url] %>/role/6516a9bd492d28b55cca8d6f' \
+curl --request DELETE '<%= config[:account_api_url] %>/role/6516a9bd492d28b55cca8d6f' \
 --header 'x-api-key: <%= config[:api_key] %>'
 ```
 
@@ -263,7 +263,7 @@ Delete an existing role. Deleting a role will **not** remove related privileges.
 
 ### HTTP Request
 
-`DELETE <%= config[:admin_api_url] %>/role/ROLE_ID`
+`DELETE <%= config[:account_api_url] %>/role/ROLE_ID`
 
 ### Headers
 | Parameter | Type   | Required | Description      |
@@ -286,7 +286,7 @@ const privileges = await client.config.access.privileges.list();
 ```
 
 ```shell
-curl --request GET '<%= config[:admin_api_url] %>/role/privilege' \
+curl --request GET '<%= config[:account_api_url] %>/role/privilege' \
 --header 'x-api-key: <%= config[:api_key] %>'
 ```
 
@@ -322,7 +322,7 @@ List all privileges
 
 ### HTTP Request
 
-`GET <%= config[:admin_api_url] %>/role/privilege`
+`GET <%= config[:account_api_url] %>/role/privilege`
 
 ### Headers
 | Parameter | Type   | Required | Description      |
@@ -345,7 +345,7 @@ const createdPrivilege = await client.config.access.privileges.create(data);
 ```
 
 ```shell
-curl --request POST '<%= config[:admin_api_url] %>/role/privilege' \
+curl --request POST '<%= config[:account_api_url] %>/role/privilege' \
 --header 'x-api-key: <%= config[:api_key] %>' \
 --data-raw '{
     "key": "SENSITIVE_DATA",
@@ -367,7 +367,7 @@ Create a privilege
 
 ### HTTP Request
 
-`POST <%= config[:admin_api_url] %>/role/privilege`
+`POST <%= config[:account_api_url] %>/role/privilege`
 
 ### Headers
 | Parameter | Type   | Required | Description      |
@@ -396,7 +396,7 @@ const updatedPrivilege = await client.config.access.privilege(id).update(data);
 ```
 
 ```shell
-curl --request PUT '<%= config[:admin_api_url] %>/role/privilege/6516b9cb492d28b55cca8daf' \
+curl --request PUT '<%= config[:account_api_url] %>/role/privilege/6516b9cb492d28b55cca8daf' \
 --header 'x-api-key: <%= config[:api_key] %>' \
 --data-raw '{
     "description": "Updated description for the sensitive data privilege"
@@ -417,7 +417,7 @@ Update an existing privilege
 
 ### HTTP Request
 
-`PUT <%= config[:admin_api_url] %>/role/privilege/PRIVILEGE_ID`
+`PUT <%= config[:account_api_url] %>/role/privilege/PRIVILEGE_ID`
 
 ### Headers
 | Parameter | Type   | Required | Description      |
@@ -448,7 +448,7 @@ await client.config.access.privilege(id).delete()
 ```
 
 ```shell
-curl --request DELETE '<%= config[:admin_api_url] %>/role/privilege/6516b9cb492d28b55cca8daf' \
+curl --request DELETE '<%= config[:account_api_url] %>/role/privilege/6516b9cb492d28b55cca8daf' \
 --header 'x-api-key: <%= config[:api_key] %>'
 ```
 
@@ -456,7 +456,7 @@ Delete an existing privilege.
 
 ### HTTP Request
 
-`DELETE <%= config[:admin_api_url] %>/role/privilege/PRIVILEGE_ID`
+`DELETE <%= config[:account_api_url] %>/role/privilege/PRIVILEGE_ID`
 
 ### Headers
 | Parameter | Type   | Required | Description      |
