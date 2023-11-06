@@ -19,6 +19,7 @@
 | termsOfServiceUrl       | string         | URL to a page on your website containing a Terms of service for your app users. E.g. checkout process will link to this url.                               |
 | emailSenderName         | string         | Emails sent from Nblocks will have this sender name                                                                                                        |
 | emailSenderEmail        | string         | Emails sent from Nblocks will have this sender email. You'll have to verify this email before                                                              |
+| paymentsAutoRedirect    | boolean        | Activates redirect to select payments plans and takes a user to selection of payment plans directly after signup or after a trial has ended.                                                                                                        |
 | stripeEnabled           | boolean        | Boolean value telling the user if Stripe is enabled                                                                                                        |
 | passkeysEnabled         | boolean        | Boolean value telling the user if Login with Passkeys is enabled                                                                                           |
 | mfaEnabled              | boolean        | Boolean value telling the user if multi-factor authentication is enabled                                                                                   |
@@ -120,6 +121,7 @@ More in depth details about a tenants payment and subscription
 | consentsToPrivacyPolicy | boolean                 | If user have left consent to the app privacy policy or not (should be set during app onboarding)       |
 | enabled                 | boolean                 | If user should be allowed to login or not                                                              |
 | teams                   | string[]                | Array of identifiers that can be used to group several users into teams or groups                      |
+| lastSeen                | string                  | Timestamp for last user activity (Read only)                                                                     |
 | createdAt               | string                  | Timestamp when created (Read only)                                                                     |
 | tenant                  | [Tenant](#tenant-model) | The tenant                                                                                             |
 
