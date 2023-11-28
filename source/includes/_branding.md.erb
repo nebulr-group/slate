@@ -155,15 +155,11 @@ Deleting a custom template will restore Nblocks default template.
 
 > Request example
 
-```typescript
-TBD
-```
-
 ```shell
-curl --request POST '<%= config[:backendless_api_url] %>/brand/css' \
+curl --request POST '<%= config[:admin_api_url] %>/brand/css' \
 --header 'x-api-key: <%= config[:api_key] %>'
 --data-raw '{
-    "content": "html,body { background-color: red !important; }"
+    "content": "html,body { background-color: red; }"
 }'
 ```
 
@@ -172,7 +168,7 @@ Use the [example css](https://github.com/nebulr-group/nblocks-api-docs/blob/main
 
 ### HTTP Request
 
-`POST <%= config[:backendless_api_url] %>/brand/css`
+`POST <%= config[:admin_api_url] %>/brand/css`
 
 ### Headers
 | Parameter | Type   | Required | Description      |
@@ -186,18 +182,14 @@ Use the [example css](https://github.com/nebulr-group/nblocks-api-docs/blob/main
 | content   | string | Yes      | The CSS content |
 
 
-<%= partial "/includes/response_success.md" %>
+<%= partial "/includes/response_success_created.md" %>
 
 ## Get your custom CSS
 
 > Request example
 
-```typescript
-TBD
-```
-
 ```shell
-curl --request GET '<%= config[:backendless_api_url] %>/brand/css' \
+curl --request GET '<%= config[:admin_api_url] %>/brand/css' \
 --header 'x-api-key: <%= config[:api_key] %>'
 ```
 
@@ -205,7 +197,7 @@ curl --request GET '<%= config[:backendless_api_url] %>/brand/css' \
 
 ```json
 {
-    "content": "html,body { background-color: red !important; }"
+    "content": "html,body { background-color: red; }"
 }
 ```
 
@@ -213,7 +205,7 @@ The CSS is used by Nblocks Cloud views, like Nblocks Login and User Management p
 
 ### HTTP Request
 
-`GET <%= config[:backendless_api_url] %>/brand/css`
+`GET <%= config[:admin_api_url] %>/brand/css`
 
 ### Headers
 | Parameter | Type   | Required | Description      |
@@ -225,6 +217,27 @@ The CSS is used by Nblocks Cloud views, like Nblocks Login and User Management p
 | --------- | ------ | --------------- |
 | content   | string | The CSS content |
 
+## Delete your custom CSS
+
+> Request example
+
+```shell
+curl --request DELETE '<%= config[:admin_api_url] %>/brand/css' \
+--header 'x-api-key: <%= config[:api_key] %>'
+```
+
+Deleting a custom CSS file will restore Nblocks to the default styling.
+
+### HTTP Request
+
+`DELETE <%= config[:admin_api_url] %>/brand/css`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+<%= partial "/includes/response_success.md" %>
 
 ## Set custom Translations
 
