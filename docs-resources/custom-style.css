@@ -31,6 +31,57 @@
 }
 
 /** Element CSS example */
-button {
-    height: 100px;
+body {
+
+}
+.customizable {
+
+}
+
+button.customizable,
+input.customizable, 
+button.customizable:not([disabled]):hover {
+
+}
+
+button.customizable.primary, 
+button.customizable.primary:not([disabled]):hover {
+
+}
+
+button.customizable.primary:disabled {
+
+}
+button.customizable.primary:not([disabled]):hover {
+
+}
+
+button.customizable.tertiary, 
+button.customizable.tertiary:not([disabled]):hover {
+
+}
+button.customizable.tertiary:not([disabled]):hover {
+
+}
+
+p.customizable, 
+label.customizable, 
+h1.customizable,
+div.divider span.customizable {
+
+}
+
+a.customizable,
+a.customizable:hover {
+
+}
+a.customizable:hover {
+
+}
+
+div.divider div.customizable {
+
+}
+div.divider span.customizable {
+
 }
