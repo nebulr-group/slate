@@ -1,0 +1,219 @@
+# Federation connections
+Federation connections are part of Enterprise login. They represent a way to authenticate with a remote Identity provider (IdP) using either SAML or OIDC.
+You can setup different types of connections and assign them to invidual or a group of tenants. The tenants will then use this method to login.
+Users of tenants with enterprise login will only be able to login this way. That's because the IdP now manage the application access.
+
+## List all connections
+
+> Request example
+
+```typescript
+const response = await client.federation.list();
+```
+
+```shell
+curl --request GET '<%= config[:account_api_url] %>/federation/connection' \
+--header 'x-api-key: <%= config[:api_key] %>'
+```
+
+> Response example:
+
+<%= partial "/includes/json/federation-connections_json.md.erb" %>
+
+Lists all federation connections in your app. These can be assigned to tenants to enable them to authenticate.
+
+### HTTP Request
+
+`GET <%= config[:account_api_url] %>/federation/connection`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+<%= partial "/includes/response_success.md" %>
+A list of [Federation connections](#federation-connection-model)
+
+## Get connection by id
+
+> Request example
+
+```typescript
+const response = await client.federation.get('606b00a61679e20008a5654d');
+```
+
+```shell
+curl --request GET '<%= config[:account_api_url] %>/federation/connection/606b00a61679e20008a5654d' \
+--header 'x-api-key: <%= config[:api_key] %>'
+```
+
+> Response example:
+
+<%= partial "/includes/json/federation-connection_json.md.erb" %>
+
+Get a single federation connection in your app
+
+### HTTP Request
+
+`GET <%= config[:account_api_url] %>/federation/connection/:CONNECTION_ID`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### URL Parameters
+| Parameter     | Description              |
+| ------------- | ------------------------ |
+| CONNECTION_ID | The ID of the connection |
+
+<%= partial "/includes/response_success.md" %>
+[Federation connection](#federation-connection-model)
+
+## Create new connection
+
+> Request example
+
+```typescript
+const response = await client.federation.create(
+    {
+        type: "saml",
+        name: "My connection",
+        clientId: "client_1234",
+        loginUrl: "https://mocksaml.com/api/saml/sso",
+        certificate: "MIIC4jCCAcoCCQC33wnybT5QZDKYRFfomGwz0TZ4Iw1ZN99Mm0eo2USlSRTVl7QHRTuiuSThHpLKQQ==",
+        requestMethod: "GET",
+        signedRequest: false
+    });
+```
+
+```shell
+curl --request POST '<%= config[:account_api_url] %>/federation/connection' \
+--header 'x-api-key: <%= config[:api_key] %>' \
+--data-raw '{
+    "type": "saml",
+        "name": "My connection",
+        "clientId": "client_1234",
+        "loginUrl": "https://mocksaml.com/api/saml/sso",
+        "certificate": "MIIC4jCCAcoCCQC33wnybT5QZDKYRFfomGwz0TZ4Iw1ZN99Mm0eo2USlSRTVl7QHRTuiuSThHpLKQQ==",
+        "requestMethod": "GET",
+        "signedRequest": false
+    }'
+```
+
+> Response example:
+
+<%= partial "/includes/json/federation-connection_json.md.erb" %>
+
+Creates a new tenant with an initial user that is regarded as the tenant owner.
+
+### HTTP Request
+
+`POST <%= config[:account_api_url] %>/federation/connection`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### Body Parameters
+
+| Parameter              | Type                 | Required                  | Description                                                                                         |
+| ---------------------- | -------------------- | ------------------------- | --------------------------------------------------------------------------------------------------- |
+| name                   | string               | Required                  | A connection name. This will also be visible for users when logging in                              |
+| clientId               | string               | Optional                  | The identifier assigned to your application by the IdP. This is sometimes not required              |
+| loginUrl               | string               | Required                  | The URL where the IdP expects to receive SAML authentication requests                               |
+| certificate            | string               | Required                  | The public key certificate provided by the IdP to validate the SAML responses.                      |
+| requestMethod          | string               | Optional                  | The preferred method for sending SAML requests, either HTTP GET Redirect (most common) or HTTP POST |
+| signedRequest          | boolean              | Optional                  | Whether the IdP requires the SAML request to be signed or not.                                      |
+| signedRequestAlgorithm | `sha256` or `sha512` | Required if signedRequest | Request signing algorithm.                                                                          |
+| privateKey             | string               | Required if signedRequest | Request signing private key. The public key should be handover to IdP                               |
+
+<%= partial "/includes/response_success_created.md" %>
+[Federation connection](#federation-connection-model)
+
+## Update connection
+
+> Request example
+
+```typescript
+const response = await client.federation.update('606b00a61679e20008a5654d',
+    {
+        requestMethod: "POST"
+    });
+```
+
+```shell
+curl --request PUT '<%= config[:account_api_url] %>/federation/connection/606b00a61679e20008a5654d' \
+--header 'x-api-key: <%= config[:api_key] %>' \
+--data-raw '{
+    "requestMethod": "POST"
+    }'
+```
+
+> Response example:
+
+<%= partial "/includes/json/federation-connection_json.md.erb" %>
+
+Update an existing connection.
+
+### HTTP Request
+
+`PUT <%= config[:account_api_url] %>/federation/connection/CONNECTION_ID`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### URL Parameters
+| Parameter     | Description              |
+| ------------- | ------------------------ |
+| CONNECTION_ID | The ID of the connection |
+
+### Body Parameters
+
+| Parameter              | Type                 | Required                  | Description                                                                                         |
+| ---------------------- | -------------------- | ------------------------- | --------------------------------------------------------------------------------------------------- |
+| name                   | string               | Optional                  | A connection name. This will also be visible for users when logging in                              |
+| clientId               | string               | Optional                  | The identifier assigned to your application by the IdP. This is sometimes not required              |
+| loginUrl               | string               | Optional                  | The URL where the IdP expects to receive SAML authentication requests                               |
+| certificate            | string               | Optional                  | The public key certificate provided by the IdP to validate the SAML responses.                      |
+| requestMethod          | string               | Optional                  | The preferred method for sending SAML requests, either HTTP GET Redirect (most common) or HTTP POST |
+| signedRequest          | boolean              | Optional                  | Whether the IdP requires the SAML request to be signed or not.                                      |
+| signedRequestAlgorithm | `sha256` or `sha512` | Optional | Request signing algorithm.                                                                          |
+| privateKey             | string               | Optional | Request signing private key. The public key should be handover to IdP                               |
+
+<%= partial "/includes/response_success.md" %>
+[Federation connection](#federation-connection-model)
+
+## Delete a connection
+
+> Request example
+
+```typescript
+await client.config.federation.delete("606b00a61679e20008a5654d");
+```
+
+```shell
+curl --request DELETE '<%= config[:account_api_url] %>/federation/connection/606b00a61679e20008a5654d' \
+--header 'x-api-key: <%= config[:api_key] %>'
+```
+
+Delete an existing connection.
+
+### HTTP Request
+
+`DELETE <%= config[:account_api_url] %>/federation/connection/CONNECTION_ID`
+
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### URL Parameters
+| Parameter     | Description              |
+| ------------- | ------------------------ |
+| CONNECTION_ID | The ID of the connection |
+
+<%= partial "/includes/response_success.md" %>

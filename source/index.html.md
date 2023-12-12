@@ -14,6 +14,7 @@ includes:
     - branding.md.erb
     - user_auth.md.erb
     - access.md.erb
+    - federation_connections.md.erb
     - users.md.erb
     - tenants.md.erb
     - feature_flags.md.erb

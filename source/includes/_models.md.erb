@@ -48,6 +48,8 @@
 
 ## Tenant model
 
+> Model example:
+
 <%= partial "/includes/json/tenant_json.md.erb" %>
 
 | Parameter        | Type                                     | Description                                                                                                                                    |
@@ -63,6 +65,7 @@
 | paymentsRequired | boolean                                  | The tenant should setup payment immediately because tenant has not setup payments and the subscribing plan carry a cost or the trial has ended |
 | metadata         | Record<string, string>                   | Custom key value meta data that you can use                                                                                                    |
 | onboarded        | string                                   | If this tenant is considered onboarded (Read only)                                                                                             |
+| federationConnection        | string                        | Assigned [Federation connection](#federation-connection-model) id used for authentication. Part of Enterprise login.                                                                                                          |
 | createdAt        | string                                   | Timestamp when created (Read only)                                                                                                             |
 
 ## Tenant payment status
@@ -106,6 +109,8 @@ More in depth details about a tenants payment and subscription
 
 ## Tenant user model
 
+> Model example:
+
 <%= partial "/includes/json/tenant-user_json.md.erb" %>
 
 | Parameter               | Type                    | Description                                                                                            |
@@ -138,6 +143,8 @@ More in depth details about a tenants payment and subscription
 
 ## Access token model
 
+> Model example:
+
 ```json
 {
   "sub": "63d25a9e0796d40008680f9a",
@@ -161,6 +168,8 @@ Decoded JWT payload.
 | plan      | string | User tenant plan key |
 
 ## Id token model
+
+> Model example:
 
 ```json
 {
@@ -245,6 +254,27 @@ Decoded JWT payload.
 | id          | string | Unique ID (Read only)                                     |
 | key         | string | Privilege key. Use this to evaluate and grant user access |
 | description | string | Description text                                          |
+
+## Federation connection model
+
+> Model example:
+
+<%= partial "/includes/json/federation-connection_json.md.erb" %>
+
+| Parameter   | Type                                    | Description                                                                                        |
+| ----------- | --------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| id          | string                                  | Unique ID (Read only)                                                                              |
+| type        | `saml`                                  | The connection type. `saml` is the only supported type currently.                                                           |
+| name         | string                                  | A connection name. This will also be visible for users when logging in                                |
+| clientId | string                                  | The identifier assigned to your application by the IdP. This is sometimes not required                                                                                   |
+| loginUrl  | string | The URL where the IdP expects to receive SAML authentication requests                                                          |
+| certificate   | string                                 | The public key certificate provided by the IdP to validate the SAML responses. |
+| requestMethod   | `GET` or `POST`                                 | The preferred method for sending SAML requests, either HTTP GET Redirect (most common) or HTTP POST. |
+| signedRequest   | boolean                                 | Whether the IdP requires the SAML request to be signed or not. |
+| signedRequestAlgorithm   | `sha256` or `sha512`                                 | Request signing algorithm  |
+| privateKey   | string                                 | Request signing private key. The public key should be handover to IdP |
+| createdAt        | string                                   | Timestamp when created (Read only)                                                                                                             |
+
 
 ## Import tenant response
 

@@ -1,6 +1,16 @@
 # Changelog
 
-#### 28 Nov 2023
+#### 20 December 2023
+### Enterprise login
+* Adding SAML support as a new alternative login method
+* SAML can be setup using federation connections
+* Federation connection can be assigned to tenants as their primary login method
+
+#### 10 December 2023
+### Nblocks Admin interactive onboarding
+* It's now easier to integrate different Nblocks modules with ready made code snippets and interactive onboarding.
+
+#### 28 November 2023
 ### Adding customizations to Nblocks Admin
 * Configure app properties such as name and logo
 * Create a custom theme for Nblocks hosted views
@@ -10,13 +20,60 @@
 * <%= config[:backendless_api_url] %>
     * CSS endpoints are moved to <%= config[:admin_api_url] %>
 
+#### 23 October 2023
+### Payments Launch
+* Introducing Payments feature for seamless integration with billing providers to get paid while building with Nblocks.
+* Use pre-made components and build paywalls in no time.
+* Generate signup links to specific plans
+
+#### 9 October 2023
+### Improved access controll
+* Enhancements to Roles and Privileges settings and simple configuration via Nblocks Admin.
+* Additional authentication options to fine-tune your users application access.
+
+#### 29 September 2023
+### Passkeys support
+* Strengthen your application security with Passkeys support for Nblocks login.
+
+#### 6 September 2023
+### Improved user signup
+* Streamlined Signup Flow for your new users
+* Initiate signup flow via link
+
+#### 16 August 2023
+### Feature Flags
+* Unveiling the Feature Flags functionality for controlled feature rollouts and experimentation.
+
+#### July 2023
+### Branding for User Management Portal
+* Personalize your User Management Portal with custom CSS and translations.
+
+#### June 2023
+### Embedding User Management Portal
+* Seamlessly integrate the User Management Portal into your applications.
+* Google Single Sign-On (SSO)
+
+#### May 2023
+### Azure AD SSO and Marketplace Integration
+* Introducing Azure AD Single Sign-On and seamless integration with the Azure Marketplace.
+* Trial Support for your application Plans
+
+#### April 2023
+### Improved Onboarding Information
+* Enhance user onboarding with improved information.
+* `onboarded` Properties
+* Tailor a smoother onboarding experience with the addition of `onboarded` properties to both `tenantUser` and `tenant` objects.
+
+#### March 2023
+### Brandable Email Templates
+* Customize your branding with brandable email templates.
+* Communication API Enhancements
+* Empower developers to change default email templates, achieving a fully customized branding experience.
+    
 ## October 2023
 * Launch of Payments
 * Improvements to Roles and privileges
 * Adding more granular control for authentication options
-
-### Affected APIs:
-* <%= config[:account_api_url] %>
 
 ## September 2023
 * Passkeys support for Nblocks login
@@ -25,52 +82,24 @@
 ## August 2023
 * Launch of Feature flags.
 
-### Affected APIs:
-* <%= config[:backendless_api_url] %>
-* <%= config[:admin_api_url] %>
-
 ## July 2023
 * Brandning of User management portal with CSS and translations
-
-### Affected APIs:
-* <%= config[:backendless_api_url] %>
 
 ## June 2023
 * Support for embedding User management portal
 * Google SSO
 
-### Affected APIs:
-* <%= config[:backendless_api_url] %>
-* <%= config[:auth_url] %>
-
 ## May 2023
 * Introduction of Azure AD SSO and Azure Marketplace integration.
 * Trial support for your plans
 
-`azureAdClientId`
-
-### Affected APIs:
-* <%= config[:auth_url] %>
-* <%= config[:account_api_url] %>
-
 ## April 2023
-Improving onboarding information
-
-Adding the `onboarded` property to both `tenantUser` and `tenant` responses.
-
-### Affected APIs:
-* <%= config[:auth_url] %>
-* <%= config[:account_api_url] %>
+* Improving onboarding information
+* Adding the `onboarded` properties to both `tenantUser` and `tenant` objects so it's simpler to tailor a good onboarding.
 
 ## March 2023
-Brandable email templates
-
-Enable developers to change the default email templates from the communication api to accomplish a fully customized branding.
-
-`getEmailTemplate`, `overrideEmailTemplate`, `resetEmailTemplate`.
-
-### Affected APIs:
-* <%= config[:communication_api_url] %>
+* Brandable email templates
+* Enable developers to change the default email templates from the communication api to accomplish a fully customized branding.
 
 ## February 2023
 Launching Auth service, Backendless and Cloud views.

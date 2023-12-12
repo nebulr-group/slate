@@ -106,6 +106,11 @@ Creates a new tenant with an initial user that is regarded as the tenant owner.
 
 `POST <%= config[:account_api_url] %>/tenant`
 
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
 ### Body Parameters
 
 | Parameter  | Type                  | Required | Description                                                                                                                                                                            |
@@ -167,6 +172,16 @@ Update an existing tenant.
 
 `PUT <%= config[:account_api_url] %>/tenant/TENANT_ID`
 
+### Headers
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| x-api-key | string | Required | Your app api key |
+
+### URL Parameters
+| Parameter | Description       |
+| --------- | ----------------- |
+| TENANT_ID    | The ID of the tenant |
+
 ### Body Parameters
 
 | Parameter | Type                  | Required | Description                                                                                                                                  |
@@ -175,6 +190,7 @@ Update an existing tenant.
 | locale    | string                | Optional | The default locale / lang code for all users in this tenant (`ISO_639-1` format). This property will set the i18n for all platform emails    |
 | logo      | string                | Optional | A URI to a logo.                                                                                                                             |
 | mfa       | boolean               | Optional | Require users to login with MFA/2FA                                                                                                          |
+| federationConnection       | string               | Optional | Assign an existing [Federation connection](#federation-connection-model) id to this tenant to activate enterprise login.                                                                                                          |
 | metadata  | Record<string,string> | Optional | Store metadata for your own business logic that will be returned in every Tenant response. This data will never be outputted to the end user |
 
 <%= partial "/includes/response_success.md" %>
