@@ -28,12 +28,13 @@ Start the Oauth 2.0 user login flow by redirecting the user to the `/authorize` 
 | redirect_uri             | string                        | Required | A target URI where the authenticated user will be redirected to together with tokens. Must be a valid URI in your App `redirectUris` |
 | scope                    | string                        | Required | Any or all of the following: `openid`, `profile`, `email`, `address`, `phone`, `onboarding`, `tenant`                                |
 | state                    | string                        | Optional | This can be used to resume a state in your app. The state will be available in the response code                                     |
-| forceFederation          | `'ms-azure-ad'` or `'google'` | Optional | If you want to force a certain federated login flow instead of letting the user choose during login.                                 |
 | responseType             | `'code'` or `'id_token'`      | Optional | If the response should be a code that could be exchanged for tokens or just an Id token                                              |
 | signup                   | boolean                       | Optional | If you want to initiate a signup instead of the default login flow for the user.                                                     |
-| signupPlan               | string                        | Optional | The key to an existing [plan](#plan-model). Allows the signup end with the new tenant subscribing to a specific plan.                |
-| signupCurrency           | string                        | Optional | A currency that matches one of the price in the plan.                                                                                |
-| signupRecurrenceInterval | string                        | Optional | An interval that matches one of the price in the plan.                                                                               |
+| signup_plan               | string                        | Optional | The key to an existing [plan](#plan-model). Allows the signup end with the new tenant subscribing to a specific plan.                |
+| signup_currency           | string                        | Optional | A currency that matches one of the price in the plan.                                                                                |
+| signup_recurrence_interval | string                        | Optional | An interval that matches one of the price in the plan.                                                                               |
+| force_federation          | `'ms-azure-ad'` or `'google'` or `'saml'` | Optional | If you want to force a certain federated login flow instead of letting the user choose during login.  Saml flows requires federationConnection to be provided.                                 |
+| federation_connection     | string                        | Optional | Specify what federation connection id to use when running `forceFederation`                                                          |
 
 <aside class="notice">
 You should redirect the user agent to this endpoint to initate the login flow. This is not an API <-> API call.
@@ -122,8 +123,9 @@ Shorthand endpoints exists so you can use them with less parameters using sensib
 | --------------- | ----------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | redirectUri     | string                        | Optional | A target URI where the authenticated user will be redirected to together with tokens. The default value is your App `defaultCallbackUri`. |
 | state           | string                        | Optional | This can be used to resume a state in your app. The state will be available in the response code                                          |
-| forceFederation | `'ms-azure-ad'` or `'google'` | Optional | If you want to force a certain federated login flow instead of letting the user choose during login.                                      |
 | responseType    | `'code'` or `'id_token'`      | Optional | If the response should be a code that could be exchanged for tokens or just an Id token                                                   |
+| forceFederation          | `'ms-azure-ad'` or `'google'` or `'saml'` | Optional | If you want to force a certain federated login flow instead of letting the user choose during login.  Saml flows requires federationConnection to be provided.                                 |
+| federationConnection     | string               | Optional | Specify what federation connection id to use when running `forceFederation`                                                          |
 
 <aside class="notice">
 You should redirect the user agent to this endpoint to initate the login flow. This is not an API <-> API call.
@@ -148,11 +150,12 @@ Shorthand endpoints exists so you can use them with less parameters using sensib
 | ------------------------ | ----------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | redirectUri              | string                        | Optional | A target URI where the authenticated user will be redirected to together with tokens. The default value is your App `defaultCallbackUri`. |
 | state                    | string                        | Optional | This can be used to resume a state in your app. The state will be available in the response code                                          |
-| forceFederation          | `'ms-azure-ad'` or `'google'` | Optional | If you want to force a certain federated login flow instead of letting the user choose during login.                                      |
 | responseType             | `'code'` or `'id_token'`      | Optional | If the response should be a code that could be exchanged for tokens or just an Id token                                                   |
 | signupPlan               | string                        | Optional | The key to an existing [plan](#plan-model). Allows the signup end with the new tenant subscribing to a specific plan.                     |
 | signupCurrency           | string                        | Optional | A currency that matches one of the price in the plan.                                                                                     |
 | signupRecurrenceInterval | string                        | Optional | An interval that matches one of the price in the plan.                                                                                    |
+| forceFederation          | `'ms-azure-ad'` or `'google'` or `'saml'` | Optional | If you want to force a certain federated signup flow instead of letting the user choose during login.  Saml flows requires federationConnection to be provided.                                 |
+| federationConnection     | string                        | Optional | Specify what federation connection id to use when running `forceFederation`                                                          |
 
 
 <aside class="notice">
