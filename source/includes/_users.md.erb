@@ -1,7 +1,281 @@
 # Users
 These are your app's users. We call them Tenant users since they belong to a tenant. But they can use the same credentials to access multiple tenants should their username exists in several places.
 
-## User management portal - Users
+## List users by tenant
+
+> Request example
+
+```typescript
+const users = await client.tenant('624c14cc0c01e70033356285').users.list();
+```
+
+```shell
+curl --request GET '<%= config[:account_api_url] %>/tenant/user' \
+--header 'x-api-key: <%= config[:api_key] %>' \
+--header 'x-tenant-id: 624c14cc0c01e70033356285'
+```
+
+> Response example:
+
+<%= partial "/includes/json/tenant-users_json.md.erb" %>
+
+List all users associated with a tenant.
+
+### HTTP Request
+
+`GET <%= config[:account_api_url] %>/tenant/user`
+
+### Headers
+| Parameter   | Type   | Required | Description      |
+| ----------- | ------ | -------- | ---------------- |
+| x-api-key   | string | Required | Your app api key |
+| x-tenant-id | string | Required | The tenant id    |
+
+<%= partial "/includes/response_success.md" %>
+A list of [Tenant user](#tenant-user-model)
+
+## Get user by id
+> Request example
+
+```typescript
+const user = await client.tenant('624c14cc0c01e70033356285').user('63cad6ac48dcba47e9322853');
+```
+
+```shell
+curl --request GET '<%= config[:account_api_url] %>/tenant/user/63cad6ac48dcba47e9322853' \
+--header 'x-api-key: <%= config[:api_key] %>' \
+--header 'x-tenant-id: 624c14cc0c01e70033356285'
+```
+
+> Response example:
+
+<%= partial "/includes/json/tenant-user_json.md.erb" %>
+
+Get a specific user in a tenant.
+
+### HTTP Request
+
+`GET <%= config[:account_api_url] %>/tenant/user/:USER_ID`
+
+### Headers
+| Parameter   | Type   | Required | Description      |
+| ----------- | ------ | -------- | ---------------- |
+| x-api-key   | string | Required | Your app api key |
+| x-tenant-id | string | Required | The tenant id    |
+
+### URL Parameters
+| Parameter | Description          |
+| --------- | -------------------- |
+| USER_ID   | The ID of the user   |
+
+<%= partial "/includes/response_success.md" %>
+A [Tenant user](#tenant-user-model)
+
+## Create user
+
+> Request example
+
+```typescript
+const user = await client.tenant('624c14cc0c01e70033356285').users.create(
+    {
+        username: "john.doe@example.com",
+        role: "OWNER",
+        firstName: "John",
+        lastName: "Doe"
+    });
+```
+
+```shell
+curl --request POST '<%= config[:account_api_url] %>/tenant/user' \
+--header 'x-api-key: <%= config[:api_key] %>' \
+--header 'x-tenant-id: 624c14cc0c01e70033356285'
+--data-raw '{"username":"john.doe@example.com","role":"OWNER","firstName":"John","lastName":"Doe"}'
+```
+
+> Response example:
+
+<%= partial "/includes/json/tenant-user_json.md.erb" %>
+
+Adds a user to to the given tenant. If the username doesn't exist, a new user will be created before being added.
+
+### HTTP Request
+
+`POST <%= config[:account_api_url] %>/tenant/user`
+
+### Headers
+| Parameter   | Type   | Required | Description      |
+| ----------- | ------ | -------- | ---------------- |
+| x-api-key   | string | Required | Your app api key |
+| x-tenant-id | string | Required | The tenant id    |
+
+### Body Parameters
+| Parameter  | Type   | Required | Description                                         |
+| ---------- | ------ | -------- | --------------------------------------------------- |
+| username   | string | Required | Email address to the new user                       |
+| role       | string | Optional | The key for an existing [Role](#access-role-model)  |
+| firstName  | string | Optional | User's first name                                   |
+| lastName   | string | Optional | User's last name                                    |
+
+<%= partial "/includes/response_success_created.md" %>
+A [Tenant user](#tenant-user-model)
+
+## Update user
+
+> Request example
+
+```typescript
+const user = await client.tenant('624c14cc0c01e70033356285').user('63cad6ac48dcba47e9322853').update(
+    {
+        role: "ADMIN",
+        enabled: false,
+    });
+```
+
+```shell
+curl --request PUT '<%= config[:account_api_url] %>/tenant/user/63cad6ac48dcba47e9322853' \
+--header 'x-api-key: <%= config[:api_key] %>' \
+--header 'x-tenant-id: 624c14cc0c01e70033356285'
+--data-raw '{"role":"ADMIN","enabled": false}'
+```
+
+> Response example:
+
+<%= partial "/includes/json/tenant-user_update_json.md.erb" %>
+
+Update an existing user
+
+### HTTP Request
+
+`PUT <%= config[:account_api_url] %>/tenant/user/:USER_ID`
+
+### Headers
+| Parameter   | Type   | Required | Description      |
+| ----------- | ------ | -------- | ---------------- |
+| x-api-key   | string | Required | Your app api key |
+| x-tenant-id | string | Required | The tenant id    |
+
+### URL Parameters
+| Parameter | Description          |
+| --------- | -------------------- |
+| USER_ID   | The ID of the user   |
+
+### Body Parameters
+| Parameter  | Type     | Required | Description                                         |
+| ---------- | -------- | -------- | --------------------------------------------------- |
+| role       | string   | Optional | The key for an existing [Role](#access-role-model)  |
+| enabled    | boolean  | Optional | If the user should be able to access the tenant     |
+| teams      | string[] | Optional | A tag for grouping the users                        |
+
+<%= partial "/includes/response_success.md" %>
+A [Tenant user](#tenant-user-model)
+
+## Reset user password
+> Request example
+
+```typescript
+await client.tenant('624c14cc0c01e70033356285').user('63cad6ac48dcba47e9322853').resetPassword()
+```
+
+```shell
+curl --request POST '<%= config[:account_api_url] %>/tenant/user/63cad6ac48dcba47e9322853/password' \
+--header 'x-api-key: <%= config[:api_key] %>' \
+--header 'x-tenant-id: 624c14cc0c01e70033356285'
+```
+
+> Response example:
+
+Sends a password reset email to the given user.
+
+### HTTP Request
+
+`POST <%= config[:account_api_url] %>/tenant/user/:USER_ID/password`
+
+### Headers
+| Parameter   | Type   | Required | Description      |
+| ----------- | ------ | -------- | ---------------- |
+| x-api-key   | string | Required | Your app api key |
+| x-tenant-id | string | Required | The tenant id    |
+
+### URL Parameters
+| Parameter | Description          |
+| --------- | -------------------- |
+| USER_ID   | The ID of the user   |
+
+<%= partial "/includes/response_success_created.md" %>
+
+
+### Get the password reset link without sending an email:
+
+> Request example
+
+```typescript
+await client.tenant('624c14cc0c01e70033356285').user('63cad6ac48dcba47e9322853').getResetPasswordLink()
+```
+
+```shell
+curl --request GET '<%= config[:account_api_url] %>/tenant/user/63cad6ac48dcba47e9322853/passwordLink' \
+--header 'x-api-key: <%= config[:api_key] %>' \
+--header 'x-tenant-id: 624c14cc0c01e70033356285'
+```
+
+> Response example:
+
+```
+<%= config[:cloud_views_url] %>/handover?appId=<%= config[:app_id] %>&flow=openidconnect&args=eyJlbnRyeVBvaW50IjoiL2F1dGgvc2V0LXBhc3N3b3JkLzA3YndwZjB1c2F1YW91aWZheHFlZm9tMnkxZ2lxb3l0eTlseDJxaGpwOGVubTF6MGtiNGR0M2hjYnpmdTJqbWljY3k2anYyazhiOG4xMG5pdXRtIn0=
+```
+
+### HTTP Request
+
+`GET <%= config[:account_api_url] %>/tenant/user/:USER_ID/passwordLink`
+
+### Headers
+| Parameter   | Type   | Required | Description      |
+| ----------- | ------ | -------- | ---------------- |
+| x-api-key   | string | Required | Your app api key |
+| x-tenant-id | string | Required | The tenant id    |
+
+### URL Parameters
+| Parameter | Description          |
+| --------- | -------------------- |
+| USER_ID   | The ID of the user   |
+
+<%= partial "/includes/response_success.md" %>
+Returns the password reset link as a `string`.
+
+## Delete user
+
+> Request example
+
+```typescript
+await client.tenant('624c14cc0c01e70033356285').user('63cad6ac48dcba47e9322853').delete()
+```
+
+```shell
+curl --request DELETE '<%= config[:account_api_url] %>/tenant/user/63cad6ac48dcba47e9322853' \
+--header 'x-api-key: <%= config[:api_key] %>' \
+--header 'x-tenant-id: 624c14cc0c01e70033356285'
+```
+
+Delete an existing user.
+
+### HTTP Request
+
+`DELETE <%= config[:account_api_url] %>/tenant/user/:USER_ID`
+
+### Headers
+| Parameter   | Type   | Required | Description      |
+| ----------- | ------ | -------- | ---------------- |
+| x-api-key   | string | Required | Your app api key |
+| x-tenant-id | string | Required | The tenant id    |
+
+### URL Parameters
+| Parameter | Description          |
+| --------- | -------------------- |
+| USER_ID   | The ID of the user   |
+
+<%= partial "/includes/response_success.md" %>
+
+## User management portal
 
 This endpoint renders Nblocks hosted user management views for listing and managing users. Redirect the user agent or embedd this url into an iframe to render the view.
 Users will be able to list and invite other users to the same tenant. See [Handover code](#handover-code) for how to obtain the code parameter required for this call.
@@ -18,3 +292,16 @@ Users will be able to list and invite other users to the same tenant. See [Hando
 <aside class="notice">
 You should redirect the user agent to this endpoint, or embedd it in an IFrame. This is not an API <-> API call.
 </aside>
+
+### List Tenant User Associations
+Endpoint to list all tenant users that another tenant user has access to.
+
+> Request example
+
+```typescript
+const response = await client.tenants.getTenantUserAssociations('user-id');
+```
+
+```shell
+curl --request GET '<%= config[:account_api_url] %>/tenants/user/user-id/associations' --header 'x-api-key: <%= config[:api_key] %>'
+```
