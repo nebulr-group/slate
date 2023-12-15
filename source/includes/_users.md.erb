@@ -32,13 +32,13 @@ List all users associated with a tenant.
 | x-tenant-id | string | Required | The tenant id    |
 
 <%= partial "/includes/response_success.md" %>
-A list of [Tenant user](#tenant-user-model)
+A list of [Tenant users](#tenant-user-model)
 
 ## Get user by id
 > Request example
 
 ```typescript
-const user = await client.tenant('624c14cc0c01e70033356285').user('63cad6ac48dcba47e9322853');
+const user = await client.tenant('624c14cc0c01e70033356285').user('63cad6ac48dcba47e9322853').get();
 ```
 
 ```shell
@@ -70,6 +70,41 @@ Get a specific user in a tenant.
 
 <%= partial "/includes/response_success.md" %>
 A [Tenant user](#tenant-user-model)
+
+## List tenants by user
+```typescript
+const users = await client.tenant('624c14cc0c01e70033356285').user('63cad6ac48dcba47e9322853').listAssociations();
+```
+
+```shell
+curl --request GET '<%= config[:account_api_url] %>/tenant/user/63cad6ac48dcba47e9322853/associations' \
+--header 'x-api-key: <%= config[:api_key] %>' \
+--header 'x-tenant-id: 624c14cc0c01e70033356285'
+```
+
+> Response example:
+
+<%= partial "/includes/json/tenant-users_json.md.erb" %>
+
+Lists all tenants a user is asssociated with
+
+### HTTP Request
+
+`GET <%= config[:account_api_url] %>/tenant/user/:USER_ID/associations`
+
+### Headers
+| Parameter   | Type   | Required | Description      |
+| ----------- | ------ | -------- | ---------------- |
+| x-api-key   | string | Required | Your app api key |
+| x-tenant-id | string | Required | The tenant id    |
+
+### URL Parameters
+| Parameter | Description          |
+| --------- | -------------------- |
+| USER_ID   | The ID of the user   |
+
+<%= partial "/includes/response_success.md" %>
+A list of [Tenant users](#tenant-user-model)
 
 ## Create user
 
@@ -292,16 +327,3 @@ Users will be able to list and invite other users to the same tenant. See [Hando
 <aside class="notice">
 You should redirect the user agent to this endpoint, or embedd it in an IFrame. This is not an API <-> API call.
 </aside>
-
-### List Tenant User Associations
-Endpoint to list all tenant users that another tenant user has access to.
-
-> Request example
-
-```typescript
-const response = await client.tenants.getTenantUserAssociations('user-id');
-```
-
-```shell
-curl --request GET '<%= config[:account_api_url] %>/tenants/user/user-id/associations' --header 'x-api-key: <%= config[:api_key] %>'
-```
