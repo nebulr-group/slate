@@ -16,6 +16,7 @@ set :auth_url, 'https://auth.nblocks.cloud'
 set :auth_host, 'auth.nblocks.cloud'
 set :backendless_api_url, 'https://backendless.nblocks.cloud'
 set :backendless_api_host, 'backendless.nblocks.cloud'
+set :cloud_views_url, 'https://app.nblocks.cloud'
 config[:api_key]
 config[:app_id]
 config[:account_api_url]
@@ -28,6 +29,7 @@ config[:file_api_url]
 config[:file_api_host]
 config[:auth_url]
 config[:auth_host]
+config[:cloud_views_url]
 
 # Markdown
 set :markdown_engine, :redcarpet
