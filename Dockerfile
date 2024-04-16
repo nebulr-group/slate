@@ -11,12 +11,12 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         build-essential \
         git \
-        nodejs \
-    && gem install bundler \
-    && bundle install \
-    && apt-get remove -y build-essential \
-    && apt-get autoremove -y \
-    && rm -rf /var/lib/apt/lists/*
+        nodejs
+RUN gem install bundler -v 2.4.22
+RUN bundle install 
+RUN apt-get remove -y build-essential
+RUN apt-get autoremove -y
+RUN rm -rf /var/lib/apt/lists/*
 
 COPY . /srv/slate
 
