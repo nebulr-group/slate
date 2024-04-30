@@ -1,10 +1,13 @@
-You can send whatever context information you want to the evaluation api. But we've simplified it using a base structure so you can build the segment targets in Nblocks Admin more easily.
+Instead of providing the user's access token you can send your own user context information to the evaluation api. 
 
-The [context object](#feature-flags-evaluation-context) contains three areas, `user`, `org` and `device`.
+We recommend you to send as much information as possible from start for a flexible experience without the need for re-releases while you add more flags and conditions. 
 
-Each one of them contains the property `key`. You can assign any value to this property.
-You can also assign any values you want to the other properties.
-When building the segment targets you can define is the value should be equal (`==`), contain, beginWith or endWith the value.
-Structure of the body that can be sent to `/flags/evaluate`
+We've simplified this by defining a base structure of what information to send so you can more easily build your groups and conditions in Nblocks Admin.
 
-Providing the access token will automatically resolve all values for user and org so you don't have to.
+The [context object](#feature-flags-evaluation-context) contains three areas, `user`, `org` and `device`. Each one of them reflect different traits and holds predefined relevant properties that you can assign.
+
+* All areas also contain a property `key` which you can use to provide custom information if none of the others fits your need.
+* All these properties can easily be referenced when building the group targets you can define if the value should be `equal` (==), `contain`, `beginWith` or `endWith` the value.
+
+
+This context object can be that can be sent to [/flags/evaluate](#evaluate-a-flag) and [/flags/bulkEvaluate](#evaluate-flags-in-bulk).

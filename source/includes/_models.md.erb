@@ -377,27 +377,7 @@ Decoded JWT payload.
 
 > Model example:
 
-```json
-{
-    "user": {
-        "key": "foobar",
-        "id": "63d2ab029e23db0afb07a5a7",
-        "role": "ADMIN",
-        "name": "John Doe";
-    }
-
-    "org": {
-        "key": "helloworld",
-        "id": "63d2ab029e23db0afb07a5a7",
-        "plan": "PREMIUM",
-        "name": "My Workspace"
-    }
-
-    "device": {
-        "key": "iphone"
-    }
-}
-```
+<%= partial "/includes/json/_feature-flags-context_json.md.erb" %>
 
 | Parameter | Type        | Description    |
 | --------- | ----------- | -------------- |
@@ -409,19 +389,19 @@ Decoded JWT payload.
 
 | Parameter | Type   | Description  |
 | --------- | ------ | ------------ |
-| key       | string | Custom value |
 | id        | string | User id      |
 | role      | string | User role    |
 | name      | string | User name    |
+| key       | string | Custom value |
 
 **OrgContext**
 
 | Parameter | Type   | Description     |
 | --------- | ------ | --------------- |
-| key       | string | Custom value    |
 | id        | string | Tenant id       |
 | plan      | string | Tenant plan key |
 | name      | string | Tenant name     |
+| key       | string | Custom value |
 
 **KeyContext**
 
