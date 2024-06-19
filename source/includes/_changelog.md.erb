@@ -1,6 +1,33 @@
 # Changelog
 
-#### 16 April 2024
+<% if false %>
+## 4 August 2024
+### Improved user Tokens
+* Added more claims to *accessToken* and *idToken*.
+* Nblocks now exposes an `onboarded` property that can be set on both user and tenant level.
+<% end %> 
+
+## 18 June 2024
+### Stability & Performance improvements
+* General performance improvements throught out all Nblocks APIs.
+* Nblocks React plugin: Adding greater support for older versions of React.
+
+## 7 June 2024
+### Enable / disable user signup
+* Added toggle to either enable or disable user self signup through Nblocks UI.
+
+## 19 May 2024
+### More Signin / Signup SSO providers
+* Adding Facebook & Github connections
+
+### Magic-link login
+* User can now authenticate with Magic-link.
+
+## 4 May 2024
+### New React plugin
+* Launching a new React plugin for a smoother Nblocks experience with React.
+
+## 16 April 2024
 ### Improved Nblocks Admin
 * Updates and improvements made to the interactive onboarding models in Nblocks Admin
 * Invite team members to your workspace to collaborate on apps
@@ -8,17 +35,17 @@
 ### Signin / Signup with LinkedIn
 * You can now activate LinkedIn as a Social Login alternative.
 
-#### 23 March 2024
+## 23 March 2024
 ### Logout via Auth Service
 * A new `logout` endpoint made available to completely logout a user from OAuth 2.0 / OIDC flows. 
 
-#### 21 Feb 2024
+## 21 Feb 2024
 ### Delete tenants and apps
 * Tenants can now be completely deleted including its users and data.
 * Apps can also be deleted and will delete data and its tenants.
 * Delete operations can be initiated both from Nblocks Admin and via Rest APIs.
 
-#### 20 December 2023
+## 20 December 2023
 ### Enterprise login
 * Adding SAML support as a new alternative login method
 * SAML can be setup using federation connections
@@ -27,11 +54,11 @@
 ### Password reset flow
 * Admins can now more efficiently handle password reset requests
 
-#### 10 December 2023
+## 10 December 2023
 ### Nblocks Admin interactive onboarding
 * It's now easier to integrate different Nblocks modules with ready made code snippets and interactive onboarding.
 
-#### 28 November 2023
+## 28 November 2023
 ### Adding customizations to Nblocks Admin
 * Configure app properties such as name and logo
 * Create a custom theme for Nblocks hosted views
@@ -41,51 +68,51 @@
 * <%= config[:backendless_api_url] %>
     * CSS endpoints are moved to <%= config[:admin_api_url] %>
 
-#### 23 October 2023
+## 23 October 2023
 ### Payments Launch
 * Introducing Payments feature for seamless integration with billing providers to get paid while building with Nblocks.
 * Use pre-made components and build paywalls in no time.
 * Generate signup links to specific plans
 
-#### 9 October 2023
+## 9 October 2023
 ### Improved access controll
 * Enhancements to Roles and Privileges settings and simple configuration via Nblocks Admin.
 * Additional authentication options to fine-tune your users application access.
 
-#### 29 September 2023
+## 29 September 2023
 ### Passkeys support
 * Strengthen your application security with Passkeys support for Nblocks login.
 
-#### 6 September 2023
+## 6 September 2023
 ### Improved user signup
 * Streamlined Signup Flow for your new users
 * Initiate signup flow via link
 
-#### 16 August 2023
+## 16 August 2023
 ### Feature Flags
 * Unveiling the Feature Flags functionality for controlled feature rollouts and experimentation.
 
-#### July 2023
+## July 2023
 ### Branding for User Management Portal
 * Personalize your User Management Portal with custom CSS and translations.
 
-#### June 2023
+## June 2023
 ### Embedding User Management Portal
 * Seamlessly integrate the User Management Portal into your applications.
 * Google Single Sign-On (SSO)
 
-#### May 2023
+## May 2023
 ### Azure AD SSO and Marketplace Integration
 * Introducing Azure AD Single Sign-On and seamless integration with the Azure Marketplace.
 * Trial Support for your application Plans
 
-#### April 2023
+## April 2023
 ### Improved Onboarding Information
 * Enhance user onboarding with improved information.
 * `onboarded` Properties
 * Tailor a smoother onboarding experience with the addition of `onboarded` properties to both `tenantUser` and `tenant` objects.
 
-#### March 2023
+## March 2023
 ### Brandable Email Templates
 * Customize your branding with brandable email templates.
 * Communication API Enhancements
@@ -163,7 +190,7 @@ Now you can expose a phone number and configure a rule set how and to which reci
 Adding `listVoiceRedirectRules`, `createVoiceRedirectRule`, `updateVoiceRedirectRule`, `deleteVoiceRedirectRule`, `listVoiceRedirectErrors`.
 
 ### Affected APIs:
-* <%= config[:communication_api] %>
+* <%= config[:communication_api_url] %>
 
 ## February 2022
 * MFA support
