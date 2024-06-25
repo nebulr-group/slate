@@ -10,12 +10,42 @@ Some use cases for feature flags are:
 - Try beta features on a selection of customers
 - Show a message to all users during a scheduled release.
 
+<aside class="notice">
+Segments are called Groups in the Nblocks Admin UI. They represent exactly the same entity.
+</aside>
+
 ## Evaluate a flag
 
 > Request example
 
 ```typescript
-TBD
+const response = await client.flag.evaluate("flag_1", {
+        context: {
+            user: {
+                id: "63d2ab029e23db0afb07a5a7",
+                role: "ADMIN",
+                name: "John Doe",
+                email: "john@doe.com",
+                key: "custom-user-trait"
+            },
+            tenant: {
+                id: "66238feb99227400774266f5",
+                plan: "PREMIUM",
+                name: "My Workspace",
+                key: "custom-customer-trait",
+            },
+            device: {
+                key: "iphone"
+            },
+            custom: {
+                property1: "value1",
+                property2: "value2",
+                property3: "value2",
+            }
+        },
+        accessToken: "XXXXXX"
+    }
+);
 ```
 
 ```shell
@@ -26,18 +56,22 @@ curl --request POST '<%= config[:backendless_api_url] %>/flags/evaluate/605b603c
             "id": "63d2ab029e23db0afb07a5a7",
             "role": "ADMIN",
             "name": "John Doe",
+            "email": "john@doe.com",
             "key": "custom-user-trait"
-        }
-
-        "org": {
+        },
+        "tenant": {
             "id": "66238feb99227400774266f5",
             "plan": "PREMIUM",
             "name": "My Workspace",
             "key": "custom-customer-trait",
-        }
-
+        },
         "device": {
             "key": "iphone"
+        },
+        "custom": {
+            "property1": "value1",
+            "property2": "value2",
+            "property3": "value2",
         }
     },
     "accessToken": "XXXXXX"
@@ -89,7 +123,33 @@ The evaluation api doesn't require authentication. It can be called from unsafe 
 > Request example
 
 ```typescript
-TBD
+const response = await client.flag.bulkEvaluate({
+        context: {
+            user: {
+                id: "63d2ab029e23db0afb07a5a7",
+                role: "ADMIN",
+                name: "John Doe",
+                email: "john@doe.com",
+                key: "custom-user-trait"
+            },
+            tenant: {
+                id: "66238feb99227400774266f5",
+                plan: "PREMIUM",
+                name: "My Workspace",
+                key: "custom-customer-trait",
+            },
+            device: {
+                key: "iphone"
+            },
+            custom: {
+                property1: "value1",
+                property2: "value2",
+                property3: "value2",
+            }
+        },
+        accessToken: "XXXXXX"
+    }
+);
 ```
 
 ```shell
@@ -101,15 +161,13 @@ curl --request POST '<%= config[:backendless_api_url] %>/flags/bulkEvaluate/605b
             "role": "ADMIN",
             "name": "John Doe",
             "key": "custom-user-trait"
-        }
-
+        },
         "org": {
             "id": "66238feb99227400774266f5",
             "plan": "PREMIUM",
             "name": "My Workspace",
             "key": "custom-customer-trait",
-        }
-
+        },
         "device": {
             "key": "iphone"
         }
@@ -184,7 +242,7 @@ The evaluation api doesn't require authentication. It can be called from unsafe 
 > Request example
 
 ```typescript
-TBD
+const response = await client.flagAdmin.listSegments();
 ```
 
 ```shell
@@ -231,6 +289,10 @@ curl --request GET '<%= config[:admin_api_url] %>/flags/segment' \
 
 List all segments
 
+<aside class="notice">
+Segments are called Groups in the Nblocks Admin UI. They represent exactly the same entity.
+</aside>
+
 ### HTTP Request
 
 `GET <%= config[:admin_api_url] %>/flags/segments`
@@ -248,7 +310,20 @@ List of [Segment](#feature-flags-segment)
 > Request example
 
 ```typescript
-TBD
+const response = await client.flagAdmin.createSegment({
+    key: "admins",
+    description: "This segment targets admins",
+    targets: [
+        {
+            user: {
+                role: {
+                    operator: "eq",
+                    value: "ADMIN"
+                }
+            }
+        }
+    ]
+});
 ```
 
 ```shell
@@ -316,7 +391,10 @@ Create a segment
 > Request example
 
 ```typescript
-TBD
+const response = await client.flagAdmin.updateSegment("667447b583e592454b76d0ec", {
+        description: 'This is a description'
+    }
+);
 ```
 
 ```shell
@@ -378,7 +456,7 @@ Update an existing segment
 > Request example
 
 ```typescript
-TBD
+await client.flagAdmin.deleteSegment("6674409b7bc7fe186ab98a56");
 ```
 
 ```shell
@@ -409,7 +487,7 @@ Delete an existing segment. Deleting a segment will also remove the relationship
 > Request example
 
 ```typescript
-TBD
+const response = await client.flagAdmin.listFlags();
 ```
 
 ```shell
@@ -465,7 +543,16 @@ List of [Flag](#feature-flags-flag)
 > Request example
 
 ```typescript
-TBD
+const response = await client.flagAdmin.createFlag({
+    key: "iphone-feature",
+    description: "A feature for iPhones",
+    defaultValue: false,
+    segments: [
+        "64c63e7adaf20f0008e71b20"
+    ],
+    targetValue: true,
+    enabled: true
+});
 ```
 
 ```shell
@@ -539,7 +626,10 @@ Create a flag
 > Request example
 
 ```typescript
-TBD
+const response = await client.flagAdmin.updateFlag("667447b583e592454b76d0ec", {
+        description: 'This is a description'
+    }
+);
 ```
 
 ```shell
@@ -611,7 +701,7 @@ Update an existing flag
 > Request example
 
 ```typescript
-TBD
+await client.flagAdmin.deleteFlag("6674409b7bc7fe186ab98a56");
 ```
 
 ```shell

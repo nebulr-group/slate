@@ -22,12 +22,17 @@
 | paymentsAutoRedirect    | boolean        | Activates redirect to select payments plans and takes a user to selection of payment plans directly after signup or after a trial has ended.                                                                                                        |
 | stripeEnabled           | boolean        | Boolean value telling the user if Stripe is enabled                                                                                                        |
 | passkeysEnabled         | boolean        | Boolean value telling the user if Login with Passkeys is enabled                                                                                           |
+| magicLinkEnabled         | boolean        | Boolean value telling the user if Login with Magic-Link is enabled                                                                                           |
 | mfaEnabled              | boolean        | Boolean value telling the user if multi-factor authentication is enabled                                                                                   |
 | azureMarketplaceEnabled | boolean        | Boolean value telling the user if Azure marketplace is enabled                                                                                             |
 | googleSsoEnabled        | boolean        | Boolean value telling the user if Login with Google SSO is enabled                                                                                         |
+| linkedinSsoEnabled        | boolean        | Boolean value telling the user if Login with LinkedIn SSO is enabled                                                                                         |
+| githubSsoEnabled        | boolean        | Boolean value telling the user if Login with Github SSO is enabled                                                                                         |
+| facebookSsoEnabled        | boolean        | Boolean value telling the user if Login with Facebook SSO is enabled                                                                                         |
 | azureAdSsoEnabled       | boolean        | Boolean value telling the user if Login with Azure SSO is enabled                                                                                          |
 | onboardingFlow          | OnboardingFlow | Configure how users will be onboarded                                                                                                                      |
 | cloudViews              | boolean        | Toggle this to true if you want to use a UI provided by NBlocks instead of your own                                                                        |
+| tenantSelfSignup         | boolean        | Wheater to allow users to signup for new workspaces themselves                                                                                            |
 | redirectUris            | string[]       | Allowed redirect uris                                                                                                                                      |
 | defaultCallbackUri      | string         | Default handover/callback uri used by Nblocks                                                                                                              |
 | accessTokenTTL          | number         | Access token lifetime in seconds                                                                                                                           |
@@ -374,6 +379,7 @@ Decoded JWT payload.
 | createdAt   | string | Timestamp when created (Read only)                                                        |
 
 ## Feature flags evaluation context
+Fields marked in bold text will be auto resolved by Nblocks when providing a user access token.
 
 > Model example:
 
@@ -381,25 +387,28 @@ Decoded JWT payload.
 
 | Parameter | Type        | Description    |
 | --------- | ----------- | -------------- |
-| user      | UserContext | User context   |
-| org       | OrgContext  | Org context    |
+| **user**      | UserContext | User context   |
+| **tenant**       | TenantContext  | Tenant context    |
 | device    | KeyContext  | Device context |
+| device    | KeyContext  | Device context |
+| custom    | CustomContext  | Custom context |
 
 **UserContext**
 
 | Parameter | Type   | Description  |
 | --------- | ------ | ------------ |
-| id        | string | User id      |
-| role      | string | User role    |
+| **id**        | string | User id      |
+| **email**     | string | User email      |
+| **role**      | string | User role    |
 | name      | string | User name    |
 | key       | string | Custom value |
 
-**OrgContext**
+**TenantContext**
 
 | Parameter | Type   | Description     |
 | --------- | ------ | --------------- |
-| id        | string | Tenant id       |
-| plan      | string | Tenant plan key |
+| **id**        | string | Tenant id       |
+| **plan**      | string | Tenant plan key |
 | name      | string | Tenant name     |
 | key       | string | Custom value |
 
@@ -408,6 +417,16 @@ Decoded JWT payload.
 | Parameter | Type   | Description                  |
 | --------- | ------ | ---------------------------- |
 | key       | string | The value to be matched (==) |
+
+**CustomContext**
+
+The `custom` property is a map that allows developers to include any additional custom key-value pairs. 
+Each key in the `custom` object should be a string, and the corresponding value should also be a string.
+
+| Parameter | Type   | Description                           |
+| --------- | ------ | ------------------------------------- |
+| *key*     | string | Custom property name defined by the developer |
+| *value*   | string | Value associated with the custom property name |
 
 ## Feature flags segment
 

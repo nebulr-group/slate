@@ -45,7 +45,7 @@ You should redirect the user agent to this endpoint to initate the login flow. T
 > Request example exchanging code for tokens
 
 ```typescript
-const response = await client.auth.getTokens({code: "XXXX"});
+const response = await client.auth.getTokensAndVerify({code: "XXXX"});
 ```
 
 ```shell
@@ -58,7 +58,7 @@ curl --request POST '<%= config[:auth_url] %>/token' \
 > Request example exchanging refresh token for tokens
 
 ```typescript
-const response = await client.auth.refreshTokens({refreshToken: "XXXX"});
+const response = await client.auth.refreshTokensAndVerify({refreshToken: "XXXX"});
 ```
 
 ```shell
@@ -167,7 +167,7 @@ You should redirect the user agent to this endpoint to initate the signup flow. 
 > Request example exchanging code for tokens
 
 ```typescript
-const response = await client.auth.getTokens({code: "XXXX"});
+const response = await client.auth.getTokensAndVerify({code: "XXXX"});
 ```
 
 ```shell
@@ -180,7 +180,7 @@ curl --request POST '<%= config[:auth_url] %>/token/code/<%= config[:app_id] %>'
 > Request example exchanging refresh token for tokens
 
 ```typescript
-const response = await client.auth.refreshTokens({refreshToken: "XXXX"});
+const response = await client.auth.refreshTokensAndVerify({refreshToken: "XXXX"});
 ```
 
 ```shell
