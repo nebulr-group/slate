@@ -468,15 +468,26 @@ Each key in the `custom` object should be a string, and the corresponding value 
             "operator": "contains",
             "value": "iphone"
         }
+    },
+    "custom": {
+        "property1": {
+            "operator": "lessThan",
+            "value": "2"
+        },
+        "property2": {
+            "operator": "contains",
+            "value": "foobar"
+        }
     }
 }
 ```
 
 | Parameter | Type       | Description     |
 | --------- | ---------- | --------------- |
-| user      | UserTarget | User id         |
-| org       | OrgTarget  | Users full name |
-| device    | KeyTarget  | Users last name |
+| user      | UserTarget | Conditions on user level |
+| tenant    | TenantTarget  | Conditions on tenant level |
+| device    | KeyTarget  | Conditions on device level |
+| custom    | CustomTarget  | Custom conditions |
 
 **UserTarget**
 
@@ -486,8 +497,9 @@ Each key in the `custom` object should be a string, and the corresponding value 
 | id        | string      | User id      |
 | role      | TargetValue | User role    |
 | name      | TargetValue | User name    |
+| email     | TargetValue | User email    |
 
-**OrgTarget**
+**TenantTarget**
 
 | Parameter | Type        | Description     |
 | --------- | ----------- | --------------- |
@@ -495,6 +507,17 @@ Each key in the `custom` object should be a string, and the corresponding value 
 | id        | string      | Tenant id       |
 | plan      | TargetValue | Tenant plan key |
 | name      | TargetValue | Tenant name     |
+
+
+**CustomTarget**
+
+The `custom` property is a map that allows developers to include any additional custom key and pair it a TargetValue. 
+Each key in the `custom` object should be a string, and the corresponding value should be a TargetValue.
+
+| Parameter | Type   | Description                           |
+| --------- | ------ | ------------------------------------- |
+| *key*     | string | Custom property name defined by the developer |
+| *value*   | TargetValue | Value associated with the custom property name |
 
 **KeyTarget**
 
