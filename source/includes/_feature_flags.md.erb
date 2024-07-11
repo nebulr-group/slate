@@ -381,7 +381,7 @@ Create a segment
 | ----------- | ----------------------------------------- | -------- | ----------------------------- |
 | key         | string                                    | Yes      | A unique key for this segment |
 | description | string                                    | No       | Optional description          |
-| targets     | [Target](#feature-flags-segment-target)[] | No       | The targets to match          |
+| targets     | [Target](#feature-flags-segment-target)[] | No       | The targets to match. Multiple targets must all match (logical AND) for the segment to match          |
 
 <%= partial "/includes/response_success.md" %>
 [Segment](#feature-flags-segment)
@@ -446,7 +446,7 @@ Update an existing segment
 | ----------- | ----------------------------------------- | -------- | ----------------------------- |
 | key         | string                                    | No       | A unique key for this segment |
 | description | string                                    | No       | Optional description          |
-| targets     | [Target](#feature-flags-segment-target)[] | No       | The targets to match          |
+| targets     | [Target](#feature-flags-segment-target)[] | No       | The targets to match. Multiple targets must all match (logical AND) for the segment to match          |
 
 <%= partial "/includes/response_success.md" %>
 [Segment](#feature-flags-segment)
@@ -614,7 +614,7 @@ Create a flag
 | key          | string   | Yes      | A unique key for this flag                                                                               |
 | description  | string   | No       | Optional description                                                                                     |
 | defaultValue | boolean  | No       | The value to return if no segment was found or matched                                                   |
-| segments     | string[] | No       | List of IDs of the segments which should be matched                                                      |
+| segments     | string[] | No       | List of IDs of the segments which should be matched. If any of the segment match (logical OR), the flag is matched                                                      |
 | targetValue  | boolean  | No       | The value to return of a segment was matched                                                             |
 | enabled      | boolean  | No       | Active state. Only enabled flags are available for evaluation. Otherwise evaluation falls back to false. |
 
@@ -689,7 +689,7 @@ Update an existing flag
 | key          | string   | No       | A unique key for this flag                                                                               |
 | description  | string   | No       | Optional description                                                                                     |
 | defaultValue | boolean  | No       | The value to return if no segment was found or matched                                                   |
-| segments     | string[] | No       | List of IDs of the segments which should be matched                                                      |
+| segments     | string[] | No       | List of IDs of the segments which should be matched. If any of the segment match (logical OR), the flag is matched                                                       |
 | targetValue  | boolean  | No       | The value to return of a segment was matched                                                             |
 | enabled      | boolean  | No       | Active state. Only enabled flags are available for evaluation. Otherwise evaluation falls back to false. |
 
