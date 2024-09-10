@@ -119,7 +119,9 @@ Creates a new tenant with an initial user that is regarded as the tenant owner.
 | name       | string                | Optional | Name of the tenant. Can also be set by tenant owner during onboarding                                                                                                                  |
 | plan       | string                | Optional | Plan key. The [plan](#plan-model) must be present in the configured App business model                                                                                                 |
 | priceOffer | PriceOffer            | Optional | One of the offering prices of the plan                                                                                                                                                 |
+| locale       | string                | Optional | The default locale / lang code for all users in this tenant (`ISO_639-1` format). This property will set the i18n for all platform emails. Defaults to 'en'                                                                                                                 |
 | logo       | string                | Optional | A URI to a logo. Can also be set by tenant owner during onboarding                                                                                                                     |
+| onboarded       | boolean         | Optional | Is the tenant considered onboarded from start                                                                                                         |
 | metadata   | Record<string,string> | Optional | Store metadata for your own business logic that will be returned in every Tenant response. This data will never be outputted to the end user                                           |
 
 **TenantOwner**
@@ -190,6 +192,7 @@ Update an existing tenant.
 | locale    | string                | Optional | The default locale / lang code for all users in this tenant (`ISO_639-1` format). This property will set the i18n for all platform emails    |
 | logo      | string                | Optional | A URI to a logo.                                                                                                                             |
 | mfa       | boolean               | Optional | Require users to login with MFA/2FA                                                                                                          |
+| onboarded       | boolean         | Optional | If this tenant is considered onboarded                                                                                                          |
 | federationConnection       | string               | Optional | Assign an existing [Federation connection](#federation-connection-model) id to this tenant to activate enterprise login.                                                                                                          |
 | metadata  | Record<string,string> | Optional | Store metadata for your own business logic that will be returned in every Tenant response. This data will never be outputted to the end user |
 

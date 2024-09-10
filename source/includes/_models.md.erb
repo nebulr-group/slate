@@ -69,8 +69,9 @@
 | paymentStatus    | [Payment status](#tenant-payment-status) | The tenant current payment status                                                                                                              |
 | paymentsRequired | boolean                                  | The tenant should setup payment immediately because tenant has not setup payments and the subscribing plan carry a cost or the trial has ended |
 | metadata         | Record<string, string>                   | Custom key value meta data that you can use                                                                                                    |
-| onboarded        | string                                   | If this tenant is considered onboarded (Read only)                                                                                             |
+| onboarded        | string                                   | If this tenant is considered onboarded                                                                                           |
 | federationConnection        | string                        | Assigned [Federation connection](#federation-connection-model) id used for authentication. Part of Enterprise login.                                                                                                          |
+| signupBy        | Object                        | Object containing email and name on the first tenant owner that was used when creating / signing up the new tenant                                                                                                         |
 | createdAt        | string                                   | Timestamp when created (Read only)                                                                                                             |
 
 ## Tenant payment status
