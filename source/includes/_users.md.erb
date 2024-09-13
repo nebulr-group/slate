@@ -150,6 +150,7 @@ Adds a user to to the given tenant. If the username doesn't exist, a new user wi
 | role       | string | Optional | The key for an existing [Role](#access-role-model)  |
 | firstName  | string | Optional | User's first name                                   |
 | lastName   | string | Optional | User's last name                                    |
+| muteNotifications   | boolean | Optional | Set this variable to true if you don't wish to send out any notifications to the user                                    |
 
 <%= partial "/includes/response_success_created.md" %>
 A [Tenant user](#tenant-user-model)
