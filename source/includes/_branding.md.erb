@@ -16,7 +16,7 @@ TBD
 ```
 
 ```shell
-curl --request PUT '<%= config[:communication_api_url] %>/template/SIGNUP' \
+curl --request PUT '<%= config[:communication_api_url] %>/email/template/SIGNUP' \
 --header 'x-api-key: <%= config[:api_key] %>'
 --data-raw '{
     "type": "SIGNUP", 
@@ -53,7 +53,7 @@ Variables in themplates, use `<h1>{{variable}}</h1>` to inject it in the content
 
 ### HTTP Request
 
-`PUT <%= config[:communication_api_url] %>/template/:templateName`
+`PUT <%= config[:communication_api_url] %>/email/template/:templateName`
 
 ### Headers
 | Parameter | Type   | Required | Description      |
@@ -85,7 +85,7 @@ TBD
 ```
 
 ```shell
-curl --request GET '<%= config[:communication_api_url] %>/template/SIGNUP' \
+curl --request GET '<%= config[:communication_api_url] %>/email/template/SIGNUP' \
 --header 'x-api-key: <%= config[:api_key] %>'
 ```
 
@@ -102,7 +102,7 @@ Get a custom email template
 
 ### HTTP Request
 
-`GET <%= config[:communication_api_url] %>/template/:templateName`
+`GET <%= config[:communication_api_url] %>/email/template/:templateName`
 
 ### Headers
 | Parameter | Type   | Required | Description      |
@@ -129,7 +129,7 @@ TBD
 ```
 
 ```shell
-curl --request DELETE '<%= config[:communication_api_url] %>/template/SIGNUP' \
+curl --request DELETE '<%= config[:communication_api_url] %>/email/template/SIGNUP' \
 --header 'x-api-key: <%= config[:api_key] %>'
 ```
 
@@ -137,7 +137,7 @@ Deleting a custom template will restore Nblocks default template.
 
 ### HTTP Request
 
-`DELETE <%= config[:communication_api_url] %>/template/:templateName`
+`DELETE <%= config[:communication_api_url] %>/email/template/:templateName`
 
 ### Headers
 | Parameter | Type   | Required | Description      |
