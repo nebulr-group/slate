@@ -1319,7 +1319,7 @@ Use this response data to alter your model and push back.</p>
 <p>Request example</p>
 </blockquote>
 <div class="highlight"><pre class="highlight typescript tab-typescript"><code><span class="nx">TBD</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--request</span> PUT <span class="s1">'https://communication-api.nebulr-core.com/template/SIGNUP'</span> <span class="se">\</span>
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--request</span> PUT <span class="s1">'https://communication-api.nebulr-core.com/email/template/SIGNUP'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: YOUR_APP_API_KEY'</span>
 <span class="nt">--data-raw</span> <span class="s1">'{
     "type": "SIGNUP", 
@@ -1418,7 +1418,7 @@ Variables in themplates, use <code>&lt;h1&gt;{{variable}}&lt;/h1&gt;</code> to i
 </tr>
 </tbody></table>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>PUT https://communication-api.nebulr-core.com/template/:templateName</code></p>
+<p><code>PUT https://communication-api.nebulr-core.com/email/template/:templateName</code></p>
 <h3 id='headers'>Headers</h3>
 <table><thead>
 <tr>
@@ -1484,7 +1484,7 @@ Variables in themplates, use <code>&lt;h1&gt;{{variable}}&lt;/h1&gt;</code> to i
 <p>Request example</p>
 </blockquote>
 <div class="highlight"><pre class="highlight typescript tab-typescript"><code><span class="nx">TBD</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--request</span> GET <span class="s1">'https://communication-api.nebulr-core.com/template/SIGNUP'</span> <span class="se">\</span>
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--request</span> GET <span class="s1">'https://communication-api.nebulr-core.com/email/template/SIGNUP'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: YOUR_APP_API_KEY'</span>
 </code></pre></div>
 <blockquote>
@@ -1497,7 +1497,7 @@ Variables in themplates, use <code>&lt;h1&gt;{{variable}}&lt;/h1&gt;</code> to i
 </span></code></pre></div>
 <p>Get a custom email template</p>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET https://communication-api.nebulr-core.com/template/:templateName</code></p>
+<p><code>GET https://communication-api.nebulr-core.com/email/template/:templateName</code></p>
 <h3 id='headers-2'>Headers</h3>
 <table><thead>
 <tr>
@@ -1554,12 +1554,12 @@ Variables in themplates, use <code>&lt;h1&gt;{{variable}}&lt;/h1&gt;</code> to i
 <p>Request example</p>
 </blockquote>
 <div class="highlight"><pre class="highlight typescript tab-typescript"><code><span class="nx">TBD</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--request</span> DELETE <span class="s1">'https://communication-api.nebulr-core.com/template/SIGNUP'</span> <span class="se">\</span>
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--request</span> DELETE <span class="s1">'https://communication-api.nebulr-core.com/email/template/SIGNUP'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: YOUR_APP_API_KEY'</span>
 </code></pre></div>
 <p>Deleting a custom template will restore Nblocks default template.</p>
 <h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE https://communication-api.nebulr-core.com/template/:templateName</code></p>
+<p><code>DELETE https://communication-api.nebulr-core.com/email/template/:templateName</code></p>
 <h3 id='headers-3'>Headers</h3>
 <table><thead>
 <tr>
