@@ -89,11 +89,7 @@ const response = await client.tenants.create(
 ```
 
 ```shell
-curl --request POST '<%= config[:account_api_url] %>/tenant' \
---header 'x-api-key: <%= config[:api_key] %>' \
---data-raw '{
-    "name": "New Company Ltd","plan": "TEAM", "owner": {"email": "john@example.com", "firstName": "John", "lastName": "Doe"},"metadata": {"VIP": "true"}
-    }'
+
 ```
 
 > Response example:

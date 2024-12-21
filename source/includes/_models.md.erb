@@ -135,7 +135,7 @@ More in depth details about a tenants payment and subscription
 | lastSeen                | string                  | Timestamp for last user activity (Read only)                                                                     |
 | createdAt               | string                  | Timestamp when created (Read only)                                                                     |
 | tenant                  | [Tenant](#tenant-model) | The tenant                                                                                             |
-
+| customParams            | [Custom param []](#custom-param) | A list of custom parameters                                                                            |
 ## Tokens response
 
 | Parameter     | Type   | Description                                                                                         |
@@ -146,6 +146,41 @@ More in depth details about a tenants payment and subscription
 | refresh_token | string | (JWT) The token use for refreshing the access token before it expires app                           |
 | id_token      | string | (JWT) The OpenId Connect user profile id                                                            |
 | user_profile  | object | A decoded id_token JWT as JSON. Available in [Shorthand get tokens](#shorthand-get-tokens) endpoint |
+
+
+## Custom param config
+
+> Model example:
+
+
+<%= partial "/includes/json/custom-tenant-users-params-config_json.md.erb" %>
+
+| Parameter | Type   | Description                                                                                            |
+| --------- | ------ | ------------------------------------------------------------------------------------------------------ |
+| label     | string | the label of the custom param                                                                                   |
+| userLabel | string | A label that will be visible in sections of the ui                                                                                   |
+| type      | string | 'email' | 'phone' | 'number' | 'integer' | 'text' | 'regex' | 'boolean'                                                                                          |
+| value     | string | the value of the custom param                                                                                                |
+| regex     | string | if the type is a regex, this is the regex pattern                                                                                        |
+
+
+## Custom param 
+a custom param is very similar to a custom param config, but it is the value of the custom param for a specific user.
+
+> Model example:
+
+
+<%= partial "/includes/json/custom-tenant-users-params_json.md.erb" %>
+
+
+| Parameter | Type   | Description                                                                                            |
+| --------- | ------ | ------------------------------------------------------------------------------------------------------ |
+| customParamConfig| [CustomParamConfig](#custom-param-config) | the config of the custom param                                                                                   |
+| value     | string | the value of the custom param                                                                                                |
+
+
+
+
 
 ## Access token model
 
