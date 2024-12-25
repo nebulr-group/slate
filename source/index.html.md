@@ -17,6 +17,7 @@ includes:
     - federation_connections.md.erb
     - users.md.erb
     - tenants.md.erb
+    - custom-params.md.erb
     - feature_flags.md.erb
     - payments.md.erb
     # - auth.md

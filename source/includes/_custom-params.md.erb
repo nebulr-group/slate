@@ -1,0 +1,109 @@
+# Custom Parameters
+Custom parameters are a way to add custom fields to your users.
+
+They are very flexible and you can add different types of parameters to individual user instances.
+
+Additionally you can add a custom param config. this config is used during the signup process to define the fields that should be shown to the user.
+Custom params can be used without a custom param config. For an example on how to use this see the [Create user](#create-user) endpoint.    
+
+
+
+
+## List a custom param config
+
+> Request example
+
+```typescript
+const users = await client.tenant('624c14cc0c01e70033356285').users.list();
+```
+
+```shell
+curl --request GET '<%= config[:account_api_url] %>/app/custom-tenant-users-params-config' \
+--header 'x-api-key: <%= config[:api_key] %>' \
+--header 'x-tenant-id: 624c14cc0c01e70033356285'
+```
+
+> Response example:
+
+<%= partial "/includes/json/custom-tenant-users-params-config_json.md.erb" %>
+
+List your custom params configs.
+
+### HTTP Request
+
+`GET <%= config[:account_api_url] %>/app/custom-tenant-user-params-config`
+
+### Headers
+| Parameter   | Type   | Required | Description      |
+| ----------- | ------ | -------- | ---------------- |
+| x-api-key   | string | Required | Your app api key |
+| x-tenant-id | string | Required | The tenant id    |
+
+<%= partial "/includes/response_success.md" %>
+
+A list of [Custom param config](#custom-param-config)
+
+## Create custom params config
+
+> Request example
+
+```typescript
+const user = await client.tenant('624c14cc0c01e70033356285').users.create(
+    {
+        "params": [
+          {
+      
+            "label": "department",  
+            "userLabel":"Department",    
+            "type":"text"
+          },
+          {
+            "label": "employeeId",      
+            "userLabel":"Employee ID",    
+            "type":"text"
+          },
+            {
+            "label": "additionalmail",      
+            "userLabel":"additionalmail",    
+            "type":"email"
+          }
+        ]
+    }
+
+```
+
+```shell
+curl --request POST '<%= config[:account_api_url] %>/app/custom-tenant-user-params-config' \
+--header 'x-api-key: <%= config[:api_key] %>' \
+--header 'x-tenant-id: 624c14cc0c01e70033356285' \
+--header 'Content-Type: application/json' \
+--data-raw '{"params":[{"label":"department","userLabel":"Department","type":"text"},{"label":"employeeId","userLabel":"Employee ID","type":"text"},{"label":"additionalmail","userLabel":"additionalmail","type":"email"}]}'
+```
+
+> Response example:
+
+<%= partial "/includes/json/custom-tenant-users-params-config_json.md.erb" %>
+
+Adds a user to to the given tenant. If the username doesn't exist, a new user will be created before being added.
+
+### HTTP Request
+
+`POST <%= config[:account_api_url] %>/app/custom-tenant-user-params-config`
+
+### Headers
+| Parameter   | Type   | Required | Description      |
+| ----------- | ------ | -------- | ---------------- |
+| x-api-key   | string | Required | Your app api key |
+| x-tenant-id | string | Required | The tenant id    |
+
+### Body Parameters
+| Parameter  | Type   | Required | Description                                         |
+| ---------- | ------ | -------- | --------------------------------------------------- |
+| params   | CustomParamConfig[] | Optional | a list of custom parameters                                     |
+
+<%= partial "/includes/response_success_created.md" %>
+A list of [Custom param config](#custom-param-config)
+
+## Update custom param config
+
+To update a custom param config, you use the same endpoint as for creating a custom param config.
